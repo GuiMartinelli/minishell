@@ -6,7 +6,7 @@
 #    By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:15:51 by proberto          #+#    #+#              #
-#    Updated: 2021/11/29 15:07:45 by proberto         ###   ########.fr        #
+#    Updated: 2021/11/29 15:48:58 by proberto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBFT = $(addprefix $(PATH_LIBFT)/, libft.a)
 MAIN = $(PATH_SRC)/minishell.c
 SRC = \
 	$(addprefix $(PATH_SRC)/cli/, prompt.c cmd.c) \
-	$(addprefix $(PATH_SRC)/builtins/, pwd.c)
+	$(addprefix $(PATH_SRC)/builtins/, pwd.c cd.c)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LFLAGS = -lreadline
