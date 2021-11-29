@@ -1,39 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2021/11/29 15:07:04 by proberto         ###   ########.fr       */
+/*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
+/*   Updated: 2021/11/29 15:12:08 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../../includes/minishell.h"
 
-# include "../libs/libft/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <signal.h>
-
-# define TRUE 1
-# define FALSE 0
-
-typedef struct s_prompt
+void	exec(char *cmd)
 {
-	char	*prompt;
-	char	*pwd;
-	char	*target;
-	char	*prefix_color;
-	char	*suffix_color;
 	size_t	len;
-}			t_prompt;
 
-char	*new_prompt(void);
-void	exec(char *cmd);
-char	*get_pwd(void);
-void	pwd(void);
-
-#endif
+	len = ft_strlen(cmd);
+	if (ft_strncmp(cmd, "pwd", len) == 0)
+		pwd();
+}
