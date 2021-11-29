@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2021/11/29 15:07:04 by proberto         ###   ########.fr       */
+/*   Updated: 2021/11/29 15:46:56 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ char	*new_prompt(void);
 void	exec(char *cmd);
 char	*get_pwd(void);
 void	pwd(void);
+void	cd(char *dir);
 
 #endif

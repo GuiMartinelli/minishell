@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:08 by proberto          #+#    #+#             */
-/*   Updated: 2021/11/22 12:33:18 by proberto         ###   ########.fr       */
+/*   Updated: 2021/11/29 15:15:54 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	main(void)
 		prompt = new_prompt();
 		signal(SIGINT, sig_handler);
 		cmd = readline(prompt);
-		printf("\ncommand: %s\n", cmd);
 		free(prompt);
 		if (cmd == NULL)
 			break ;
 		add_history(cmd);
+		exec(cmd);
 		free(cmd);
 	}
 	if (cmd)
