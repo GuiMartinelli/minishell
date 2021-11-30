@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd.c                                              :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2021/11/30 14:46:06 by proberto         ###   ########.fr       */
+/*   Created: 2021/11/30 14:42:18 by proberto          #+#    #+#             */
+/*   Updated: 2021/11/30 16:38:31 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	exec(char *cmd)
+/**
+ * @brief Prints the string passed as argument.
+ * 
+ * @todo get the value of the variable when there is a $
+ * @param str The string to print
+ * @return void
+ */
+void	echo(char *str)
 {
-	size_t	len;
+	char	*strtrim;
 
-	len = ft_strlen(cmd);
-	if (ft_strncmp(cmd, "pwd", len) == 0)
-		pwd();
-	else if (ft_strncmp(cmd, "cd ", 3) == 0)
-		cd(&cmd[3]);
-	else if (ft_strncmp(cmd, "echo ", 5) == 0)
-		echo(&cmd[5]);
+	if (*str == 39)
+	{
+		strtrim = ft_strtrim(str, "'");
+		printf("%s\n", strtrim);
+		free(strtrim);
+	}
+	else if (*str == 34)
+	{
+		strtrim = ft_strtrim(str, "\"");
+		printf("%s\n", strtrim);
+		free(strtrim);
+	}
+	else
+		printf("%s\n", str);
 }
