@@ -1,43 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/20 23:03:12 by proberto          #+#    #+#             */
-/*   Updated: 2021/11/30 17:24:09 by proberto         ###   ########.fr       */
+/*   Created: 2021/12/06 06:47:03 by guferrei          #+#    #+#             */
+/*   Updated: 2021/12/07 19:59:45 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/**
- * @brief Gets the current working directory.
- * 
- * @return char* pointer to the current working directory
- */
-char	*get_pwd(void)
+t_var	*unset(t_var *var_list, char *var_name)
 {
-	char	*tmp;
+	t_var	*curr;
+	t_var	*prev;
+	size_t	size;
 
-	tmp = getcwd(NULL, 0);
-	return (tmp);
-}
-
-/**
- * @brief Prints the current working directory.
- * 
- * @return void
- */
-void	pwd(void)
-{
-	char	*pwd;
-	size_t	len;
-
-	pwd = get_pwd();
-	len = ft_strlen(pwd);
-	write(1, pwd, len);
-	write(1, "\n", 1);
-	free(pwd);
+	size = ft_strlen(var_name);
+	curr = var_list;
+	prev = NULL;
+	while (curr)
+	{
+		if (!ft_strncmp(curr->name, var_name, size))
+		{
+			if (prev)
+				prev->next = curr->next;
+			else
+				var_list = var_list->next;
+			free_var(curr);
+			return (var_list);
+		}
+		else
+		{
+			prev = curr;
+			curr = curr->next;
+		}
+	}
+	return (var_list);
 }

@@ -1,43 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   var_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/20 23:03:12 by proberto          #+#    #+#             */
-/*   Updated: 2021/11/30 17:24:09 by proberto         ###   ########.fr       */
+/*   Created: 2021/12/06 06:54:38 by guferrei          #+#    #+#             */
+/*   Updated: 2021/12/07 20:39:57 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/**
- * @brief Gets the current working directory.
- * 
- * @return char* pointer to the current working directory
- */
-char	*get_pwd(void)
+void	free_n_null(void *ptr)
 {
-	char	*tmp;
-
-	tmp = getcwd(NULL, 0);
-	return (tmp);
+	if (ptr)
+	{
+		free(ptr);
+		ptr = NULL;
+	}
 }
 
-/**
- * @brief Prints the current working directory.
- * 
- * @return void
- */
-void	pwd(void)
+void	free_var(t_var *var)
 {
-	char	*pwd;
-	size_t	len;
-
-	pwd = get_pwd();
-	len = ft_strlen(pwd);
-	write(1, pwd, len);
-	write(1, "\n", 1);
-	free(pwd);
+	free_n_null(var->name);
+	free_n_null(var->value);
+	var->next = NULL;
+	free_n_null(var);
 }

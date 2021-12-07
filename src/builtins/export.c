@@ -1,43 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/20 23:03:12 by proberto          #+#    #+#             */
-/*   Updated: 2021/11/30 17:24:09 by proberto         ###   ########.fr       */
+/*   Created: 2021/11/30 10:21:15 by guferrei          #+#    #+#             */
+/*   Updated: 2021/12/07 19:56:49 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/**
- * @brief Gets the current working directory.
- * 
- * @return char* pointer to the current working directory
- */
-char	*get_pwd(void)
+int	export(t_var **env, t_var *var)
 {
-	char	*tmp;
-
-	tmp = getcwd(NULL, 0);
-	return (tmp);
-}
-
-/**
- * @brief Prints the current working directory.
- * 
- * @return void
- */
-void	pwd(void)
-{
-	char	*pwd;
-	size_t	len;
-
-	pwd = get_pwd();
-	len = ft_strlen(pwd);
-	write(1, pwd, len);
-	write(1, "\n", 1);
-	free(pwd);
+	if (new_variable(env, var->name, var->value))
+		return (1);
+	return (0);
 }
