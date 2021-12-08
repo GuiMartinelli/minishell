@@ -6,12 +6,21 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 06:47:03 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/07 19:59:45 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:26:35 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief Simulates unset shell builtin, that delete a variable of a variable
+ * list.
+ * 
+ * @param var_list variable list
+ * @param var_name name of the var to be deleted
+ * @return beggining of the var list, may change if the variable to be deleted
+ * is the first one
+ */
 t_var	*unset(t_var *var_list, char *var_name)
 {
 	t_var	*curr;

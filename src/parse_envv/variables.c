@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 09:12:52 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/08 08:15:39 by guferrei         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:27:29 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief Overwrite a existing variable with a new value.
+ * 
+ * @param var variable to be updated
+ * @param value new value to var
+ * @return returns 0 if succeds or 1 if malloc fails
+ */
 int	overwrite_var(t_var *var, char *value)
 {
 	free((void *)var->value);
@@ -21,6 +28,15 @@ int	overwrite_var(t_var *var, char *value)
 	return (0);
 }
 
+/**
+ * @brief Check if a variable already exists in a list.
+ * 
+ * @param var_list variables list to be checked
+ * @param name name of the new variable to check
+ * @param value value of the new variable
+ * @return returns 0 if the variable don't exists yet, 1 if exists
+ * and was updated or -1 if something failed
+ */
 int	update_var(t_var *var_list, char *name, char *value)
 {
 	t_var	*curr;
@@ -43,6 +59,14 @@ int	update_var(t_var *var_list, char *name, char *value)
 	return (0);
 }
 
+/**
+ * @brief Create a var struct, allocating memory and setting its value 
+ * and name.
+ * 
+ * @param name name of the new variable
+ * @param value value of the new variable
+ * @return t_var struct created
+ */
 t_var	*create_var(char *name, char *value)
 {
 	t_var	*new;
@@ -57,6 +81,15 @@ t_var	*create_var(char *name, char *value)
 	return (new);
 }
 
+/**
+ * @brief Create a new t_var struct or update a existing one and append 
+ * it at the end of a variables linked list.
+ * 
+ * @param lst linked list where new variable will be appended
+ * @param name name of the new variable
+ * @param value value of the new variable
+ * @return return 1 if something fails allocating memory, or 0 if succeds
+ */
 int	new_variable(t_var **lst, char *name, char *value)
 {
 	t_var	*new_var;
@@ -81,6 +114,13 @@ int	new_variable(t_var **lst, char *name, char *value)
 	return (0);
 }
 
+/**
+ * @brief Parses the environment variables matrix and return it as a t_var
+ * structs linked list.
+ * 
+ * @param env environment variables matrix, that main function receive as param
+ * @return t_var* 
+ */
 t_var	*env_variables(char **env)
 {
 	char	**split;

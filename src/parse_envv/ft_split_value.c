@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_value.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 09:49:10 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/08 08:13:18 by guferrei         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:27:02 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,15 @@ char	*str_cpy(char *src, char *dest, char c)
 	return (src);
 }
 
+/**
+ * @brief Split a string in two, before and after a char. Splits only in
+ * the first occurence of the char, because some variables may contain
+ * several '=' in it's value.
+ * 
+ * @param s string to be splited
+ * @param c character to split, usually '='
+ * @return returns a matrix containing the two splited pieces of the string
+ */
 char	**ft_split_value(char const *s, char c)
 {
 	char	**ptr;

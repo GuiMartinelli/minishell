@@ -6,12 +6,18 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 08:47:33 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/07 20:40:38 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:26:05 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief Search for PATH environment variable, and parse it in a new matrix.
+ * 
+ * @param env environment variables matrix, usually received at main function
+ * @return matrix containing all environment paths
+ */
 char	**parse_paths(char **env)
 {
 	char	*ptr;
@@ -31,6 +37,13 @@ char	**parse_paths(char **env)
 	return (NULL);
 }
 
+/**
+ * @brief Join a path and a command in a string.
+ * 
+ * @param env_path path of the command
+ * @param cmd command to be executed
+ * @return string created
+ */
 char	*build_path(char *env_path, char *cmd)
 {
 	char	*path;
@@ -47,6 +60,15 @@ char	*build_path(char *env_path, char *cmd)
 	return (path);
 }
 
+/**
+ * @brief Check each environment path with a command, to find where the command
+ * is installed
+ * 
+ * @param env_path matrix that contains all environment paths
+ * @param cmd command to search for
+ * @return returns the right path of the command, or NULL if the command
+ * doesn't exist or something fails
+ */
 char	*check_path(char **env_path, char *cmd)
 {
 	char	*path;
