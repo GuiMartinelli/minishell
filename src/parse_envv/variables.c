@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 09:12:52 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/07 20:40:00 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/08 08:15:39 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ t_var	*create_var(char *name, char *value)
 	if (!new)
 		return (NULL);
 	new->name = ft_strdup(name);
-	new->value = ft_strdup(value);
+	if (value)
+		new->value = ft_strdup(value);
 	new->next = NULL;
 	return (new);
 }
@@ -90,7 +91,7 @@ t_var	*env_variables(char **env)
 	{
 		split = ft_split_value(*env, '=');
 		new_variable(&var_list, split[0], split[1]);
-			free(split[0]);
+		free(split[0]);
 		free(split[1]);
 		free(split);
 		*env++;

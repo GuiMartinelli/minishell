@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 09:50:02 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/07 19:47:42 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/08 08:08:38 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	env(t_var *list, int fd)
 	{
 		ft_putstr_fd(curr->name, fd);
 		ft_putchar_fd('=', fd);
-		ft_putstr_fd(curr->value, fd);
+		if (curr->value)
+			ft_putstr_fd(curr->value, fd);
 		ft_putchar_fd('\n', fd);
 		curr = curr->next;
 	}

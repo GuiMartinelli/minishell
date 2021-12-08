@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:08 by proberto          #+#    #+#             */
-/*   Updated: 2021/12/07 20:02:05 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/08 08:06:03 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ int	main(int argc, char **argv, char **envp)
 	t_var	*curr;
 
 	env_list = env_variables(envp);
-	env(env_list, 1);
-	printf("________________________\n");
-	unset(env_list, "PATH");
 	env(env_list, 1);
 	// while (1)
 	// {
