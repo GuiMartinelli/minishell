@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   var_utils.c                                        :+:      :+:    :+:   */
+/*   env_var_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 06:54:38 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/08 08:25:45 by guferrei         ###   ########.fr       */
+/*   Updated: 2021/12/09 17:50:00 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,15 @@ void	free_var(t_var *var)
 	free_n_null(var->value);
 	var->next = NULL;
 	free_n_null(var);
+}
+
+char	*ft_getenv(char *name, t_var *env_list)
+{
+	while (env_list)
+	{
+		if (ft_strncmp(env_list->name, name, ft_strlen(name)) == 0)
+			return (env_list->value);
+		env_list = env_list->next;
+	}
+	return (NULL);
 }

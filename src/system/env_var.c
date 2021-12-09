@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   variables.c                                        :+:      :+:    :+:   */
+/*   env_var.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 09:12:52 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/08 19:27:29 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/09 17:37:01 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * 
  * @param var variable to be updated
  * @param value new value to var
- * @return returns 0 if succeds or 1 if malloc fails
+ * @return returns 0 if success or 1 if malloc fails
  */
 int	overwrite_var(t_var *var, char *value)
 {
@@ -88,7 +88,7 @@ t_var	*create_var(char *name, char *value)
  * @param lst linked list where new variable will be appended
  * @param name name of the new variable
  * @param value value of the new variable
- * @return return 1 if something fails allocating memory, or 0 if succeds
+ * @return return 1 if something fails allocating memory, or 0 if success
  */
 int	new_variable(t_var **lst, char *name, char *value)
 {

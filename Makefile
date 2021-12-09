@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:15:51 by proberto          #+#    #+#              #
-#    Updated: 2021/12/08 07:18:50 by guferrei         ###   ########.fr        #
+#    Updated: 2021/12/09 17:44:09 by proberto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ MAIN = $(PATH_SRC)/minishell.c
 SRC = \
 	$(addprefix $(PATH_SRC)/cli/, prompt.c cmd.c) \
 	$(addprefix $(PATH_SRC)/builtins/, pwd.c cd.c echo.c env.c unset.c) \
-	$(addprefix $(PATH_SRC)/parse_envv/, variables.c var_utils.c ft_split_value.c)
+	$(addprefix $(PATH_SRC)/system/, env_var.c env_var_utils.c ft_split_value.c)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -w
 LFLAGS = -lreadline
