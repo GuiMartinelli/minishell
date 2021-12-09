@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2021/12/07 19:56:33 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/09 19:23:28 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,30 @@ typedef struct s_var
 }				t_var;
 
 /**
- * @brief Builtins
+ * Command line interface (cli)
  */
-void	pwd(void);
+char	*new_prompt(void);
+void	eval(char *command_line, t_var *env_list);
+
+/**
+ * System
+ */
+char	**ft_split_value(char const *s, char c);
+void	free_n_null(void *ptr);
+void	free_var(t_var *var);
+t_var	*env_variables(char **env);
+char	*ft_getenv(char *name, t_var *env_list);
+
+/**
+ * Builtins
+ */
+char	*get_pwd(void);
+void	pwd(int fd);
 int		export(t_var **env, t_var *var);
 void	env(t_var *list, int fd);
 void	echo(char *op, char *str);
 t_var	*unset(t_var *var_list, char *var_name);
 void	cd(char *dir);
 void	b_exit(void);
-
-char	*new_prompt(void);
-void	eval(char *command_line);
-char	*get_pwd(void);
-
-char	**ft_split_value(char const *s, char c);
-void	free_n_null(void *ptr);
-void	free_var(t_var *var);
-t_var	*env_variables(char **env);
 
 #endif

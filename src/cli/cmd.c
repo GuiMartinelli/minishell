@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2021/12/07 19:31:01 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:08:24 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	format(char *command_line, t_cmd *cmd)
 	free(strtrim);
 }
 
-int	launch_builtins(char *cmd, char *op, char *arg, t_cmd *env_list)
+int	launch_builtins(char *cmd, char *op, char *arg, t_var *env_list)
 {
 	size_t	len;
 
 	len = ft_strlen(cmd);
 	if (ft_strncmp(cmd, "pwd", len) == 0)
-		pwd();
+		pwd(1);
 	else if (ft_strncmp(cmd, "env", len) == 0)
 	 	env(env_list, 1);
 	else if (ft_strncmp(cmd, "echo", len) == 0)
@@ -53,10 +53,12 @@ int	launch_builtins(char *cmd, char *op, char *arg, t_cmd *env_list)
 	return (TRUE);
 }
 
-void	eval(char *command_line)
+void	eval(char *command_line, t_var *env_list)
 {
 	t_cmd	cmd;
 
-	format(command_line, &cmd);
+	// format(command_line, &cmd);
 	// launch_builtins(cmd.name, cmd.option, cmd.arg);
+	launch_builtins("cd", "", "src/", env_list);
+	launch_builtins("pwd", "", "", env_list);
 }
