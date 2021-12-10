@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2021/12/09 19:23:28 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/10 08:37:30 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	**ft_split_value(char const *s, char c);
 void	free_n_null(void *ptr);
 void	free_var(t_var *var);
 t_var	*env_variables(char **env);
-char	*ft_getenv(char *name, t_var *env_list);
+char	*get_var_value(char *name, t_var *var_list);
 
 /**
  * Builtins

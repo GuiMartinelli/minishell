@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 06:54:38 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/09 17:50:00 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/10 08:37:16 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@ void	free_var(t_var *var)
 	free_n_null(var);
 }
 
-char	*ft_getenv(char *name, t_var *env_list)
+char	*get_var_value(char *name, t_var *var_list)
 {
-	while (env_list)
+	if (!name)
+		return (NULL);
+	while (var_list)
 	{
-		if (ft_strncmp(env_list->name, name, ft_strlen(name)) == 0)
-			return (env_list->value);
-		env_list = env_list->next;
+		if (ft_strncmp(var_list->name, name, ft_strlen(name)) == 0)
+			return (var_list->value);
+		var_list = var_list->next;
 	}
 	return (NULL);
 }
