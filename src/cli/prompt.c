@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:12:44 by proberto          #+#    #+#             */
-/*   Updated: 2021/11/22 11:43:57 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/10 20:26:46 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*new_prompt(void)
 	if (prompt.pwd != NULL)
 	{
 		prompt.len = get_prompt_len(&prompt);
-		prompt.prompt = malloc(prompt.len * sizeof(char));
+		prompt.prompt = ft_calloc(prompt.len, sizeof(char));
 		if (prompt.prompt == NULL)
 			return (NULL);
 		build_prompt(&prompt);

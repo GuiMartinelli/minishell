@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 09:12:52 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/09 17:37:01 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/10 21:23:31 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	update_var(t_var *var_list, char *name, char *value)
 	curr = var_list;
 	while (curr->next != NULL)
 	{
-		if (!ft_strncmp(curr->name, name, 30))
+		if (!ft_strncmp(curr->name, name, ft_strlen(curr->name)))
 		{
 			if (overwrite_var(curr, value))
 				return (-1);

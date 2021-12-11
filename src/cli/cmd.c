@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2021/12/09 15:08:24 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/10 19:35:26 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	launch_builtins(char *cmd, char *op, char *arg, t_var *env_list)
 	else if (ft_strncmp(cmd, "echo", len) == 0)
 		echo(op, arg);
 	else if (ft_strncmp(cmd, "cd", len) == 0)
-		cd(arg);
+		cd(arg, env_list);
 	// else if (ft_strncmp(cmd, "export", len) == 0)
 	// 	export();
 	// else if (ft_strncmp(cmd, "unset", len) == 0)
@@ -59,6 +59,6 @@ void	eval(char *command_line, t_var *env_list)
 
 	// format(command_line, &cmd);
 	// launch_builtins(cmd.name, cmd.option, cmd.arg);
-	launch_builtins("cd", "", "src/", env_list);
-	launch_builtins("pwd", "", "", env_list);
+	launch_builtins("cd", "", &command_line[3], env_list);
+	// launch_builtins("pwd", "", "", env_list);
 }
