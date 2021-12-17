@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2021/12/10 19:35:58 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/16 20:54:18 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_var
  * Command line interface (cli)
  */
 char	*new_prompt(void);
-void	eval(char *command_line, t_var *env_list);
+void	eval(char *command_line, t_var *env_list, char **envp);
 
 /**
  * System
@@ -67,9 +67,17 @@ char	*get_pwd(void);
 void	pwd(int fd);
 int		export(t_var **env, t_var *var);
 void	env(t_var *list, int fd);
-void	echo(char *op, char *str);
+void	echo(char *str);
 t_var	*unset(t_var *var_list, char *var_name);
 void	cd(char *dir, t_var *env_list);
 void	b_exit(void);
+
+/**
+ * Execve
+ * 
+ */
+char	**parse_paths(char **env);
+char	*build_path(char *env_path, char *cmd);
+char	*check_path(char **env_path, char *cmd);
 
 #endif

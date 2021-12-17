@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:08 by proberto          #+#    #+#             */
-/*   Updated: 2021/12/10 19:36:16 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/16 19:40:43 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 		if (cmd == NULL)
 			break ;
 		add_history(cmd);
-		eval(cmd, env_list);
+		eval(cmd, env_list, envp);
 		free(cmd);
 	}
 	if (cmd)

@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:42:18 by proberto          #+#    #+#             */
-/*   Updated: 2021/12/07 20:47:29 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/16 20:11:45 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
  * @param str The string to print
  * @return void
  */
-void	echo(char *op, char *str)
+void	echo(char *str)
 {
 	char	*strtrim;
 	char	breakline;
 
-	if (ft_strncmp(op, "-n", ft_strlen(op)) == 0)
+	if (ft_strncmp(str, "-n", 2) == 0)
 		breakline = 0;
 	else
 		breakline = '\n';
