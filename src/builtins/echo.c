@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:42:18 by proberto          #+#    #+#             */
-/*   Updated: 2021/12/16 20:11:45 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/20 19:08:07 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,30 @@
  * @param str The string to print
  * @return void
  */
-void	echo(char *str)
+void	echo(char **str, int fd)
 {
-	char	*strtrim;
-	char	breakline;
+	char	flag;
+	size_t	i;
 
-	if (ft_strncmp(str, "-n", 2) == 0)
-		breakline = 0;
-	else
-		breakline = '\n';
-	if (*str == 39)
+	i = 1;
+	if (str[i] == NULL)
 	{
-		strtrim = ft_strtrim(str, "'");
-		printf("%s%c", strtrim, breakline);
-		free(strtrim);
+		ft_putstr_fd("\n", fd);
+		return ;
 	}
-	else if (*str == 34)
+	if (ft_strncmp(str[i], "-n", ft_strlen(str[i])) == 0)
 	{
-		strtrim = ft_strtrim(str, "\"");
-		printf("%s%c", strtrim, breakline);
-		free(strtrim);
+		flag = TRUE;
+		i++;	
 	}
 	else
-		printf("%s\n", str);
+		flag = FALSE;
+	while (str[i])
+	{
+		if ((flag == TRUE && i > 2) || (flag == FALSE && i > 1))
+			ft_putchar_fd(' ', fd);
+		ft_putstr_fd(str[i++], fd);
+	}
+	if (flag == FALSE)
+		ft_putchar_fd('\n', fd);
 }
