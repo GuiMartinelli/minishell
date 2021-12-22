@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 09:12:52 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/10 21:23:31 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/22 17:18:39 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param value new value to var
  * @return returns 0 if success or 1 if malloc fails
  */
-int	overwrite_var(t_var *var, char *value)
+static int	overwrite_var(t_var *var, char *value)
 {
 	free((void *)var->value);
 	var->value = ft_strdup(value);
@@ -29,22 +29,44 @@ int	overwrite_var(t_var *var, char *value)
 }
 
 /**
+ * @brief Create a var struct, allocating memory and setting its value 
+ * and name.
+ * 
+ * @param name name of the new variable
+ * @param value value of the new variable
+ * @return t_var struct created
+ */
+static t_var	*create_var(char *name, char *value)
+{
+	t_var	*new;
+
+	new = (t_var *)malloc(sizeof(t_var));
+	if (!new)
+		return (NULL);
+	new->name = ft_strdup(name);
+	if (value)
+		new->value = ft_strdup(value);
+	new->next = NULL;
+	return (new);
+}
+
+/**
  * @brief Check if a variable already exists in a list.
  * 
- * @param var_list variables list to be checked
+ * @param env_list variables list to be checked
  * @param name name of the new variable to check
  * @param value value of the new variable
  * @return returns 0 if the variable don't exists yet, 1 if exists
  * and was updated or -1 if something failed
  */
-int	update_var(t_var *var_list, char *name, char *value)
+int	update_var(t_var *env_list, char *name, char *value)
 {
 	t_var	*curr;
 
-	if (!var_list)
+	if (!env_list)
 		return (0);
-	curr = var_list;
-	while (curr->next != NULL)
+	curr = env_list;
+	while (curr != NULL)
 	{
 		if (!ft_strncmp(curr->name, name, ft_strlen(curr->name)))
 		{
@@ -60,52 +82,30 @@ int	update_var(t_var *var_list, char *name, char *value)
 }
 
 /**
- * @brief Create a var struct, allocating memory and setting its value 
- * and name.
- * 
- * @param name name of the new variable
- * @param value value of the new variable
- * @return t_var struct created
- */
-t_var	*create_var(char *name, char *value)
-{
-	t_var	*new;
-
-	new = (t_var *)malloc(sizeof(t_var));
-	if (!new)
-		return (NULL);
-	new->name = ft_strdup(name);
-	if (value)
-		new->value = ft_strdup(value);
-	new->next = NULL;
-	return (new);
-}
-
-/**
  * @brief Create a new t_var struct or update a existing one and append 
  * it at the end of a variables linked list.
  * 
- * @param lst linked list where new variable will be appended
+ * @param env_list linked list where new variable will be appended
  * @param name name of the new variable
  * @param value value of the new variable
  * @return return 1 if something fails allocating memory, or 0 if success
  */
-int	new_variable(t_var **lst, char *name, char *value)
+int	new_variable(t_var **env_list, char *name, char *value)
 {
 	t_var	*new_var;
 	t_var	*curr;
 
-	if (update_var(*lst, name, value))
+	if (update_var(*env_list, name, value))
 		return (0);
 	new_var = create_var(name, value);
 	if (!new_var)
 		return (1);
-	if (*lst == NULL)
+	if (*env_list == NULL)
 	{
-		*lst = new_var;
+		*env_list = new_var;
 		return (0);
 	}
-	curr = *lst;
+	curr = *env_list;
 	while (curr->next != NULL)
 	{
 		curr = curr->next;
@@ -124,17 +124,17 @@ int	new_variable(t_var **lst, char *name, char *value)
 t_var	*env_variables(char **env)
 {
 	char	**split;
-	t_var	*var_list;
+	t_var	*env_list;
 
-	var_list = NULL;
+	env_list = NULL;
 	while (*env)
 	{
 		split = ft_split_value(*env, '=');
-		new_variable(&var_list, split[0], split[1]);
+		new_variable(&env_list, split[0], split[1]);
 		free(split[0]);
 		free(split[1]);
 		free(split);
 		*env++;
 	}
-	return (var_list);
+	return (env_list);
 }

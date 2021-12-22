@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2021/12/22 09:37:55 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/22 15:34:25 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ void	eval(char *command_line, t_var *env_list, char **envp);
  * System
  */
 void	sig_handler(int sign);
-char	**ft_split_value(char const *s, char c);
 t_var	*env_variables(char **env);
+int		new_variable(t_var **env_list, char *name, char *value);
+int		update_var(t_var *env_list, char *name, char *value);
+char	**ft_split_value(char const *s, char c);
 char	*get_var_value(char *name, t_var *var_list);
 void	free_var_list(t_var *var_list);
 void	free_n_null(void *ptr);
@@ -67,7 +69,7 @@ void	free_var(t_var *var);
  */
 char	*get_pwd(void);
 void	pwd(int fd);
-int		export(t_var **env, t_var *var);
+int		export(char **arg, t_var *env_list);
 void	env(t_var *list, int fd);
 void	echo(char **str, int fd);
 t_var	*unset(t_var *var_list, char *var_name);

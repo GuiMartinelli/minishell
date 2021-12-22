@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 10:21:15 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/16 10:06:01 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/22 17:52:50 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,26 @@
  * @param var variable to be appended at environment variables list
  * @return returns 0 if success or 1 if something fails
  */
-int	export(t_var **env, t_var *var)
+int	export(char **arg, t_var *env_list)
 {
-	if (new_variable(env, var->name, var->value))
-		return (1);
+	char	**name;
+	char	*value;
+	size_t	i;
+	size_t	j;
+
+	i = 1;
+	while (arg[i] != NULL)
+	{
+		value = ft_strchr(arg[i], '=');
+		name = ft_split(arg[i], '=');
+		if (*name == NULL)
+			break ;
+		new_variable(&env_list, name[0], ++value);
+		j = 0;
+		while (name[j] != NULL)
+			free(name[j++]);
+		free(name);
+		i++;
+	}
 	return (0);
 }

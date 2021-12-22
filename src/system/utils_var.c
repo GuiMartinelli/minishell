@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 06:54:38 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/22 09:30:24 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/22 14:20:31 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ char	*str_cpy(char *src, char *dest, char c)
  * the first occurrence of the char, because some variables may contain
  * several '=' in it's value.
  * 
- * @param s string to be splited
+ * @param s string to be splitted
  * @param c character to split, usually '='
- * @return returns a matrix containing the two splited pieces of the string
+ * @return returns a matrix containing the two splitted pieces of the string
  */
 char	**ft_split_value(char const *s, char c)
 {
