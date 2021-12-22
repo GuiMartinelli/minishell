@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_var_utils.c                                    :+:      :+:    :+:   */
+/*   free_var.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/06 06:54:38 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/10 08:37:16 by guferrei         ###   ########.fr       */
+/*   Created: 2021/12/22 09:30:26 by proberto          #+#    #+#             */
+/*   Updated: 2021/12/22 09:37:27 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ void	free_var(t_var *var)
 	free_n_null(var);
 }
 
-char	*get_var_value(char *name, t_var *var_list)
+void	free_var_list(t_var *var_list)
 {
-	if (!name)
-		return (NULL);
-	while (var_list)
-	{
-		if (ft_strncmp(var_list->name, name, ft_strlen(name)) == 0)
-			return (var_list->value);
+	t_var	*curr;
+
+	curr = var_list;
+	while (curr)
+	{	
 		var_list = var_list->next;
+		free_var(curr);
+		curr = var_list;
 	}
-	return (NULL);
 }
