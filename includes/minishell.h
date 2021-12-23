@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2021/12/22 15:34:25 by proberto         ###   ########.fr       */
+/*   Updated: 2021/12/23 09:19:35 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,15 @@ typedef struct s_var
 	char			*value;
 	struct s_var	*next;
 }				t_var;
+
+typedef struct s_parse
+{
+	char	*parsed;
+	char	*str;
+	int		idx1;
+	int		idx2;
+	char	quotes;
+}				t_parse;
 
 /**
  * Command line interface (cli)
@@ -83,5 +92,15 @@ void	b_exit(void);
 char	**parse_paths(char **env);
 char	*build_path(char *env_path, char *cmd);
 char	*check_path(char **env_path, char *cmd);
+
+/**
+ * Parse
+ * 
+ */
+int		is_quotes(char *str, char q);
+int		mv_ptr(char mode, char *str);
+int		get_var_size(char *str, t_var *env, t_var *local);
+int		var_value_cpy(char *dest, char *src, t_var *env, t_var *local);
+char	*string_parse(char *str, t_var *env, t_var *local);
 
 #endif
