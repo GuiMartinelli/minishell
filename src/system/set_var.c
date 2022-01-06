@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 08:30:25 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/05 18:41:03 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/06 10:20:16 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,22 @@ int	name_validation(char *name)
 void	set_var(char *str, t_var **local)
 {
 	char	**splitted;
+	char	**var;
+	int		index;
 
-	splitted = ft_split(str, '=');
-	if (name_validation(splitted[0]))
-		new_variable(local, splitted[0], splitted[1]);
-	free(splitted[0]);
-	free(splitted[1]);
+	index = 0;
+	splitted = ft_split(str, ' ');
+	while (splitted[index])
+	{
+		var = ft_split(splitted[index],'=');
+		if (name_validation(var[0]))
+			new_variable(local, var[0], var[1]);
+		free(var[0]);
+		free(var[1]);
+		free(var);
+		free(splitted[index]);
+		index++;
+	}
+	free(splitted[index]);
 	free(splitted);
 }
