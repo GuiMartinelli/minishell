@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 09:12:52 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/22 17:18:39 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/06 17:16:43 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int	update_var(t_var *env_list, char *name, char *value)
 	curr = env_list;
 	while (curr != NULL)
 	{
-		if (!ft_strncmp(curr->name, name, ft_strlen(curr->name)))
+		if (!ft_strncmp(curr->name, name, ft_strlen(curr->name))
+			&& !ft_strncmp(curr->name, name, ft_strlen(name)))
 		{
 			if (overwrite_var(curr, value))
 				return (-1);
