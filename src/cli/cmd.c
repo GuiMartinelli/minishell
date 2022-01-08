@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2021/12/22 11:12:57 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/07 22:15:46 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	launch_builtins(char *cmd, char **arg, t_var *env_list)
 	else if (ft_strncmp(cmd, "cd", len) == 0)
 		cd(arg[1], env_list);
 	else if (ft_strncmp(cmd, "export", len) == 0)
-		export(arg, env_list);
-	// else if (ft_strncmp(cmd, "unset", len) == 0)
-	// 	unset();
+		export(&arg[1], env_list);
+	else if (ft_strncmp(cmd, "unset", len) == 0)
+		env_list = unset(env_list, &arg[1]);
 	// else if (ft_strncmp(cmd, "exit", len) == 0)
 	// 	b_exit();
 	else
@@ -48,31 +48,28 @@ int	launch_builtins(char *cmd, char **arg, t_var *env_list)
 	return (TRUE);
 }
 
-void	launch_execve(char *cmd, char **arg, char **envp, char *path)
+void	launch_execve(char *path, char **arg, char **envp)
 {
 	pid_t	pid;
 
-	// printf("PATH: %s\nCMD: %s\nARG: %s\n", path, cmd, arg);
-	pid = fork();
-	if (pid == -1)
+	if (access(path, F_OK) == 0)
 	{
-		ft_putstr_fd("\nFailed forking child..", 2);
-		return ;
-	}
-	else if (pid == 0)
-	{
-		if (execve(path, arg, envp) == -1)
+		pid = fork();
+		if (pid == 0)
 		{
-			ft_putstr_fd("minishell: command not found: ", 2);
-			ft_putendl_fd(cmd, 2);
-			exit(EXIT_FAILURE);
+			if (execve(path, arg, envp) == -1)
+			{
+				perror("minishell");
+				exit(EXIT_FAILURE);
+			}
 		}
+		else if (pid == -1)
+			ft_putendl_fd("\nFailed forking child..", 2);
+		else
+			wait(NULL);
 	}
 	else
-	{
-		wait(NULL);
-		return ;
-	}
+		ft_putendl_fd("minishell: command not found: ", 2);
 }
 
 void	eval(char *command_line, t_var *env_list, char **envp)
@@ -87,10 +84,12 @@ void	eval(char *command_line, t_var *env_list, char **envp)
 	if (*run == NULL || *path == NULL)
 		return ;
 	valid_path = check_path(path, run[0]);
+	if (valid_path == NULL)
+		valid_path = ft_strdup(run[0]);
 	if (launch_builtins(run[0], run, env_list) == TRUE)
 		i = 0;
 	else
-		launch_execve(run[0], run, envp, valid_path);
+		launch_execve(valid_path, run, envp);
 	i = 0;
 	while (run[i])
 		free(run[i++]);
