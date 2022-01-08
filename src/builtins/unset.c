@@ -6,22 +6,21 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 06:47:03 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/08 19:26:35 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/07 21:16:19 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 /**
- * @brief Simulates unset shell builtin, that delete a variable of a variable
- * list.
+ * @brief Subroutine to unset variables.
  * 
  * @param var_list variable list
  * @param var_name name of the var to be deleted
- * @return beggining of the var list, may change if the variable to be deleted
- * is the first one
- */
-t_var	*unset(t_var *var_list, char *var_name)
+ * @return beginning of the node list, may change if the variable to be 
+ * deleted is the first
+*/
+static t_var	*ft_remove(t_var *var_list, char *var_name)
 {
 	t_var	*curr;
 	t_var	*prev;
@@ -46,6 +45,27 @@ t_var	*unset(t_var *var_list, char *var_name)
 			prev = curr;
 			curr = curr->next;
 		}
+	}
+}
+
+/**
+ * @brief Simulates unset shell builtin, that delete a variable of a variable
+ * list.
+ * 
+ * @param var_list variable list
+ * @param var_name name of the var to be deleted
+ * @return beginning of the node list, may change if the variable to be 
+ * deleted is the first
+ */
+t_var	*unset(t_var *var_list, char **var_name)
+{
+	size_t	i;
+
+	i = 0;
+	while (var_name[i])
+	{
+		var_list = ft_remove(var_list, var_name[i]);
+		i++;
 	}
 	return (var_list);
 }
