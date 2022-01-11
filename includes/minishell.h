@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/11 16:05:05 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/11 19:01:55 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_var
 	char			*name;
 	char			*value;
 	struct s_var	*next;
-}				t_var;
+}					t_var;
 
 typedef struct s_parse
 {
@@ -53,7 +53,7 @@ typedef struct s_parse
 	int		idx1;
 	int		idx2;
 	char	quotes;
-}				t_parse;
+}			t_parse;
 
 /**
  * Command line interface (cli)
@@ -102,7 +102,7 @@ int		is_quotes(char *str, char q);
 int		mv_ptr(char mode, char *str);
 int		get_var_size(char *str, t_var *env, t_var *local);
 int		var_value_cpy(char *dest, char *src, t_var *env, t_var *local);
-char	*string_parse(char *str, t_var *env, t_var *local);
+char	**string_parse(char *str, t_var *env, t_var *local);
 char	**ft_split_string(char *s);
 
 #endif

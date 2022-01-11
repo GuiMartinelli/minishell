@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/11 16:04:18 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:56:12 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	eval(char *command_line, t_var *env_list, char **envp)
 	char	*valid_path;
 	int		i;
 
-	run = ft_split_string(string_parse(command_line, env_list, NULL));
+	run = string_parse(command_line, env_list, NULL);
 	path = parse_paths(envp);
 	if (*run == NULL || *path == NULL)
 		return ;
