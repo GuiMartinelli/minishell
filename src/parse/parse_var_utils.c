@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_var_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 08:24:42 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/11 16:40:33 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/11 20:03:05 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*get_var_name(char *str)
 	return (name);
 }
 
-int	get_var_size(char *str, t_var *env, t_var *local)
+int	get_var_size(char *str, t_var *env)
 {
 	char	*name;
 	char	*value;
@@ -44,8 +44,6 @@ int	get_var_size(char *str, t_var *env, t_var *local)
 	name = get_var_name(str);
 	size = 0;
 	value = get_var_value(name, env);
-	if (!value)
-		value = get_var_value(name, local);
 	if (!value)
 		size = 0;
 	else
@@ -58,13 +56,12 @@ int	get_var_size(char *str, t_var *env, t_var *local)
 	return (size);
 }
 
-int	var_value_cpy(char *dest, char *src, t_var *env, t_var *local)
+int	var_value_cpy(char *dest, char *src, t_var *env)
 {
 	char	*name;
 	char	*value;
 	int		cpy_size;
 
-	(void)local;
 	if (src[0] == '~')
 		name = ft_strdup("HOME");
 	else

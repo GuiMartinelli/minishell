@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:42:18 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/11 11:19:45 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/11 19:44:13 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	echo(char **str, int fd)
 		ft_putstr_fd("\n", fd);
 		return ;
 	}
-	if (ft_strncmp(str[i], "-n", ft_strlen(str[i])) == 0)
+	if (ft_strncmp(str[i], "-n\0", 3) == 0)
 	{
 		flag = TRUE;
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 08:08:25 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/11 16:37:44 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/11 19:45:31 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*alloc_n_copy(char *s, char c, int index, char **dest)
 	if (c == '"' || c == '\'')
 		s++;
 	size = strlenchr_split((char *)s, c);
-	dest[index] = (char *)malloc(size * sizeof(char));
+	dest[index] = (char *)ft_calloc(size, sizeof(char));
 	if (!dest[index])
 		return (NULL);
 	return (str_cpy_split((char *)s, dest[index], c));
@@ -90,16 +90,16 @@ char	*alloc_n_copy(char *s, char c, int index, char **dest)
 
 char	**ft_split_string(char *s)
 {
-	int		str;
+	int		size;
 	char	**ptr;
 	int		cont;
 
 	cont = 0;
-	str = matrix_size(s);
-	ptr = malloc(str * sizeof(char *));
+	size = matrix_size(s);
+	ptr = ft_calloc(size, sizeof(char *));
 	if (ptr == NULL)
 		return (NULL);
-	while (cont < (str - 1))
+	while (cont < (size - 1))
 	{
 		if (*s == ' ' || *s == '\\')
 			s++;

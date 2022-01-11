@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 09:12:52 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/11 16:41:50 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/11 19:07:01 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_var	*create_var(char *name, char *value)
 {
 	t_var	*new;
 
-	new = (t_var *)malloc(sizeof(t_var));
+	new = (t_var *)ft_calloc(1, sizeof(t_var));
 	if (!new)
 		return (NULL);
 	new->name = ft_strdup(name);
