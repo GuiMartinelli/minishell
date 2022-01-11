@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quotes_parse.c                                     :+:      :+:    :+:   */
+/*   string_parse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 07:49:51 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/11 07:46:02 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/11 08:05:36 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,11 @@ void	string_parse_sub(t_parse *parse, t_var *env, t_var *local)
 {
 	while (parse->str[parse->idx1])
 	{
+		if (parse->str[parse->idx1] == '\\' )
+			parse->idx1++;
 		if ((parse->str[parse->idx1] == '\'' || parse->str[parse->idx1] == '"')
-			&& is_quotes((parse->str + parse->idx1), parse->str[parse->idx1]))
+			&& is_quotes((parse->str + parse->idx1), parse->str[parse->idx1])
+			&& parse->str[parse->idx1 - 1] != '\\')
 			parse->quotes = parse->str[parse->idx1];
 		else if (parse->str[parse->idx1] == parse->quotes)
 			parse->quotes = 0;
