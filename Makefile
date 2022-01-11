@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:15:51 by proberto          #+#    #+#              #
-#    Updated: 2021/12/23 15:19:47 by proberto         ###   ########.fr        #
+#    Updated: 2022/01/11 07:50:16 by guferrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRC = \
 	$(addprefix $(PATH_SRC)/cli/, prompt.c cmd.c) \
 	$(addprefix $(PATH_SRC)/system/, env_var.c utils_var.c free_var.c signals.c) \
 	$(addprefix $(PATH_SRC)/builtins/, cd.c echo.c env.c export.c pwd.c unset.c) \
-	$(addprefix $(PATH_SRC)/exec/, paths.c)
+	$(addprefix $(PATH_SRC)/exec/, paths.c) \
+	$(addprefix $(PATH_SRC)/parse/, parse_utils.c parse_var_utils.c string_parse.c)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -w
 LFLAGS = -lreadline

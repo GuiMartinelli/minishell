@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 07:49:51 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/23 09:07:35 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/11 07:46:02 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	get_quote_size(char *str, t_var *env, t_var *local)
 		size++;
 		aux++;
 	}
-	return (size);
+	return (size + 2);
 }
 
 int	check_var(char *str, t_var *env, t_var *local)
@@ -79,17 +79,13 @@ void	string_parse_sub(t_parse *parse, t_var *env, t_var *local)
 	while (parse->str[parse->idx1])
 	{
 		if ((parse->str[parse->idx1] == '\'' || parse->str[parse->idx1] == '"')
-			&& is_quotes((parse->str + parse->idx1), parse->str[parse->idx1])
-			&& !parse->quotes)
-			parse->quotes = parse->str[parse->idx1++];
-		else if (parse->str[parse->idx1] == ' '
+			&& is_quotes((parse->str + parse->idx1), parse->str[parse->idx1]))
+			parse->quotes = parse->str[parse->idx1];
+		else if (parse->str[parse->idx1] == parse->quotes)
+			parse->quotes = 0;
+		if (parse->str[parse->idx1] == ' '
 			&& parse->str[parse->idx1 + 1] == ' ' && !parse->quotes)
 			parse->idx1 += mv_ptr(' ', (parse->str + parse->idx1));
-		else if (parse->str[parse->idx1] == parse->quotes)
-		{
-			parse->quotes = 0;
-			parse->idx1++;
-		}
 		else if ((parse->str[parse->idx1] == '$' && parse->quotes != '\'')
 			|| (parse->str[parse->idx1] == '~' && !parse->quotes))
 		{
