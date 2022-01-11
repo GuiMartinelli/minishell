@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/11 10:17:31 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:00:34 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	env(t_var *list, int fd);
 void	echo(char **str, int fd);
 t_var	*unset(t_var *var_list, char **var_name);
 void	cd(char *dir, t_var *env_list);
-void	b_exit(void);
+void	ft_exit(void);
 
 /**
  * Execve
