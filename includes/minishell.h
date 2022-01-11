@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/11 16:00:34 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:05:05 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libs/libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/wait.h>
 # include <signal.h>
 
 # define TRUE 1

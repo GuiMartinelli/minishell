@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/11 15:22:16 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:04:18 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	launch_builtins(char *cmd, char **arg, t_var *env_list)
 	else if (ft_strncmp(cmd, "cd", len) == 0)
 		cd(arg[1], env_list);
 	else if (ft_strncmp(cmd, "export", len) == 0)
-		export(&arg[1], env_list);
+		export(env_list, &arg[1]);
 	else if (ft_strncmp(cmd, "unset", len) == 0)
 		env_list = unset(env_list, &arg[1]);
 	else if (ft_strncmp(cmd, "exit", len) == 0)

@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 09:12:52 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/06 17:16:43 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:41:50 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ t_var	*env_variables(char **env)
 		free(split[0]);
 		free(split[1]);
 		free(split);
-		*env++;
+		env++;
 	}
 	return (env_list);
 }

@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 08:47:33 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/08 19:26:05 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:07:45 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ char	*build_path(char *env_path, char *cmd)
 char	*check_path(char **env_path, char *cmd)
 {
 	char	*path;
-	char	*temp;
 	int		index;
 
 	index = 0;

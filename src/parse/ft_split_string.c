@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 08:08:25 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/11 11:19:44 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:37:44 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*str_cpy_split(char *src, char *dest, char c)
 	while (*src != c && *src != '\0')
 	{
 		if (*src == '\\')
-			*src++;
+			src++;
 		else
 		{
 			*dest = *src;

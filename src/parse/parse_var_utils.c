@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_var_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 08:24:42 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/23 09:13:49 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:40:33 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	var_value_cpy(char *dest, char *src, t_var *env, t_var *local)
 	char	*value;
 	int		cpy_size;
 
+	(void)local;
 	if (src[0] == '~')
 		name = ft_strdup("HOME");
 	else
