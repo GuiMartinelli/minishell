@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 08:08:25 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/11 10:30:11 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/11 10:40:49 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,14 @@ char	*str_cpy_split(char *src, char *dest, char c)
 {
 	while (*src != c && *src != '\0')
 	{
-		*dest = *src;
-		dest++;
-		src++;
+		if (*src == '\\')
+			*src++;
+		else
+		{
+			*dest = *src;
+			dest++;
+			src++;
+		}
 	}
 	*dest = '\0';
 	if (*src == '\0')
@@ -88,7 +93,7 @@ char	**ft_split_string(char *s)
 	int		str;
 	char	**ptr;
 	int		cont;
-
+	
 	cont = 0;
 	str = matrix_size(s);
 	ptr = malloc(str * sizeof(char *));
@@ -96,7 +101,7 @@ char	**ft_split_string(char *s)
 		return (NULL);
 	while (cont < (str - 1))
 	{
-		if (*s == ' ')
+		if (*s == ' ' || *s == '\\')
 			s++;
 		else
 		{
