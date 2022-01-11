@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 08:30:25 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/06 10:20:16 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/11 11:19:48 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	set_var(char *str, t_var **local)
 	splitted = ft_split(str, ' ');
 	while (splitted[index])
 	{
-		var = ft_split(splitted[index],'=');
+		var = ft_split(splitted[index], '=');
 		if (name_validation(var[0]))
 			new_variable(local, var[0], var[1]);
 		free(var[0]);

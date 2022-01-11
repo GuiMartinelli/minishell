@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:42:18 by proberto          #+#    #+#             */
-/*   Updated: 2021/12/20 19:08:07 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/11 11:19:45 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	echo(char **str, int fd)
 	if (ft_strncmp(str[i], "-n", ft_strlen(str[i])) == 0)
 	{
 		flag = TRUE;
-		i++;	
+		i++;
 	}
 	else
 		flag = FALSE;

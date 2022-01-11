@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 08:08:25 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/11 10:40:49 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/11 11:19:44 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	**ft_split_string(char *s)
 	int		str;
 	char	**ptr;
 	int		cont;
-	
+
 	cont = 0;
 	str = matrix_size(s);
 	ptr = malloc(str * sizeof(char *));
@@ -105,7 +105,8 @@ char	**ft_split_string(char *s)
 			s++;
 		else
 		{
-			if ((*s == '"' || *s == '\'') && is_quotes(s, *s) && *(s - 1) != '\\')
+			if ((*s == '"' || *s == '\'') && is_quotes(s, *s)
+				&& *(s - 1) != '\\')
 				s = alloc_n_copy(s, *s, cont, ptr);
 			else
 				s = alloc_n_copy(s, ' ', cont, ptr);
