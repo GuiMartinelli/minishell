@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:42:18 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/11 19:44:13 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/11 20:42:48 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	echo(char **str, int fd)
 		flag = FALSE;
 	while (str[i])
 	{
+		if (*str[i] == '>')
+			break ;
 		if ((flag == TRUE && i > 2) || (flag == FALSE && i > 1))
 			ft_putchar_fd(' ', fd);
 		ft_putstr_fd(str[i++], fd);
