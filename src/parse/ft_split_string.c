@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 08:08:25 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/11 10:20:15 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/11 10:30:11 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	**ft_split_string(char *s)
 			s++;
 		else
 		{
-			if ((*s == '"' || *s == '\'') && is_quotes(s, *s))
+			if ((*s == '"' || *s == '\'') && is_quotes(s, *s) && *(s - 1) != '\\')
 				s = alloc_n_copy(s, *s, cont, ptr);
 			else
 				s = alloc_n_copy(s, ' ', cont, ptr);
