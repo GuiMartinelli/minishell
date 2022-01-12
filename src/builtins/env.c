@@ -6,18 +6,19 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 09:50:02 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/08 19:26:17 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/12 18:07:01 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 /**
- * @brief Simulates env shell builtin, and writes every environment variables
- * in a given fd.
+ * @brief Simulates the shell's built-in env, which writes all environment 
+ * variables to a given fd.
  * 
- * @param list list of variables to be writed
- * @param fd file descriptor to write
+ * @param list the environment variables list
+ * @param fd the file descriptor to print
+ * @return void
  */
 void	env(t_var *list, int fd)
 {

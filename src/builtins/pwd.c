@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 23:03:12 by proberto          #+#    #+#             */
-/*   Updated: 2021/12/09 15:05:38 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/12 18:07:12 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ char	*get_pwd(void)
 }
 
 /**
- * @brief Prints the current working directory.
+ * @brief Simulates the shell's built-in pwd, which prints the current working 
+ * directory.
  * 
+ * @param fd the file descriptor to print
  * @return void
  */
 void	pwd(int fd)

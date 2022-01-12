@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:42:18 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/11 20:42:48 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/12 17:47:25 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 /**
- * @brief Prints the string passed as argument.
+ * @brief Simulates the shell's built-in echo, which prints the string passed 
+ * as argument.
  * 
- * @todo get the value of the variable when there is a $
- * @param str The string to print
+ * @details if there is a flag (-n) in the str, don't print a newline
+ * @param str the string to print
+ * @param fd the file descriptor to print
  * @return void
  */
 void	echo(char **str, int fd)
@@ -25,25 +27,22 @@ void	echo(char **str, int fd)
 	size_t	i;
 
 	i = 1;
-	if (str[i] == NULL)
+	flag = FALSE;
+	if (str[i] != NULL)
 	{
-		ft_putstr_fd("\n", fd);
-		return ;
-	}
-	if (ft_strncmp(str[i], "-n\0", 3) == 0)
-	{
-		flag = TRUE;
-		i++;
-	}
-	else
-		flag = FALSE;
-	while (str[i])
-	{
-		if (*str[i] == '>')
-			break ;
-		if ((flag == TRUE && i > 2) || (flag == FALSE && i > 1))
-			ft_putchar_fd(' ', fd);
-		ft_putstr_fd(str[i++], fd);
+		if (ft_strncmp(str[i], "-n\0", 3) == 0)
+		{
+			flag = TRUE;
+			i++;
+		}
+		while (str[i])
+		{
+			if (*str[i] == '>')
+				break ;
+			if ((flag == TRUE && i > 2) || (flag == FALSE && i > 1))
+				ft_putchar_fd(' ', fd);
+			ft_putstr_fd(str[i++], fd);
+		}
 	}
 	if (flag == FALSE)
 		ft_putchar_fd('\n', fd);

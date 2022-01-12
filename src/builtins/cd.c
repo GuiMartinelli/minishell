@@ -6,14 +6,15 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 15:39:20 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/11 16:06:28 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/12 17:57:27 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 /**
- * @brief Changes the current working directory.
+ * @brief Simulates the shell's built-in cd, which changes the current 
+ * working directory.
  * 
  * @param dir the destination directory to change to
  * @param env_list the environment variables list

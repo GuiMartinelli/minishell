@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 10:21:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/07 21:06:22 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/12 17:28:10 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ static int	valid_var(char *name, char *value)
 }
 
 /**
- * @brief Simulates export shell builtin, that adds a new variable at
- * environment variables list.
+ * @brief Simulates the shell's built-in export, which adds a new variable to 
+ * the environment variable list.
  * 
  * @param env_list environment variables list
  * @param var variable to be appended at environment variables list
