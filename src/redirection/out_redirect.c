@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   out_redirect.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:54:17 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/11 20:41:49 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/12 18:51:13 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		create_file(char *file, int mode)
 	int	fd;
 
 	if (mode == 1)
-		fd = open(file, O_WRONLY | O_CREAT, 0777);
+		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	else
 		fd = open(file, O_WRONLY | O_APPEND | O_CREAT, 0777);
 	return (fd);
