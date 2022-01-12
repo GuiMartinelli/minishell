@@ -6,11 +6,19 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 08:24:42 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/11 20:03:05 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/12 09:52:13 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int		is_variable(char *c)
+{
+	if (*c == '$' && (*(c + 1) == '_' || ft_isalnum(*(c + 1))))
+		return (1);
+	else
+		return (0);
+}
 
 char	*get_var_name(char *str)
 {

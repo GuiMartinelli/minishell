@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 07:49:51 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/11 20:04:11 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/12 09:54:37 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ int	get_string_size(char *str, t_var *env)
 	while (str[aux])
 	{
 		if ((str[aux] == '\'' || str[aux] == '"')
-			&& is_quotes((str + aux), str[aux]))
+			&& is_quotes((str + aux), str[aux]) && str[(aux - 1)] != '\\')
 		{
 			size += get_quote_size((str + aux), env);
 			aux += (mv_ptr(str[aux], (str + aux)) - 1);
 		}
 		else if (str[aux] == ' ' && str[aux + 1] == ' ')
 			aux += (mv_ptr(' ', (str + aux)) - 1);
-		else if (str[aux] == '$' || str[aux] == '~')
+		else if (is_variable((str + aux)) || str[aux] == '~')
 		{
 			size += (check_var((str + aux), env));
 			aux += (mv_ptr('$', (str + aux)) - 1);
@@ -87,7 +87,7 @@ void	string_parse_sub(t_parse *parse, t_var *env)
 		if (parse->str[parse->idx1] == ' '
 			&& parse->str[parse->idx1 + 1] == ' ' && !parse->quotes)
 			parse->idx1 += mv_ptr(' ', (parse->str + parse->idx1));
-		else if ((parse->str[parse->idx1] == '$' && parse->quotes != '\'')
+		else if (is_variable(parse->str + parse->idx1)
 			|| (parse->str[parse->idx1] == '~' && !parse->quotes))
 		{
 			parse->idx2 += var_value_cpy((parse->parsed + parse->idx2),
