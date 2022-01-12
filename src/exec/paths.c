@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 08:47:33 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/11 16:07:45 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/12 19:42:25 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*build_path(char *env_path, char *cmd)
 
 /**
  * @brief Check each environment path with a command, to find where the command
- * is installed
+ * is installed.
  * 
  * @param env_path matrix that contains all environment paths
  * @param cmd command to search for

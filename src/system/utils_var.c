@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_var.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 06:54:38 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/12 09:56:48 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/12 20:20:51 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,13 @@ char	**ft_split_value(char const *s, char c)
 	return (ptr);
 }
 
+/**
+ * @brief Look for a value in the list, from the parameterized key.
+ * 
+ * @param name variable name (key)
+ * @param var_list variable list
+ * @return char* pointer to the variable value
+ */
 char	*get_var_value(char *name, t_var *var_list)
 {
 	if (!name)

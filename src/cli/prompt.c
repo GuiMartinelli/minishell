@@ -6,12 +6,18 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:12:44 by proberto          #+#    #+#             */
-/*   Updated: 2021/12/10 20:26:46 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/12 19:39:40 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief Calculate the length of the prompt string.
+ * 
+ * @param prompt prompt struct
+ * @return total len of prompt
+ */
 static size_t	get_prompt_len(t_prompt *prompt)
 {
 	return (ft_strlen(prompt->pwd)
@@ -21,6 +27,12 @@ static size_t	get_prompt_len(t_prompt *prompt)
 		+ 1);
 }
 
+/**
+ * @brief Concatenate strings that make up the prompt.
+ * 
+ * @param prompt prompt struct
+ * @return void
+ */
 static void	build_prompt(t_prompt *prompt)
 {
 	ft_strlcat(prompt->prompt, prompt->prefix_color, prompt->len);
@@ -29,6 +41,12 @@ static void	build_prompt(t_prompt *prompt)
 	ft_strlcat(prompt->prompt, prompt->target, prompt->len);
 }
 
+/**
+ * @brief Responsible for creating the prompt string to be displayed in the 
+ * CLI (command line interface).
+ * 
+ * @return the char* pointer to a new prompt
+ */
 char	*new_prompt(void)
 {
 	t_prompt	prompt;

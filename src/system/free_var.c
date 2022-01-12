@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 09:30:26 by proberto          #+#    #+#             */
-/*   Updated: 2021/12/22 09:37:27 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/12 19:45:06 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
  * @brief Free and set a pointer to NULL, very useful to save some lines.
  * 
  * @param ptr pointer to be freed
+ * @return void
  */
 void	free_n_null(void *ptr)
 {
@@ -30,6 +31,7 @@ void	free_n_null(void *ptr)
  * @brief Free a t_var type of struct.
  * 
  * @param var t_var struct to be freed
+ * @return void
  */
 void	free_var(t_var *var)
 {
@@ -39,6 +41,12 @@ void	free_var(t_var *var)
 	free_n_null(var);
 }
 
+/**
+ * @brief Free a t_env type of struct.
+ * 
+ * @param var_list variable list to be freed
+ * @return void
+ */
 void	free_var_list(t_var *var_list)
 {
 	t_var	*curr;
