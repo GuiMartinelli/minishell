@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/11 20:38:37 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/13 17:08:44 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	launch_execve(char *path, char **arg, char **envp)
 	if (access(path, F_OK) == 0)
 	{
 		pid = fork();
+		signal(SIGINT, interrupt_process);
+		signal(SIGQUIT, quit_process);
 		if (pid == 0)
 		{
 			if (execve(path, arg, envp) == -1)

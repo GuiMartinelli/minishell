@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:08 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/11 16:03:03 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/13 16:53:58 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		prompt = new_prompt();
-		signal(SIGINT, sig_handler);
+		signal(SIGINT, redisplay_prompt);
 		cmd = readline(prompt);
 		free(prompt);
 		if (cmd == NULL)

@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/12 18:22:44 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/13 16:58:33 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ void	eval(char *command_line, t_var *env_list, char **envp);
 /**
  * System
  */
-void	sig_handler(int sign);
+void	redisplay_prompt(int signal);
+void	interrupt_process(int signal);
+void	quit_process(int signal);
 t_var	*env_variables(char **env);
 int		new_variable(t_var **env_list, char *name, char *value);
 int		update_var(t_var *env_list, char *name, char *value);
