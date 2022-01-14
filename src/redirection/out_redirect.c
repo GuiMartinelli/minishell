@@ -6,13 +6,23 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:54:17 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/13 20:19:02 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/14 08:23:21 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int		create_file(char *file, int mode)
+int	move_index(char **matrix, int index)
+{
+	while (*matrix[index] != '>')
+		index++;
+	index++;
+	if (matrix[index])
+		index++;
+	return (index);
+}
+
+int	create_file(char *file, int mode)
 {
 	int	fd;
 
@@ -53,16 +63,24 @@ char	*file_name(char **matrix, char c)
 	return (NULL);
 }
 
-int		output_redirects(char **matrix)
+int	output_redirects(char **matrix)
 {
 	char	*name;
 	int		mode;
+	int		index;
+	int		fd;
 
-	mode = check_redirects(matrix, '>');
-	if (!mode)
-		return (1);
-	name = file_name(matrix, '>');
-	if (name == NULL)
-		return (-1);
-	return (create_file(name, mode));
+	index = 0;
+	while (matrix[index] && *matrix[index] != '|')
+	{
+		mode = check_redirects((matrix + index), '>');
+		if (!mode)
+			return (1);
+		name = file_name((matrix + index), '>');
+		if (name == NULL)
+			return (-1);
+		fd = create_file(name, mode);
+		index = move_index(matrix, index);
+	}
+	return (fd);
 }
