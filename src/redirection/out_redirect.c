@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   out_redirect.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:54:17 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/12 18:51:13 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/13 20:19:02 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int		create_file(char *file, int mode)
 	return (fd);
 }
 
-int	check_redirects(char **matrix)
+int	check_redirects(char **matrix, char c)
 {
 	while (*matrix)
 	{
-		if (**matrix == '>')
+		if (**matrix == c)
 		{
-			if (*(*matrix + 1) == '>')
+			if (*(*matrix + 1) == c)
 				return (2);
 			else
 				return (1);
@@ -39,11 +39,11 @@ int	check_redirects(char **matrix)
 	return (0);
 }
 
-char	*file_name(char **matrix)
+char	*file_name(char **matrix, char c)
 {
 	while (*matrix)
 	{
-		if (**matrix == '>')
+		if (**matrix == c)
 		{
 			matrix++;
 			return (*matrix);
@@ -58,11 +58,11 @@ int		output_redirects(char **matrix)
 	char	*name;
 	int		mode;
 
-	mode = check_redirects(matrix);
+	mode = check_redirects(matrix, '>');
 	if (!mode)
 		return (1);
-	name = file_name(matrix);
+	name = file_name(matrix, '>');
 	if (name == NULL)
-		return (1);
+		return (-1);
 	return (create_file(name, mode));
 }

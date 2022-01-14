@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/13 16:58:33 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/13 20:09:20 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ char	**ft_split_string(char *s);
  * Redirects
  * 
  */
+int		check_redirects(char **matrix, char c);
+char	*file_name(char **matrix, char c);
 int		output_redirects(char **matrix);
 
 #endif
