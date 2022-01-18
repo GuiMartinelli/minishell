@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/17 21:54:31 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/18 19:12:10 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	ft_exit(void);
  */
 char	**parse_paths(char **env);
 char	*build_path(char *env_path, char *cmd);
+char	**parse_cmd(t_cmd *cmd, char **matrix, char **env);
 char	*check_path(char **env_path, char *cmd);
 
 /**
