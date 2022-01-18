@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 14:42:18 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/12 17:47:25 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/17 21:25:29 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	echo(char **str, int fd)
 		}
 		while (str[i])
 		{
-			if (*str[i] == '>')
+			if (*str[i] == '>' || *str[i] == '|')
 				break ;
 			if ((flag == TRUE && i > 2) || (flag == FALSE && i > 1))
 				ft_putchar_fd(' ', fd);

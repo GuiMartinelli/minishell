@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/13 20:09:20 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/17 21:54:31 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ typedef struct s_prompt
 typedef struct s_cmd
 {
 	char	*name;
-	char	*option;
-	char	*arg;
+	char	**option;
+	char	**env;
 }			t_cmd;
 
 typedef struct s_var
@@ -76,6 +76,14 @@ char	*get_var_value(char *name, t_var *var_list);
 void	free_var_list(t_var *var_list);
 void	free_n_null(void *ptr);
 void	free_var(t_var *var);
+void	free_matrix(char **matrix);
+
+/**
+ * Launch
+ */
+int		launch_builtins(char *cmd, char **arg, t_var *env_list, int fd);
+void	launch_execve(char *path, char **arg, char **envp, int fd[2]);
+void	run_cmds(char **matrix, char **envp, int input, int output, t_var *env_list);
 
 /**
  * Builtins

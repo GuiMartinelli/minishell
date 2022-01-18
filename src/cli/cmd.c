@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/13 17:08:44 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/17 21:57:24 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,9 @@ int	ft_is_space(char c)
 	return (0);
 }
 
-int	launch_builtins(char *cmd, char **arg, t_var *env_list)
+int	launch_builtins(char *cmd, char **arg, t_var *env_list, int fd)
 {
 	size_t	len;
-	int		fd;
-
-	fd = output_redirects(arg);
 
 	len = ft_strlen(cmd);
 	if (ft_strncmp(cmd, "pwd", len) == 0)
@@ -46,7 +43,7 @@ int	launch_builtins(char *cmd, char **arg, t_var *env_list)
 	return (TRUE);
 }
 
-void	launch_execve(char *path, char **arg, char **envp)
+void	launch_execve(char *path, char **arg, char **envp, int fd[2])
 {
 	pid_t	pid;
 
@@ -57,6 +54,8 @@ void	launch_execve(char *path, char **arg, char **envp)
 		signal(SIGQUIT, quit_process);
 		if (pid == 0)
 		{
+			dup2(fd[0], 0);
+			close(fd[1]);
 			if (execve(path, arg, envp) == -1)
 			{
 				perror("minishell");
@@ -66,7 +65,10 @@ void	launch_execve(char *path, char **arg, char **envp)
 		else if (pid == -1)
 			ft_putendl_fd("\nFailed forking child..", 2);
 		else
+		{
 			wait(NULL);
+			close(fd[0]);
+		}
 	}
 	else
 		ft_putendl_fd("minishell: command not found: ", 2);
@@ -75,28 +77,30 @@ void	launch_execve(char *path, char **arg, char **envp)
 void	eval(char *command_line, t_var *env_list, char **envp)
 {
 	char	**run;
-	char	**path;
-	char	*valid_path;
-	int		i;
+//	char	**path;
+//	char	*valid_path;
+//	int		i;
 
+	//check redirect in/out
 	run = string_parse(command_line, env_list);
-	path = parse_paths(envp);
-	if (*run == NULL || *path == NULL)
-		return ;
-	valid_path = check_path(path, run[0]);
-	if (valid_path == NULL)
-		valid_path = ft_strdup(run[0]);
-	if (launch_builtins(run[0], run, env_list) == TRUE)
-		i = 0;
-	else
-		launch_execve(valid_path, run, envp);
-	i = 0;
-	while (run[i])
-		free(run[i++]);
-	i = 0;
-	while (path[i])
-		free(path[i++]);
-	free(run);
-	free(path);
-	free(valid_path);
+	run_cmds(run, envp, 0, output_redirects(run), env_list);
+//	path = parse_paths(envp);
+//	if (*run == NULL || *path == NULL)
+//		return ;
+//	valid_path = check_path(path, run[0]);
+//	if (valid_path == NULL)
+//		valid_path = ft_strdup(run[0]);
+//	if (launch_builtins(run[0], run, env_list, 1) == TRUE)
+//		i = 0;
+//	else
+//		launch_execve(valid_path, run, envp);
+//	i = 0;
+//	while (run[i])
+//		free(run[i++]);
+//	i = 0;
+//	while (path[i])
+//		free(path[i++]);
+	free_matrix(run);
+//	free(path);
+//	free(valid_path);
 }
