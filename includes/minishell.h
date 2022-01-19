@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/18 20:29:10 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/19 18:46:22 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,6 @@ char	**ft_split_string(char *s);
 int		check_redirects(char **matrix, char c);
 char	*file_name(char **matrix, char c);
 int		output_redirects(char **matrix);
+int		input_redirects(char **matrix);
 
 #endif

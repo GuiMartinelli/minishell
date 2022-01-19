@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_redirect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:08:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/13 20:29:25 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/19 18:47:20 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,10 @@ int	input_redirects(char **matrix)
 {
 	char	*name;
 	int		mode;
-	int		fd;
 
 	mode = check_redirects(matrix, '<');
 	if (!mode)
 		return (0);
-	//if (mode == 2)
-		//here_docs
 	name = file_name(matrix, '<');
 	if (name == NULL)
 		return (-1);

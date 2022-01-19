@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/18 20:29:32 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/19 18:46:29 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ void	eval(char *command_line, t_var *env_list, char **envp)
 
 	//check redirect in/out
 	run = string_parse(command_line, env_list);
-	run_cmds(run, envp, 0, output_redirects(run));
+	run_cmds(run, envp, input_redirects(run), output_redirects(run));
+
 //	path = parse_paths(envp);
 //	if (*run == NULL || *path == NULL)
 //		return ;
