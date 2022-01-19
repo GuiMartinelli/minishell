@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 07:49:51 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/12 09:54:37 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/19 20:19:10 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ char	**string_parse(char *str, t_var *env)
 {
 	t_parse	parse;
 	char	**splitted;
+	char	*parsed_str;
 
 	parse.idx1 = 0;
 	parse.idx2 = 0;
@@ -113,7 +114,8 @@ char	**string_parse(char *str, t_var *env)
 	if (!parse.parsed)
 		return (NULL);
 	string_parse_sub(&parse, env);
-	splitted = ft_split_string(parse.parsed);
-	free_n_null(parse.parsed);
+	parsed_str = parse_spaces(parse.parsed);
+	splitted = ft_split_string(parsed_str);
+	free_n_null(parsed_str);
 	return (splitted);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/19 18:46:22 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/19 20:15:01 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int		is_variable(char *c);
 int		mv_ptr(char mode, char *str);
 int		get_var_size(char *str, t_var *env);
 int		var_value_cpy(char *dest, char *src, t_var *env);
+char	*parse_spaces(char *str);
 char	**string_parse(char *str, t_var *env);
 char	**ft_split_string(char *s);
 
