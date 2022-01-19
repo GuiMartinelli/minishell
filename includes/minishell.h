@@ -6,7 +6,11 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/01/19 20:15:01 by guferrei         ###   ########.fr       */
+=======
+/*   Updated: 2022/01/19 19:03:44 by proberto         ###   ########.fr       */
+>>>>>>> 12da995d366831cabf14102d7b654b056fb8d261
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +87,7 @@ void	free_matrix(char **matrix);
  */
 int		launch_builtins(char *cmd, char **arg, t_var *env_list, int fd);
 void	launch_execve(char *path, char **arg, char **envp, int fd[2]);
-void	run_cmds(char **matrix, char **envp, int input, int output);
+void	run_cmds(char **matrix, char **envp, int input, int output, t_var *env_list);
 
 /**
  * Builtins
