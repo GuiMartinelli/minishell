@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/17 21:57:24 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/18 20:29:32 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,28 @@ void	launch_execve(char *path, char **arg, char **envp, int fd[2])
 		if (pid == 0)
 		{
 			dup2(fd[0], 0);
-			close(fd[1]);
+			dup2(fd[1], 1);
 			if (execve(path, arg, envp) == -1)
 			{
 				perror("minishell");
 				exit(EXIT_FAILURE);
 			}
+			if (fd[0] != 0)
+				close(fd[0]);
+			if (fd[1] != 1)
+				close(fd[1]);
+			fd[0] = 0;
 		}
 		else if (pid == -1)
 			ft_putendl_fd("\nFailed forking child..", 2);
 		else
 		{
 			wait(NULL);
-			close(fd[0]);
+			if (fd[0] != 0)
+				close(fd[0]);
+			if (fd[1] != 1)
+				close(fd[1]);
+			fd[0] = 0;
 		}
 	}
 	else
@@ -83,7 +92,7 @@ void	eval(char *command_line, t_var *env_list, char **envp)
 
 	//check redirect in/out
 	run = string_parse(command_line, env_list);
-	run_cmds(run, envp, 0, output_redirects(run), env_list);
+	run_cmds(run, envp, 0, output_redirects(run));
 //	path = parse_paths(envp);
 //	if (*run == NULL || *path == NULL)
 //		return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/18 19:12:10 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/18 20:29:10 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	free_matrix(char **matrix);
  */
 int		launch_builtins(char *cmd, char **arg, t_var *env_list, int fd);
 void	launch_execve(char *path, char **arg, char **envp, int fd[2]);
-void	run_cmds(char **matrix, char **envp, int input, int output, t_var *env_list);
+void	run_cmds(char **matrix, char **envp, int input, int output);
 
 /**
  * Builtins

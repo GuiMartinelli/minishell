@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:58:44 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/18 19:44:23 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/18 20:18:48 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char	**parse_cmd(t_cmd *cmd, char **matrix, char **env)
 
 	index = 0;
 	paths = parse_paths(env);
-	cmd = malloc(sizeof(t_cmd));
 	cmd->name = check_path(paths, matrix[0]);
 	cmd->option = malloc(get_args_size(matrix) * sizeof(char *));
 
