@@ -6,13 +6,13 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 08:24:42 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/12 09:52:13 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/20 08:54:16 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int		is_variable(char *c)
+int	is_variable(char *c)
 {
 	if (*c == '$' && (*(c + 1) == '_' || ft_isalnum(*(c + 1))))
 		return (1);

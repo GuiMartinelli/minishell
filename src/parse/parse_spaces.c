@@ -6,11 +6,21 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 09:11:48 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/19 20:17:56 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/20 08:54:00 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+char	check_quote(char *ptr, char quotes)
+{
+	if (*ptr != quotes && quotes)
+		return (quotes);
+	if (quotes == *ptr)
+		return (0);
+	else
+		return (*ptr);
+}
 
 int	get_size(char *str)
 {
@@ -22,19 +32,15 @@ int	get_size(char *str)
 	while (*str)
 	{
 		if (*str == '"' || *str == '\'')
-		{
-			if (quotes == *str)
-				quotes = 0;
-			else
-				quotes = *str;
-		}
-		else if ((*str == '|' || *str == '>' || *str == '<') && !quotes)
+			quotes = check_quote(str, quotes);
+		else if ((*str == '|' || *str == '>' || *str == '<')
+			&& !quotes && (*(str - 1) != ' ' || *(str + 1) != ' '))
 		{
 			count += 2;
 			if (*str == *(str + 1))
 			{
 				str++;
-				count += 2;
+				count++;
 			}
 		}
 		count++;
@@ -43,47 +49,31 @@ int	get_size(char *str)
 	return (count);
 }
 
-char	*cpy_str(char *src, char *dest)
+char	*cpy_str(char *src, char *dest, char quotes)
 {
-	int		index1;
-	int		index2;
-	char	quotes;
+	int		index;
 
-	quotes = 0;
-	index1 = 0;
-	index2 = 0;
-	while (src[index1])
+	index = 0;
+	while (*src)
 	{
-		if ((src[index1] == '|' || src[index1] == '<'
-				|| src[index1] == '>') && !quotes)
+		if ((*src == '|' || *src == '<'
+				|| *src == '>') && !quotes)
 		{
-			dest[index2] = ' ';
-			index2++;
-			dest[index2] = src[index1];
-			index2++;
-			if (src[index1] == src[index1 + 1])
-			{
-				dest[index2] = src[index1];
-				index1++;
-				index2++;
-			}
-			dest[index2] = ' ';
+			dest[index++] = ' ';
+			dest[index++] = *src;
+			if (*src == *(src + 1))
+				dest[index++] = *src++;
+			dest[index] = ' ';
 		}
 		else
 		{
-			if (src[index1] == '"' || src[index1] == '\'')
-			{
-				if (quotes)
-					quotes = 0;
-				else
-				quotes = src[index1];
-			}
-			dest[index2] = src[index1];
+			if (*src == '"' || *src == '\'')
+				quotes = check_quote(src, quotes);
+			dest[index] = *src;
 		}
-		index2++;
-		index1++;
+		src++;
+		index++;
 	}
-	dest[index2] = '\0';
 	return (dest);
 }
 
@@ -91,14 +81,16 @@ char	*parse_spaces(char *str)
 {
 	char	*parsed;
 	int		size;
-	
+	char	quotes;
+
+	quotes = 0;
 	size = get_size(str);
 	if (size == (int)ft_strlen(str))
 		return (str);
-	parsed = malloc(size * sizeof(char));
+	parsed = ft_calloc(size, sizeof(char));
 	if (!parsed)
 		return (NULL);
-	parsed = cpy_str(str, parsed);
+	parsed = cpy_str(str, parsed, quotes);
 	if (str)
 	{
 		free(str);
