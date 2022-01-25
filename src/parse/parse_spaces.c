@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_spaces.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 09:11:48 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/25 16:10:40 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/25 19:39:45 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,28 @@ char	check_quote(char *ptr, char quotes)
 		return (*ptr);
 }
 
+int	check_tokens(char *str)
+{
+	int	count;
+
+	count = 0;
+	if (*str == '|')
+	{
+		if (*(str - 1) != ' ')
+			count++;
+		if (*(str + 1) != ' ')
+			count++;
+	}
+	else if (*str == '>' || *str == '<')
+	{
+		if (*(str - 1) != ' ' && *(str - 1) != *str)
+			count++;
+		if (*(str + 1) != ' ' && *(str + 1) != *str)
+			count++;
+	}
+	return (count);
+}
+
 int	get_size(char *str)
 {
 	int		count;
@@ -33,16 +55,8 @@ int	get_size(char *str)
 	{
 		if (*str == '"' || *str == '\'')
 			quotes = check_quote(str, quotes);
-		else if ((*str == '|' || *str == '>' || *str == '<')
-			&& !quotes && (*(str - 1) != ' ' || *(str + 1) != ' '))
-		{
-			count += 2;
-			if (*str == *(str + 1))
-			{
-				str++;
-				count++;
-			}
-		}
+		else if ((*str == '|' || *str == '>' || *str == '<') && !quotes)
+			count += check_tokens(str);
 		count++;
 		str++;
 	}
@@ -56,14 +70,23 @@ char	*cpy_str(char *src, char *dest, char quotes)
 	index = 0;
 	while (*src)
 	{
-		if ((*src == '|' || *src == '<'
-				|| *src == '>') && !quotes)
+		if ((*src == '<' || *src == '>') && !quotes)
 		{
-			dest[index++] = ' ';
-			dest[index++] = *src;
+			if (*(src - 1) != ' ')
+				dest[index++] = ' ';
+			dest[index] = *src;
 			if (*src == *(src + 1))
-				dest[index++] = *src++;
-			dest[index] = ' ';
+				dest[++index] = *src++;
+			if (*(src + 1) != ' ')
+				dest[++index] = ' ';
+		}
+		else if (*src == '|' && !quotes)
+		{
+			if (*(src - 1) != ' ')
+				dest[index++] = ' ';
+			dest[index] = *src;
+			if (*(src + 1) != ' ')
+				dest[++index] = ' ';
 		}
 		else
 		{
