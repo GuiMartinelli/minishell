@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_redirect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:08:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/19 18:47:20 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/25 10:31:58 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ int	input_redirects(char **matrix)
 	name = file_name(matrix, '<');
 	if (name == NULL)
 		return (-1);
+	//if (mode == 2)
+		//heredocs
 	return (open(name, O_RDONLY));
 }
