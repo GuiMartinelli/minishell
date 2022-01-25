@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 09:11:48 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/20 08:54:00 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/25 16:10:40 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*parse_spaces(char *str)
 	size = get_size(str);
 	if (size == (int)ft_strlen(str))
 		return (str);
-	parsed = ft_calloc(size, sizeof(char));
+	parsed = ft_calloc((size + 1), sizeof(char));
 	if (!parsed)
 		return (NULL);
 	parsed = cpy_str(str, parsed, quotes);
