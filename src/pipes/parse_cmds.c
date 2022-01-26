@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmartinelli <gmartinelli@student.42.fr>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:58:44 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/26 08:50:29 by gmartinelli      ###   ########.fr       */
+/*   Updated: 2022/01/26 09:30:23 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	get_args_size(char **matrix)
 
 	x = 0;
 	while (matrix[x] && *matrix[x] != '|'
-			&& *matrix[x] != '<' && *matrix[x] != '>' )
+		&& *matrix[x] != '<' && *matrix[x] != '>' )
 			x++;
 	return (x + 1);
 }
