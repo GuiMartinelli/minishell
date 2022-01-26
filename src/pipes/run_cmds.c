@@ -6,7 +6,7 @@
 /*   By: gmartinelli <gmartinelli@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:02:27 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/26 08:53:27 by gmartinelli      ###   ########.fr       */
+/*   Updated: 2022/01/26 08:57:56 by gmartinelli      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,16 @@ void	run_cmds(char **matrix, char **envp, int input, int output, t_var *env_list
 			signal(SIGQUIT, quit_process);
 			if (pid == 0)
 			{
-				dup2(input, 0);
-				dup2(fd[1], 1);
-				if (input != 0)
-					close(input);
-				close(fd[1]);
 				if (!cmd->name)
 					{
 						printf("%s: command not found\n", cmd->option[0]);
 						exit (1);
 					}
+				dup2(input, 0);
+				dup2(fd[1], 1);
+				if (input != 0)
+					close(input);
+				close(fd[1]);
 				execve(cmd->name, cmd->option, cmd->env);
 			}
 			else
@@ -117,13 +117,13 @@ void	run_cmds(char **matrix, char **envp, int input, int output, t_var *env_list
 			signal(SIGQUIT, quit_process);
 			if (pid == 0)
 			{
-				dup2(input, 0);
-				dup2(output, 1);
 				if (!cmd->name)
 				{
 					printf("%s: command not found\n", cmd->option[0]);
 					exit (1);
 				}
+				dup2(input, 0);
+				dup2(output, 1);
 				execve(cmd->name, cmd->option, cmd->env);
 			}
 			else
