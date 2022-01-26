@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gmartinelli <gmartinelli@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/25 16:42:23 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/26 08:19:07 by gmartinelli      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ void	ft_exit(void);
  * Execve
  * 
  */
-char	**parse_paths(char **env);
+char	**parse_paths(t_var *env_list);
 char	*build_path(char *env_path, char *cmd);
-char	**parse_cmd(t_cmd *cmd, char **matrix, char **env);
+char	**parse_cmd(t_cmd *cmd, char **matrix, char **env, t_var *env_list);
 char	*check_path(char **env_path, char *cmd);
 
 /**

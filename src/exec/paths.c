@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gmartinelli <gmartinelli@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 08:47:33 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/12 19:42:25 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/26 08:47:50 by gmartinelli      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,19 @@
  * @param env environment variables matrix, usually received at main function
  * @return matrix containing all environment paths
  */
-char	**parse_paths(char **env)
+char	**parse_paths(t_var *env_list)
 {
-	char	*ptr;
-	int		index;
+	t_var	*curr;
 
-	index = 0;
-	while (env[index])
+	curr = env_list;
+	while (curr->next)
 	{
-		if (!ft_strncmp(env[index], "PATH", 4))
+		if (!ft_strncmp(curr->name, "PATH", 4))
 		{
-			ptr = env[index] + 5;
-			return (ft_split(ptr, ':'));
+			return (ft_split(curr->value, ':'));
 		}
 		else
-			index++;
+			curr = curr->next;
 	}
 	return (NULL);
 }
@@ -76,6 +74,8 @@ char	*check_path(char **env_path, char *cmd)
 
 	index = 0;
 	path = NULL;
+	if (!env_path)
+		return (NULL);
 	while (env_path[index])
 	{
 		path = build_path(env_path[index], cmd);

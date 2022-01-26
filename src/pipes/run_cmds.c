@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_cmds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gmartinelli <gmartinelli@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:02:27 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/25 18:35:59 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/26 08:53:27 by gmartinelli      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	run_cmds(char **matrix, char **envp, int input, int output, t_var *env_list
 	fd[1] = STDOUT_FILENO;
 	cmd = malloc(sizeof(t_cmd));
 	// ft_print_matrix(matrix);
-	matrix = parse_cmd(cmd, matrix, envp);
+	matrix = parse_cmd(cmd, matrix, envp, env_list);
 	if (*matrix && **matrix == '|')
 	{
 		pipe(fd);
@@ -69,6 +69,11 @@ void	run_cmds(char **matrix, char **envp, int input, int output, t_var *env_list
 				if (input != 0)
 					close(input);
 				close(fd[1]);
+				if (!cmd->name)
+					{
+						printf("%s: command not found\n", cmd->option[0]);
+						exit (1);
+					}
 				execve(cmd->name, cmd->option, cmd->env);
 			}
 			else
@@ -114,11 +119,12 @@ void	run_cmds(char **matrix, char **envp, int input, int output, t_var *env_list
 			{
 				dup2(input, 0);
 				dup2(output, 1);
+				if (!cmd->name)
+				{
+					printf("%s: command not found\n", cmd->option[0]);
+					exit (1);
+				}
 				execve(cmd->name, cmd->option, cmd->env);
-				if (input != 0)
-					close(input);
-				if (output != 1)
-					close(output);
 			}
 			else
 			{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gmartinelli <gmartinelli@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:58:44 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/18 20:18:48 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/26 08:50:29 by gmartinelli      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,15 @@ int	get_args_size(char **matrix)
 	return (x + 1);
 }
 
-char	**parse_cmd(t_cmd *cmd, char **matrix, char **env)
+char	**parse_cmd(t_cmd *cmd, char **matrix, char **env, t_var *env_list)
 {
 	char	**paths;
 	int		index;
 
 	index = 0;
-	paths = parse_paths(env);
+	paths = parse_paths(env_list);
 	cmd->name = check_path(paths, matrix[0]);
 	cmd->option = malloc(get_args_size(matrix) * sizeof(char *));
-
 	while (*matrix && **matrix != '|' && **matrix != '<' && **matrix != '>' )
 	{
 		cmd->option[index] = *matrix;
@@ -41,6 +40,7 @@ char	**parse_cmd(t_cmd *cmd, char **matrix, char **env)
 	}
 	cmd->option[index] = NULL;
 	cmd->env = env;
-	free_matrix(paths);
+	if (paths)
+		free_matrix(paths);
 	return (matrix);
 }
