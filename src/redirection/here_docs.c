@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_docs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 09:07:13 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/25 16:36:47 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/27 19:17:45 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	**next_redirect(char **matrix)
 	while (**matrix != '<')
 	{
 		matrix++;
-		if (!*matrix)
+		if (!*matrix || **matrix == '|')
 			return (NULL);
 	}
 	return (matrix);
