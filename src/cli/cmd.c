@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/25 19:39:58 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/27 10:22:32 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,19 @@ int	ft_is_space(char c)
 
 int	launch_builtins(char *cmd, char **arg, t_var *env_list, int fd)
 {
-	size_t	len;
-
-	len = ft_strlen(cmd);
-	if (ft_strncmp(cmd, "pwd", len) == 0)
+	if (ft_strncmp(cmd, "pwd", comp_size(cmd, "pwd")) == 0)
 		pwd(fd);
-	else if (ft_strncmp(cmd, "env", len) == 0)
+	else if (ft_strncmp(cmd, "env", comp_size(cmd, "env")) == 0)
 		env(env_list, fd);
-	else if (ft_strncmp(cmd, "echo", len) == 0)
+	else if (ft_strncmp(cmd, "echo", comp_size(cmd, "echo")) == 0)
 		echo(arg, fd);
-	else if (ft_strncmp(cmd, "cd", len) == 0)
+	else if (ft_strncmp(cmd, "cd", comp_size(cmd, "cd")) == 0)
 		cd(arg[1], env_list);
-	else if (ft_strncmp(cmd, "export", len) == 0)
+	else if (ft_strncmp(cmd, "export", comp_size(cmd, "export")) == 0)
 		export(env_list, &arg[1]);
-	else if (ft_strncmp(cmd, "unset", len) == 0)
+	else if (ft_strncmp(cmd, "unset", comp_size(cmd, "unset")) == 0)
 		env_list = unset(env_list, &arg[1]);
-	else if (ft_strncmp(cmd, "exit", len) == 0)
+	else if (ft_strncmp(cmd, "exit", comp_size(cmd, "exit")) == 0)
 		ft_exit();
 	else
 		return (FALSE);

@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 10:21:09 by guferrei          #+#    #+#             */
-/*   Updated: 2021/12/23 08:49:50 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/27 10:19:58 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,17 @@ int	mv_ptr(char mode, char *str)
 		x++;
 	}
 	return (x);
+}
+
+size_t	comp_size(char *str1, char *str2)
+{
+	size_t	size1;
+	size_t	size2;
+
+	size1 = ft_strlen(str1);
+	size2 = ft_strlen(str2);
+	if (size1 > size2)
+		return (size1);
+	else
+		return (size2);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmartinelli <gmartinelli@student.42.fr>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/26 08:19:07 by gmartinelli      ###   ########.fr       */
+/*   Updated: 2022/01/27 10:20:12 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int		var_value_cpy(char *dest, char *src, t_var *env);
 char	*parse_spaces(char *str);
 char	**string_parse(char *str, t_var *env);
 char	**ft_split_string(char *s);
+size_t	comp_size(char *str1, char *str2);
 
 /**
  * Redirects

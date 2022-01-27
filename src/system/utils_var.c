@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_var.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 06:54:38 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/12 20:20:51 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/27 10:20:56 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*get_var_value(char *name, t_var *var_list)
 		return (NULL);
 	while (var_list)
 	{
-		if (ft_strncmp(var_list->name, name, ft_strlen(var_list->name)) == 0)
+		if (!ft_strncmp(var_list->name, name, comp_size(var_list->name, name)))
 			return (var_list->value);
 		var_list = var_list->next;
 	}
