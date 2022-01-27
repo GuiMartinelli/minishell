@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/27 10:20:12 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/27 19:36:52 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ typedef struct s_var
 	struct s_var	*next;
 }					t_var;
 
+typedef struct s_env_var
+{
+	char	**envp;
+	t_var	*list;
+}			t_env_var;
+
 typedef struct s_parse
 {
 	char	*parsed;
@@ -84,7 +90,7 @@ void	free_matrix(char **matrix);
  * Launch
  */
 int		launch_builtins(char *cmd, char **arg, t_var *env_list, int fd);
-void	launch_execve(char *path, char **arg, char **envp, int fd[2]);
+void	launch_execve(t_cmd *cmd, int input, int output);
 void	run_cmds(char **matrix, char **envp, int input, int output, t_var *env_list);
 
 /**
