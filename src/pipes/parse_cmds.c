@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:58:44 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/26 09:30:23 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/27 08:45:02 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ char	**parse_cmd(t_cmd *cmd, char **matrix, char **env, t_var *env_list)
 	char	**paths;
 	int		index;
 
+	if (**matrix == '|')
+	{
+		write(1, "bash: syntax error near unexpected token `|'\n", 47);
+		return (NULL);
+	}
 	index = 0;
 	paths = parse_paths(env_list);
 	cmd->name = check_path(paths, matrix[0]);

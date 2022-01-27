@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_cmds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmartinelli <gmartinelli@student.42.fr>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:02:27 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/26 08:57:56 by gmartinelli      ###   ########.fr       */
+/*   Updated: 2022/01/27 08:48:47 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	run_cmds(char **matrix, char **envp, int input, int output, t_var *env_list
 	cmd = malloc(sizeof(t_cmd));
 	// ft_print_matrix(matrix);
 	matrix = parse_cmd(cmd, matrix, envp, env_list);
+	if (!matrix)
+		return ;
 	if (*matrix && **matrix == '|')
 	{
 		pipe(fd);
@@ -81,6 +83,11 @@ void	run_cmds(char **matrix, char **envp, int input, int output, t_var *env_list
 				wait(NULL);
 				close(fd[1]);
 				matrix++;
+				if (!*matrix)
+				{
+					close(fd[0]);
+					return ;
+				}
 				run_cmds(matrix, envp, fd[0], output, env_list);
 				close(fd[0]);
 			}
