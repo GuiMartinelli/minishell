@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   out_redirect.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:54:17 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/14 08:23:21 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/27 14:48:29 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	output_redirects(char **matrix)
 	int		fd;
 
 	index = 0;
+	fd = STDOUT_FILENO;
 	while (matrix[index] && *matrix[index] != '|')
 	{
 		mode = check_redirects((matrix + index), '>');
