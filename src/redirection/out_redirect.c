@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   out_redirect.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:54:17 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/27 14:48:29 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/28 11:40:23 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,11 @@ int	output_redirects(char **matrix)
 		if (!mode)
 			return (1);
 		name = file_name((matrix + index), '>');
-		if (name == NULL)
+		if (!name || *name == '|' || *name == '<' || *name == '>')
+		{
+			file_error(name);
 			return (-1);
+		}
 		fd = create_file(name, mode);
 		index = move_index(matrix, index);
 	}
