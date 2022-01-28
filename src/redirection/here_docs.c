@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_docs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 09:07:13 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/27 19:17:45 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/28 11:48:52 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ char	**next_redirect(char **matrix)
 
 void	print_err(char *delimiter)
 {
-	printf("minishell: warning: here-document delimited by "
-		"end-of-file (wanted `%s`)\n", delimiter);
+	write(1, "minishell: warning: here-document delimited by "
+		"end-of-file (wanted `", 69);
+	ft_putstr_fd(delimiter, 1);
+	write(1, "`)\n", 4);
 }
 
 int	heredocs_prompt(char **matrix, char *delimiter)
