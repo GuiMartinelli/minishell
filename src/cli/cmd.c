@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/27 19:36:05 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/28 10:42:18 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,23 @@ void run_command_line(char **cl, t_env_var *env, int input, int output)
 	if (cmd == NULL)
 		return ;
 	cl = parse_cmd(cmd, cl, env->envp, env->list);
+	if (!cl)
+	{
+		//EXIT STATUS 2
+		return ;
+	}
 	set_io(cl, fd, &input, output);
-	// ft_print_matrix(cl);
+	if (input == -1)
+	{
+		//EXIT STATUS 1, FILE NOT FOUND
+		return ;
+	}
 	// printf("input: %d\nfd[0]: %d\nfd[1]: %d\n", input, fd[0], fd[1]);
+	if (!cmd->name || !cmd->option[0])
+	{
+		//Se for só redirect, sem commando, exit status = 0
+		return ;
+	}
 	if (launch_builtins(cmd->option[0], cmd->option, env->list, fd[1]))
 	{
 		if (input != STDIN_FILENO)
@@ -174,6 +188,8 @@ void	eval(char *command_line, t_var *env_list, char **envp)
 	env.envp = envp;
 	env.list = env_list;
 	run = string_parse(command_line, env_list);
+	if (!*run)
+		return ;
 	// run_cmds(run, envp, STDIN_FILENO, STDOUT_FILENO, env.list);
 	run_command_line(run, &env, STDIN_FILENO, STDOUT_FILENO);
 

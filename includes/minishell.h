@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/27 19:36:52 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/28 11:39:33 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,6 @@ char	*file_name(char **matrix, char c);
 int		output_redirects(char **matrix);
 int		input_redirects(char **matrix);
 int		heredocs_prompt(char **matrix, char *delimiter);
+void	file_error(char *name);
 
 #endif
