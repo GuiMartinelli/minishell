@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/28 10:42:18 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/30 02:16:46 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,11 @@ static int	is_there_a_pipe(char **cl)
 	while (*cl)
 	{
 		if (**cl == '|')
+		{
+			if (*(++cl) && **cl == '|')
+				return (FALSE);
 			return (TRUE);
+		}
 		cl++;
 	}
 	return(FALSE);
@@ -169,10 +173,9 @@ void run_command_line(char **cl, t_env_var *env, int input, int output)
 			ft_putendl_fd("minishell: command not found: ", 2);
 	}
 	free_cmd(cmd);
-	
 	while (*cl && **cl++ != '|')
 		;
-	if (*cl)
+	if (*cl && **cl != '|')
 		run_command_line(cl, env, fd[0], fd[1]);
 }
 
