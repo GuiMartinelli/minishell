@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   out_redirect.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:54:17 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/28 11:40:23 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/30 10:52:11 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ int	check_redirects(char **matrix, char c)
 
 char	*file_name(char **matrix, char c)
 {
-	while (*matrix)
+	char	*file;
+
+	file = NULL;
+	while (*matrix && **matrix != '|')
 	{
 		if (**matrix == c)
-		{
-			matrix++;
-			return (*matrix);
-		}
+			file = *(matrix + 1);
 		matrix++;
 	}
-	return (NULL);
+	return (file);
 }
 
 int	output_redirects(char **matrix)
