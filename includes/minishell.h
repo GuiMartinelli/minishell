@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/13 20:09:20 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/28 11:39:33 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 
 # define TRUE 1
 # define FALSE 0
+# define STDIN_FILENO 0
+# define STDOUT_FILENO 1
 
 typedef struct s_prompt
 {
@@ -36,8 +38,8 @@ typedef struct s_prompt
 typedef struct s_cmd
 {
 	char	*name;
-	char	*option;
-	char	*arg;
+	char	**option;
+	char	**env;
 }			t_cmd;
 
 typedef struct s_var
@@ -46,6 +48,12 @@ typedef struct s_var
 	char			*value;
 	struct s_var	*next;
 }					t_var;
+
+typedef struct s_env_var
+{
+	char	**envp;
+	t_var	*list;
+}			t_env_var;
 
 typedef struct s_parse
 {
@@ -76,6 +84,14 @@ char	*get_var_value(char *name, t_var *var_list);
 void	free_var_list(t_var *var_list);
 void	free_n_null(void *ptr);
 void	free_var(t_var *var);
+void	free_matrix(char **matrix);
+
+/**
+ * Launch
+ */
+int		launch_builtins(char *cmd, char **arg, t_var *env_list, int fd);
+void	launch_execve(t_cmd *cmd, int input, int output);
+void	run_cmds(char **matrix, char **envp, int input, int output, t_var *env_list);
 
 /**
  * Builtins
@@ -93,8 +109,9 @@ void	ft_exit(void);
  * Execve
  * 
  */
-char	**parse_paths(char **env);
+char	**parse_paths(t_var *env_list);
 char	*build_path(char *env_path, char *cmd);
+char	**parse_cmd(t_cmd *cmd, char **matrix, char **env, t_var *env_list);
 char	*check_path(char **env_path, char *cmd);
 
 /**
@@ -106,8 +123,10 @@ int		is_variable(char *c);
 int		mv_ptr(char mode, char *str);
 int		get_var_size(char *str, t_var *env);
 int		var_value_cpy(char *dest, char *src, t_var *env);
+char	*parse_spaces(char *str);
 char	**string_parse(char *str, t_var *env);
 char	**ft_split_string(char *s);
+size_t	comp_size(char *str1, char *str2);
 
 /**
  * Redirects
@@ -116,5 +135,8 @@ char	**ft_split_string(char *s);
 int		check_redirects(char **matrix, char c);
 char	*file_name(char **matrix, char c);
 int		output_redirects(char **matrix);
+int		input_redirects(char **matrix);
+int		heredocs_prompt(char **matrix, char *delimiter);
+void	file_error(char *name);
 
 #endif

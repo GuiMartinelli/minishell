@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_var.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 09:30:26 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/12 19:45:06 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/17 21:09:06 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,17 @@ void	free_var_list(t_var *var_list)
 		free_var(curr);
 		curr = var_list;
 	}
+}
+
+void	free_matrix(char **matrix)
+{
+	int	x;
+
+	x = 0;
+	while (matrix[x])
+	{
+		free_n_null(matrix[x]);
+		x++;
+	}
+	free_n_null(matrix);
 }

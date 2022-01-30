@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:12:44 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/12 19:39:40 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/26 15:24:45 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ char	*new_prompt(void)
 	t_prompt	prompt;
 
 	prompt.pwd = get_pwd();
-	prompt.prefix_color = "\033[31;33m";
-	prompt.suffix_color = "\033[0m";
+	prompt.prefix_color = "\001\033[1;33m\002";
+	prompt.suffix_color = "\001\033[0m\002";
 	prompt.target = "$ ";
 	if (prompt.pwd != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:54:17 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/14 08:23:21 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/28 11:40:23 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,18 @@ int	output_redirects(char **matrix)
 	int		fd;
 
 	index = 0;
+	fd = STDOUT_FILENO;
 	while (matrix[index] && *matrix[index] != '|')
 	{
 		mode = check_redirects((matrix + index), '>');
 		if (!mode)
 			return (1);
 		name = file_name((matrix + index), '>');
-		if (name == NULL)
+		if (!name || *name == '|' || *name == '<' || *name == '>')
+		{
+			file_error(name);
 			return (-1);
+		}
 		fd = create_file(name, mode);
 		index = move_index(matrix, index);
 	}
