@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/30 02:16:46 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/30 12:49:40 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,62 +62,8 @@ void	launch_execve(t_cmd *cmd, int input, int output)
 	}
 	else if (pid == -1)
 		ft_putendl_fd("\nFailed forking child..", 2);
-	else
-	{
-		wait(NULL);
-		if (input != STDIN_FILENO)
-			close(input);
-		if (output != STDOUT_FILENO)
-			close(output);
-	}
-}
-
-static int	is_there_a_pipe(char **cl)
-{
-	while (*cl)
-	{
-		if (**cl == '|')
-		{
-			if (*(++cl) && **cl == '|')
-				return (FALSE);
-			return (TRUE);
-		}
-		cl++;
-	}
-	return(FALSE);
-}
-
-static int	is_there_redirections(char **cl, char redirection)
-{
-	while (*cl && **cl != '|')
-	{
-		if (**cl == redirection)
-			return (TRUE);
-		cl++;
-	}
-	return(FALSE);
-}
-
-static void	set_io(char **cl, int *fd, int *input, int output)
-{
-	(void)output;
-	if (is_there_a_pipe(cl) == TRUE)
-		pipe(fd);
-	if (is_there_redirections(cl, '>'))
-	{
-		if (fd[1] != STDOUT_FILENO)
-			close(fd[1]);
-		fd[1] = output_redirects(cl);
-	}
-	if (is_there_redirections(cl, '<'))
-	{
-		// if (fd[0] != STDIN_FILENO)
-		// 	close(fd[0]);
-		if (*input != STDIN_FILENO)
-			close(*input);
-		*input = input_redirects(cl);
-	}
-	// printf("fd[0]: %d\nfd[1]: %d\n", fd[0], fd[1]);
+	wait(NULL);
+	reset_io(&input, &output);
 }
 
 static void	free_cmd(t_cmd *cmd)
@@ -145,7 +91,7 @@ void run_command_line(char **cl, t_env_var *env, int input, int output)
 		//EXIT STATUS 2
 		return ;
 	}
-	set_io(cl, fd, &input, output);
+	set_io(cl, fd, &input);
 	if (input == -1)
 	{
 		//EXIT STATUS 1, FILE NOT FOUND
@@ -158,13 +104,7 @@ void run_command_line(char **cl, t_env_var *env, int input, int output)
 		return ;
 	}
 	if (launch_builtins(cmd->option[0], cmd->option, env->list, fd[1]))
-	{
-		if (input != STDIN_FILENO)
-			close(input);
-		if (fd[1] != STDOUT_FILENO)
-			close(fd[1]);
-		fd[1] = STDOUT_FILENO;
-	}
+		reset_io(&input, &fd[1]);
 	else
 	{
 		if (access(cmd->name, F_OK) == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/28 11:39:33 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/30 12:51:51 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ typedef struct s_parse
  */
 char	*new_prompt(void);
 void	eval(char *command_line, t_var *env_list, char **envp);
+void	set_io(char **cl, int *fd, int *input);
+void	reset_io(int *input, int *output);
 
 /**
  * System

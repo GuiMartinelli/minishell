@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:15:51 by proberto          #+#    #+#              #
-#    Updated: 2022/01/28 09:02:55 by guferrei         ###   ########.fr        #
+#    Updated: 2022/01/30 12:52:42 by proberto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME = minishell
 LIBFT = $(addprefix $(PATH_LIBFT)/, libft.a)
 MAIN = $(PATH_SRC)/minishell.c
 SRC = \
-	$(addprefix $(PATH_SRC)/cli/, prompt.c cmd.c) \
+	$(addprefix $(PATH_SRC)/cli/, prompt.c cmd.c utils.c) \
 	$(addprefix $(PATH_SRC)/system/, env_var.c utils_var.c free_var.c signals.c) \
 	$(addprefix $(PATH_SRC)/builtins/, cd.c echo.c env.c export.c pwd.c unset.c ft_exit.c) \
 	$(addprefix $(PATH_SRC)/exec/, paths.c) \
