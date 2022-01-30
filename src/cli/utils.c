@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:48:57 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/30 12:53:08 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/30 15:48:15 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	is_there_a_pipe(char **cl)
 		}
 		cl++;
 	}
-	return(FALSE);
+	return (FALSE);
 }
 
 static int	is_there_redirections(char **cl, char redirection)
@@ -35,7 +35,7 @@ static int	is_there_redirections(char **cl, char redirection)
 			return (TRUE);
 		cl++;
 	}
-	return(FALSE);
+	return (FALSE);
 }
 
 void	reset_io(int *input, int *output)
@@ -46,7 +46,6 @@ void	reset_io(int *input, int *output)
 		close(*output);
 	*output = STDOUT_FILENO;
 }
-
 
 void	set_io(char **cl, int *fd, int *input)
 {
