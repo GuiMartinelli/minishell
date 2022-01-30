@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:54:17 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/30 10:52:11 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/30 12:21:36 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ char	*file_name(char **matrix, char c)
 	file = NULL;
 	while (*matrix && **matrix != '|')
 	{
-		if (**matrix == c)
+		if (**matrix == c && c == '<')
 			file = *(matrix + 1);
+		else if (**matrix == c && c == '>')
+			return (*(matrix + 1));
 		matrix++;
 	}
 	return (file);
@@ -83,6 +85,8 @@ int	output_redirects(char **matrix)
 			file_error(name);
 			return (-1);
 		}
+		if (mode > 0 && fd != STDOUT_FILENO)
+			close(fd);
 		fd = create_file(name, mode);
 		index = move_index(matrix, index);
 	}
