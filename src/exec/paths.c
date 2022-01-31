@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 08:47:33 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/31 09:28:02 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/31 11:45:23 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,10 @@ char	**parse_paths(t_var *env_list)
 	t_var	*curr;
 
 	curr = env_list;
-	while (curr->next)
+	while (curr)
 	{
 		if (!ft_strncmp(curr->name, "PATH", 4))
-		{
 			return (ft_split(curr->value, ':'));
-		}
 		else
 			curr = curr->next;
 	}
