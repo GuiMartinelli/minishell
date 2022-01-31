@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:58:44 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/27 08:45:02 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/31 09:41:04 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,21 @@ int	get_args_size(char **matrix)
 	return (x + 1);
 }
 
+char	*parse_absolute_path(char *path)
+{
+	int		size;
+
+	size = 0;
+	while (*path)
+		path++;
+	while (*path != '/')
+	{
+		path--;
+		size++;
+	}
+	return (ft_strdup((path + 1)));
+}
+
 char	**parse_cmd(t_cmd *cmd, char **matrix, char **env, t_var *env_list)
 {
 	char	**paths;
@@ -30,7 +45,7 @@ char	**parse_cmd(t_cmd *cmd, char **matrix, char **env, t_var *env_list)
 
 	if (**matrix == '|')
 	{
-		write(1, "bash: syntax error near unexpected token `|'\n", 47);
+		write(2, "bash: syntax error near unexpected token `|'\n", 47);
 		return (NULL);
 	}
 	index = 0;
@@ -39,7 +54,10 @@ char	**parse_cmd(t_cmd *cmd, char **matrix, char **env, t_var *env_list)
 	cmd->option = malloc(get_args_size(matrix) * sizeof(char *));
 	while (*matrix && **matrix != '|' && **matrix != '<' && **matrix != '>' )
 	{
-		cmd->option[index] = *matrix;
+		if (index == 0 && **matrix == '/')
+			cmd->option[index] = parse_absolute_path(*matrix);
+		else
+			cmd->option[index] = *matrix;
 		matrix++;
 		index++;
 	}

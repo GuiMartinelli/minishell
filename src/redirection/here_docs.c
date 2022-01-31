@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 09:07:13 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/28 11:48:52 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/31 09:16:18 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ char	**next_redirect(char **matrix)
 
 void	print_err(char *delimiter)
 {
-	write(1, "minishell: warning: here-document delimited by "
+	write(2, "minishell: warning: here-document delimited by "
 		"end-of-file (wanted `", 69);
-	ft_putstr_fd(delimiter, 1);
-	write(1, "`)\n", 4);
+	ft_putstr_fd(delimiter, 2);
+	write(2, "`)\n", 4);
 }
 
 int	heredocs_prompt(char **matrix, char *delimiter)

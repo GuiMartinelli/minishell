@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmartinelli <gmartinelli@student.42.fr>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 08:47:33 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/26 08:47:50 by gmartinelli      ###   ########.fr       */
+/*   Updated: 2022/01/31 09:28:02 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ char	*check_path(char **env_path, char *cmd)
 	path = NULL;
 	if (!env_path)
 		return (NULL);
+	if (*cmd == '/')
+		return (ft_strdup(cmd));
 	while (env_path[index])
 	{
 		path = build_path(env_path[index], cmd);

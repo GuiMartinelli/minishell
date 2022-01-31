@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:08:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/28 11:43:13 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/31 09:16:30 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	file_error(char *name)
 		write(1, "'\n", 2);
 	}
 	else
-		write(1, "newline'\n", 10);
+		write(2, "newline'\n", 10);
 }
 
 void	file_not_found(char *name)
 {
-	write(1, "bash: ", 7);
-	ft_putstr_fd(name, 1);
-	write(1, ": No such file or directory\n", 29);
+	write(2, "bash: ", 7);
+	ft_putstr_fd(name, 2);
+	write(2, ": No such file or directory\n", 29);
 }
 
 int	input_redirects(char **matrix)
