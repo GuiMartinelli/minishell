@@ -6,15 +6,19 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 08:24:42 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/20 08:54:16 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/01/31 11:19:48 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	is_variable(char *c)
+int	is_variable(char *c, char quote)
 {
-	if (*c == '$' && (*(c + 1) == '_' || ft_isalnum(*(c + 1))))
+	if (*c == '~' && (*(c - 1) == ' ' && (!*(c + 1)
+				|| *(c + 1) == ' ')) && !quote)
+		return (1);
+	if (*c == '$' && (*(c + 1) == '_' || ft_isalnum(*(c + 1)))
+		&& quote != '\'')
 		return (1);
 	else
 		return (0);

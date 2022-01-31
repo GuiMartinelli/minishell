@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/30 12:51:51 by proberto         ###   ########.fr       */
+/*   Updated: 2022/01/31 11:12:41 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ char	*check_path(char **env_path, char *cmd);
  * 
  */
 int		is_quotes(char *str, char q);
-int		is_variable(char *c);
+int		is_variable(char *c, char quote);
 int		mv_ptr(char mode, char *str);
 int		get_var_size(char *str, t_var *env);
 int		var_value_cpy(char *dest, char *src, t_var *env);
