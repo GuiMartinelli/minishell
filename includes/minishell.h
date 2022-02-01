@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/01 08:00:07 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/01 09:09:08 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +122,13 @@ char	*check_path(char **env_path, char *cmd);
  */
 int		is_quotes(char *str, char q);
 int		is_variable(char *c, char quote);
+int		home_size(char **matrix);
+char	*home_value(char **matrix);
 int		mv_ptr(char mode, char *str);
-int		get_var_size(char *str, t_var *env);
-int		var_value_cpy(char *dest, char *src, t_var *env);
+int		get_var_size(char *str, t_var *env, char **env_matrix);
+int		var_value_cpy(char *dest, char *src, t_var *env, char **env_matrix);
 char	*parse_spaces(char *str);
-char	**string_parse(char *str, t_var *env);
+char	**string_parse(char *str, t_var *env, char **envp);
 char	**ft_split_string(char *s);
 size_t	comp_size(char *str1, char *str2);
 

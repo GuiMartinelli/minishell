@@ -6,13 +6,13 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 07:49:51 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/01 07:48:36 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/01 09:45:31 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	get_quote_size(char *str, t_var *env)
+int	get_quote_size(char *str, t_var *env, char **env_matrix)
 {
 	char	quote;
 	int		size;
@@ -25,7 +25,7 @@ int	get_quote_size(char *str, t_var *env)
 	{
 		if (str[aux] == '$' && quote != '\'')
 		{
-			size += (get_var_size(str, env) - 1);
+			size += (get_var_size(str, env, env_matrix) - 1);
 			aux += mv_ptr('$', (str + aux));
 		}
 		size++;
@@ -34,18 +34,18 @@ int	get_quote_size(char *str, t_var *env)
 	return (size + 2);
 }
 
-int	check_var(char *str, t_var *env)
+int	check_var(char *str, t_var *env, char **env_matrix)
 {
 	int	size;
 
 	if (*str == '~')
-		size = get_var_size("$HOME", env);
+		size = get_var_size("~", env, env_matrix);
 	else
-		size = get_var_size(str, env);
+		size = get_var_size(str, env, env_matrix);
 	return (size);
 }
 
-int	get_string_size(char *str, t_var *env)
+int	get_string_size(char *str, t_var *env, char **env_matrix)
 {
 	int		size;
 	int		aux;
@@ -57,14 +57,14 @@ int	get_string_size(char *str, t_var *env)
 		if ((str[aux] == '\'' || str[aux] == '"')
 			&& is_quotes((str + aux), str[aux]) && str[(aux - 1)] != '\\')
 		{
-			size += get_quote_size((str + aux), env);
+			size += get_quote_size((str + aux), env, env_matrix);
 			aux += (mv_ptr(str[aux], (str + aux)) - 1);
 		}
 		else if (str[aux] == ' ' && str[aux + 1] == ' ')
 			aux += (mv_ptr(' ', (str + aux)) - 1);
-		else if (is_variable((str + aux), 0) || str[aux] == '~')
+		else if (is_variable((str + aux), 0))
 		{
-			size += (check_var((str + aux), env));
+			size += (check_var((str + aux), env, env_matrix));
 			aux += (mv_ptr('$', (str + aux)) - 1);
 		}
 		else
@@ -74,7 +74,7 @@ int	get_string_size(char *str, t_var *env)
 	return (size + 1);
 }
 
-void	string_parse_sub(t_parse *parse, t_var *env)
+void	string_parse_sub(t_parse *parse, t_var *env, char **env_matrix)
 {
 	while (parse->str[parse->idx1])
 	{
@@ -90,7 +90,7 @@ void	string_parse_sub(t_parse *parse, t_var *env)
 		else if (is_variable((parse->str + parse->idx1), parse->quotes))
 		{
 			parse->idx2 += var_value_cpy((parse->parsed + parse->idx2),
-					(parse->str + parse->idx1), env);
+					(parse->str + parse->idx1), env, env_matrix);
 			parse->idx1 += mv_ptr(parse->str[parse->idx1],
 					(parse->str + parse->idx1));
 		}
@@ -99,7 +99,7 @@ void	string_parse_sub(t_parse *parse, t_var *env)
 	}
 }
 
-char	**string_parse(char *str, t_var *env)
+char	**string_parse(char *str, t_var *env, char **envp)
 {
 	t_parse	parse;
 	char	**splitted;
@@ -108,10 +108,10 @@ char	**string_parse(char *str, t_var *env)
 	parse.idx2 = 0;
 	parse.str = str;
 	parse.quotes = 0;
-	parse.parsed = ft_calloc(get_string_size(str, env), sizeof(char));
+	parse.parsed = ft_calloc(get_string_size(str, env, envp), sizeof(char));
 	if (!parse.parsed)
 		return (NULL);
-	string_parse_sub(&parse, env);
+	string_parse_sub(&parse, env, envp);
 	parse.parsed = parse_spaces(parse.parsed);
 	splitted = ft_split_string(parse.parsed);
 	free_n_null(parse.parsed);

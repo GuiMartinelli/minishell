@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 10:21:09 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/27 10:25:55 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/01 09:47:40 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,21 @@ size_t	comp_size(char *str1, char *str2)
 		return (size1);
 	else
 		return (size2);
+}
+
+int	home_size(char **matrix)
+{
+	while (ft_strncmp(*matrix, "HOME", 4))
+		matrix++;
+	return (((int)ft_strlen(*matrix) - 4));
+}
+
+char	*home_value(char **matrix)
+{
+	char	*value;
+
+	while (ft_strncmp(*matrix, "HOME", 4))
+		matrix++;
+	value = (*matrix + 5);
+	return (value);
 }

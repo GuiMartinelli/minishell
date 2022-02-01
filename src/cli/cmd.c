@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/01 08:19:02 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/01 09:04:05 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void	eval(char *command_line, t_var *env_list, char **envp)
 	//check redirect in/out
 	env.envp = envp;
 	env.list = env_list;
-	run = string_parse(command_line, env_list);
+	run = string_parse(command_line, env_list, envp);
 	if (!*run)
 		return ;
 	// run_cmds(run, envp, STDIN_FILENO, STDOUT_FILENO, env.list);

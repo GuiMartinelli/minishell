@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 08:24:42 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/31 11:19:48 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/01 09:46:49 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_variable(char *c, char quote)
 {
 	if (*c == '~' && (*(c - 1) == ' ' && (!*(c + 1)
-				|| *(c + 1) == ' ')) && !quote)
+				|| *(c + 1) == ' ' || *(c + 1) == '/')) && !quote)
 		return (1);
 	if (*c == '$' && (*(c + 1) == '_' || ft_isalnum(*(c + 1)))
 		&& quote != '\'')
@@ -47,12 +47,14 @@ char	*get_var_name(char *str)
 	return (name);
 }
 
-int	get_var_size(char *str, t_var *env)
+int	get_var_size(char *str, t_var *env, char **env_matrix)
 {
 	char	*name;
 	char	*value;
 	int		size;
 
+	if (*str == '~')
+		return (home_size(env_matrix));
 	name = get_var_name(str);
 	size = 0;
 	value = get_var_value(name, env);
@@ -68,14 +70,18 @@ int	get_var_size(char *str, t_var *env)
 	return (size);
 }
 
-int	var_value_cpy(char *dest, char *src, t_var *env)
+int	var_value_cpy(char *dest, char *src, t_var *env, char **env_matrix)
 {
 	char	*name;
 	char	*value;
 	int		cpy_size;
 
 	if (src[0] == '~')
-		name = ft_strdup("HOME");
+	{
+		value = home_value(env_matrix);
+		cpy_size = ft_strlcpy(dest, value, (ft_strlen(value) + 1));
+		return (cpy_size);
+	}
 	else
 		name = get_var_name(src);
 	value = get_var_value(name, env);
