@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/31 09:45:50 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/01 08:19:02 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	launch_builtins(char *cmd, char **arg, t_var *env_list, int fd)
 	else if (ft_strncmp(cmd, "unset", comp_size(cmd, "unset")) == 0)
 		env_list = unset(env_list, &arg[1]);
 	else if (ft_strncmp(cmd, "exit", comp_size(cmd, "exit")) == 0)
-		ft_exit();
+		ft_exit(arg, env_list);
 	else
 		return (FALSE);
 	return (TRUE);

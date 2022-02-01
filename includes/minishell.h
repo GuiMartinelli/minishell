@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/31 11:12:41 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/01 08:00:07 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	env(t_var *list, int fd);
 void	echo(char **str, int fd);
 t_var	*unset(t_var *env_list, char **var_name);
 void	cd(char *dir, t_var *env_list);
-void	ft_exit(void);
+void	ft_exit(char **exit_status, t_var *env_list);
 
 /**
  * Execve
