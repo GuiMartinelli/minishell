@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   out_redirect.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:54:17 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/01 23:22:56 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/02 18:16:58 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,29 @@ int	output_redirects(char **matrix)
 {
 	char	*name;
 	int		mode;
-	int		index;
+	// int		index;
 	int		fd;
 
-	index = 0;
+	// index = 0;
 	fd = STDOUT_FILENO;
-	while (matrix[index] && *matrix[index] != '|')
+	// printf("\n#####matrix: %s\n", *matrix);
+	// while (*matrix && **matrix != '>')
+	// 	matrix++; 
+	while (check_redirects(matrix, '>'))
 	{
-		mode = check_redirects((matrix + index), '>');
+		mode = check_redirects(matrix, '>');
+		// printf("\n*******mode: %d\n", mode);
 		if (!mode)
 			return (1);
-		name = file_name((matrix + index), '>');
+		name = file_name(matrix, '>');
 		if (!name || *name == '|' || *name == '<' || *name == '>')
 			return (file_error(name));
 		if (mode > 0 && fd != STDOUT_FILENO)
 			close(fd);
 		fd = create_file(name, mode);
-		index = move_index(matrix, index, '>');
+		// printf("\n*******matrix: %s\n", *matrix);
+		// printf("\n*******fd: %d\n", fd);
+		matrix++;
 	}
 	return (fd);
 }

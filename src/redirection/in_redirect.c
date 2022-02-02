@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_redirect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:08:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/02 12:19:36 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/02 16:32:20 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	input_redirects(char **matrix)
 	int		i;
 
 	i = 0;
-	while (matrix[i] && *matrix[i] != '|')
+	fd = STDIN_FILENO;
+	while (matrix[i] && *matrix[i] == '<')
 	{
 		mode = check_redirects((matrix + i), '<');
 		if (!mode)
@@ -57,9 +58,10 @@ int	input_redirects(char **matrix)
 		}
 		else
 		{
-			if (fd != STDIN_FILENO && *matrix[i] == '<')
+			if (*matrix[i] == '<')
 			{
-				close(fd);
+				if (fd != STDIN_FILENO)
+					close(fd);
 				fd = open(name, O_RDONLY);
 				if (fd == -1)
 					return (file_not_found(name));
