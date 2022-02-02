@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   out_redirect.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:54:17 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/02 18:16:58 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/02 19:15:26 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ char	*file_name(char **matrix, char c)
 	file = NULL;
 	while (*matrix && **matrix != '|')
 	{
-		if (**matrix == c && c == '<')
+		if (**matrix == c && c == '<' && *(matrix + 1))
 			return (*(matrix + 1));
-		else if (**matrix == c && c == '>')
+		else if (**matrix == c && c == '>' && *(matrix + 1))
 			return (*(matrix + 1));
 		matrix++;
 	}

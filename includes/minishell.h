@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/02 11:39:44 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/02 20:03:35 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,12 @@ void	free_var_list(t_var *var_list);
 void	free_n_null(void *ptr);
 void	free_var(t_var *var);
 void	free_matrix(char **matrix);
+void	free_cmd(t_cmd *cmd);
 
 /**
  * Launch
  */
-int		launch_builtins(char *cmd, char **arg, t_var *env_list, int fd);
+int		launch_builtins(t_cmd *cmd, char **matrix, t_var *env_list, int fd);
 void	launch_execve(t_cmd *cmd, int input, int output);
 
 /**
@@ -106,7 +107,7 @@ void	env(t_var *list, int fd);
 void	echo(char **str, int fd);
 t_var	*unset(t_var *env_list, char **var_name);
 void	cd(char *dir, t_var *env_list);
-void	ft_exit(char **exit_status, t_var *env_list);
+void	ft_exit(char **exit_status, t_var *env_list, char **matrix, t_cmd *cmd);
 
 /**
  * Execve

@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:59:47 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/02 12:12:05 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/02 20:08:19 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	valid_exit(char *status)
  * 
  * @return void 
  */
-void	ft_exit(char **exit_status, t_var *env_list)
+void	ft_exit(char **exit_status, t_var *env_list, char **matrix, t_cmd *cmd)
 {
 	int	ex;
 	int	args;
@@ -63,7 +63,8 @@ void	ft_exit(char **exit_status, t_var *env_list)
 			ex = 0;
 		else
 			ex = ft_atoi(exit_status[1]);
-		free_matrix(exit_status);
+		free_cmd(cmd);
+		free_matrix(matrix);
 		free_var_list(env_list);
 		exit(ex);
 	}

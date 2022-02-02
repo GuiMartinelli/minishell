@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:58:44 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/02 18:32:55 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/02 19:52:35 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,6 @@ int	get_args_size(char **matrix)
 	return (x + 1);
 }
 
-char	*parse_absolute_path(char *path)
-{
-	while (*path)
-		path++;
-	while (*path != '/')
-		path--;
-	return (ft_strdup((path + 1)));
-}
-
 char	**parse_cmd(t_cmd *cmd, char **matrix, char **env, t_var *env_list)
 {
 	char	**paths;
@@ -46,12 +37,18 @@ char	**parse_cmd(t_cmd *cmd, char **matrix, char **env, t_var *env_list)
 	}
 	aux = matrix;
 	while (*matrix && (**matrix == '<' || **matrix == '>'))
-		matrix += 2;
+	{
+		matrix ++;
+		if (*matrix)
+			matrix++;
+	}
+	if (!*matrix)
+		return (aux);
 	index = 0;
 	paths = parse_paths(env_list);
 	cmd->name = check_path(paths, *matrix);
 	cmd->option = ft_calloc(get_args_size(matrix), sizeof(char *));
-	while (*matrix && **matrix != '|' && **matrix != '<' && **matrix != '>' )
+	while (*matrix && **matrix != '|' && **matrix != '>' && **matrix != '<')
 	{
 		cmd->option[index] = *matrix;
 		matrix++;
