@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_spaces.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 09:11:48 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/25 19:39:45 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/02 20:25:21 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,23 @@ char	check_quote(char *ptr, char quotes)
 		return (*ptr);
 }
 
-int	check_tokens(char *str)
+int	check_tokens(char *str, int index)
 {
 	int	count;
 
 	count = 0;
 	if (*str == '|')
 	{
-		if (*(str - 1) != ' ')
+		if (index && *(str - 1) != ' ')
 			count++;
-		if (*(str + 1) != ' ')
+		if (*(str + 1) && *(str + 1) != ' ')
 			count++;
 	}
 	else if (*str == '>' || *str == '<')
 	{
-		if (*(str - 1) != ' ' && *(str - 1) != *str)
+		if (index && *(str - 1) != ' ' && *(str - 1) != *str)
 			count++;
-		if (*(str + 1) != ' ' && *(str + 1) != *str)
+		if (*(str + 1) && *(str + 1) != ' ' && *(str + 1) != *str)
 			count++;
 	}
 	return (count);
@@ -56,7 +56,7 @@ int	get_size(char *str)
 		if (*str == '"' || *str == '\'')
 			quotes = check_quote(str, quotes);
 		else if ((*str == '|' || *str == '>' || *str == '<') && !quotes)
-			count += check_tokens(str);
+			count += check_tokens(str, count);
 		count++;
 		str++;
 	}
@@ -72,7 +72,7 @@ char	*cpy_str(char *src, char *dest, char quotes)
 	{
 		if ((*src == '<' || *src == '>') && !quotes)
 		{
-			if (*(src - 1) != ' ')
+			if (*(src - 1) && *(src - 1) != ' ')
 				dest[index++] = ' ';
 			dest[index] = *src;
 			if (*src == *(src + 1))
@@ -82,10 +82,10 @@ char	*cpy_str(char *src, char *dest, char quotes)
 		}
 		else if (*src == '|' && !quotes)
 		{
-			if (*(src - 1) != ' ')
+			if (*(src - 1) && *(src - 1) != ' ')
 				dest[index++] = ' ';
 			dest[index] = *src;
-			if (*(src + 1) != ' ')
+			if (*(src + 1) && *(src + 1) != ' ')
 				dest[++index] = ' ';
 		}
 		else
@@ -114,10 +114,6 @@ char	*parse_spaces(char *str)
 	if (!parsed)
 		return (NULL);
 	parsed = cpy_str(str, parsed, quotes);
-	if (str)
-	{
-		free(str);
-		str = NULL;
-	}
+	free_n_null(str);
 	return (parsed);
 }
