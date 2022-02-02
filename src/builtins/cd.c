@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 15:39:20 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/12 17:57:27 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/02 11:23:55 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	cd(char *dir, t_var *env_list)
 	if (chdir(dir))
 	{
 		perror("chdir() failed");
+		g_error_status = 1;
 		return ;
 	}
 	oldpwd = get_var_value("PWD", env_list);

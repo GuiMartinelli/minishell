@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 09:07:13 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/31 09:16:18 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/02 12:09:38 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	heredocs_prompt(char **matrix, char *delimiter)
 	close(fd);
 	while (1)
 	{
-		str = readline(">");
+		str = readline("> ");
 		if (str == NULL)
 		{
 			print_err(delimiter);

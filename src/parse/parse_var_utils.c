@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 08:24:42 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/01 09:46:49 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/02 11:41:40 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	is_variable(char *c, char quote)
 	if (*c == '~' && (*(c - 1) == ' ' && (!*(c + 1)
 				|| *(c + 1) == ' ' || *(c + 1) == '/')) && !quote)
 		return (1);
-	if (*c == '$' && (*(c + 1) == '_' || ft_isalnum(*(c + 1)))
-		&& quote != '\'')
+	if (*c == '$' && (*(c + 1) == '_' || ft_isalnum(*(c + 1))
+			|| *(c + 1) == '?') && quote != '\'')
 		return (1);
 	else
 		return (0);
@@ -35,7 +35,7 @@ char	*get_var_name(char *str)
 	while (str[index] != '$' && str[index])
 		index++;
 	index++;
-	while (ft_isalnum(str[index]) || str[index] == '_')
+	while (ft_isalnum(str[index]) || str[index] == '_' || str[index] == '?')
 	{
 		index++;
 		size++;
@@ -55,6 +55,8 @@ int	get_var_size(char *str, t_var *env, char **env_matrix)
 
 	if (*str == '~')
 		return (home_size(env_matrix));
+	if (*str == '?')
+		return (ft_strlen(ft_itoa(g_error_status)));
 	name = get_var_name(str);
 	size = 0;
 	value = get_var_value(name, env);

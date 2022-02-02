@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:59:47 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/01 08:34:13 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/02 12:12:05 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,5 @@ void	ft_exit(char **exit_status, t_var *env_list)
 		free_var_list(env_list);
 		exit(ex);
 	}
+	g_error_status = 2;
 }

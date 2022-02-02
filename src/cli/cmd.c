@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/01 23:28:53 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/02 12:09:46 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 void	ft_print_matrix(char **matrix)
 {
-	while(*matrix)
+	while (*matrix)
 		printf("cl: %s\n", *matrix++);
 }
 
 int	launch_builtins(char *cmd, char **arg, t_var *env_list, int fd)
 {
+	g_error_status = 0;
 	if (ft_strncmp(cmd, "pwd", comp_size(cmd, "pwd")) == 0)
 		pwd(fd);
 	else if (ft_strncmp(cmd, "env", comp_size(cmd, "env")) == 0)
@@ -64,6 +65,7 @@ void	launch_execve(t_cmd *cmd, int input, int output)
 		ft_putendl_fd("\nFailed forking child..", 2);
 	wait(NULL);
 	reset_io(&input, &output);
+	g_error_status = 0;
 }
 
 static void	free_cmd(t_cmd *cmd)
@@ -73,7 +75,7 @@ static void	free_cmd(t_cmd *cmd)
 	free(cmd);
 }
 
-void run_command_line(char **cl, t_env_var *env, int input, int output)
+void	run_command_line(char **cl, t_env_var *env, int input, int output)
 {
 	t_cmd	*cmd;
 	int		fd[2];
@@ -88,21 +90,23 @@ void run_command_line(char **cl, t_env_var *env, int input, int output)
 	cl = parse_cmd(cmd, cl, env->envp, env->list);
 	if (!cl)
 	{
-		//EXIT STATUS 2
+		free_cmd(cmd);
+		g_error_status = 2;
 		return ;
 	}
 	set_io(cl, fd, &input);
 	if (input == -1)
 	{
-		//EXIT STATUS 1, FILE NOT FOUND
+		free_cmd(cmd);
+		g_error_status = 1;
 		return ;
 	}
 	if (!cmd->option[0])
 	{
-		//Se for só redirect, sem commando, exit status = 0
+		g_error_status = 0;
+		free_cmd(cmd);
 		return ;
 	}
-	// printf("input: %d\nfd[0]: %d\nfd[1]: %d\n", input, fd[0], fd[1]);
 	if (launch_builtins(cmd->option[0], cmd->option, env->list, fd[1]))
 		reset_io(&input, &fd[1]);
 	else
@@ -111,7 +115,7 @@ void run_command_line(char **cl, t_env_var *env, int input, int output)
 			launch_execve(cmd, input, fd[1]);
 		else
 		{
-			//Apenas printando o erro corretamente, ocupa muitas linhas então vai precisar de refactor
+			g_error_status = 127;
 			ft_putstr_fd("minishell: command not found: ", 2);
 			ft_putstr_fd(cmd->option[0], 2);
 			write(2, "\n", 1);

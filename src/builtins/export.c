@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 10:21:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/12 17:28:10 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/02 11:23:23 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void	export(t_var *env_list, char **var)
 			name = key[0];
 		if (valid_var(name, value) == TRUE)
 			new_variable(&env_list, name, ++value);
+		else
+			g_error_status = 2;
 		ft_free(key);
 		i++;
 	}

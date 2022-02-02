@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:08:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/01 23:21:52 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/02 12:19:36 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	file_not_found(char *name)
 	write(2, "bash: ", 7);
 	ft_putstr_fd(name, 2);
 	write(2, ": No such file or directory\n", 29);
+	g_error_status = 1;
 	return (-1);
 }
 

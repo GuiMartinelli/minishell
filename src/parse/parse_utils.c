@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 10:21:09 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/01 09:47:40 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/02 11:18:30 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	mv_ptr(char mode, char *str)
 	if (mode == '$')
 	{
 		x++;
-		while ((ft_isalnum(str[x]) || str[x] == '_') && str[x])
+		while ((ft_isalnum(str[x]) || str[x] == '_' || str[x] == '?') && str[x])
 			x++;
 	}
 	else if (mode == ' ')
