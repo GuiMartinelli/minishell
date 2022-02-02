@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/01 09:09:08 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/01 23:27:07 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ char	*file_name(char **matrix, char c);
 int		output_redirects(char **matrix);
 int		input_redirects(char **matrix);
 int		heredocs_prompt(char **matrix, char *delimiter);
-void	file_error(char *name);
+int		file_error(char *name);
+int		move_index(char **matrix, int index, char c);
 
 #endif

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   out_redirect.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:54:17 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/30 12:21:36 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/01 23:22:56 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	move_index(char **matrix, int index)
+int	move_index(char **matrix, int index, char c)
 {
-	while (*matrix[index] != '>')
+	while (*matrix[index] != c)
 		index++;
 	index++;
 	if (matrix[index])
@@ -57,7 +57,7 @@ char	*file_name(char **matrix, char c)
 	while (*matrix && **matrix != '|')
 	{
 		if (**matrix == c && c == '<')
-			file = *(matrix + 1);
+			return (*(matrix + 1));
 		else if (**matrix == c && c == '>')
 			return (*(matrix + 1));
 		matrix++;
@@ -81,14 +81,11 @@ int	output_redirects(char **matrix)
 			return (1);
 		name = file_name((matrix + index), '>');
 		if (!name || *name == '|' || *name == '<' || *name == '>')
-		{
-			file_error(name);
-			return (-1);
-		}
+			return (file_error(name));
 		if (mode > 0 && fd != STDOUT_FILENO)
 			close(fd);
 		fd = create_file(name, mode);
-		index = move_index(matrix, index);
+		index = move_index(matrix, index, '>');
 	}
 	return (fd);
 }

@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/01 09:04:05 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/01 23:28:53 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,36 +128,12 @@ void	eval(char *command_line, t_var *env_list, char **envp)
 {
 	char		**run;
 	t_env_var	env;
-//	char	**path;
-//	char	*valid_path;
-//	int		i;
 
-	//check redirect in/out
 	env.envp = envp;
 	env.list = env_list;
 	run = string_parse(command_line, env_list, envp);
 	if (!*run)
 		return ;
-	// run_cmds(run, envp, STDIN_FILENO, STDOUT_FILENO, env.list);
 	run_command_line(run, &env, STDIN_FILENO, STDOUT_FILENO);
-
-//	path = parse_paths(envp);
-//	if (*run == NULL || *path == NULL)
-//		return ;
-//	valid_path = check_path(path, run[0]);
-//	if (valid_path == NULL)
-//		valid_path = ft_strdup(run[0]);
-//	if (launch_builtins(run[0], run, env_list, 1) == TRUE)
-//		i = 0;
-//	else
-//		launch_execve(valid_path, run, envp);
-//	i = 0;
-//	while (run[i])
-//		free(run[i++]);
-//	i = 0;
-//	while (path[i])
-//		free(path[i++]);
 	free_matrix(run);
-//	free(path);
-//	free(valid_path);
 }
