@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/03 10:25:02 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/03 11:13:01 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,10 @@ void	eval(char *command_line, t_var *env_list, char **envp)
 	env.list = env_list;
 	run = string_parse(command_line, env_list, envp);
 	if (!*run)
+	{
+		free_matrix(run);
 		return ;
+	}
 	run_command_line(run, &env, STDIN_FILENO, STDOUT_FILENO);
 	free_matrix(run);
 }
