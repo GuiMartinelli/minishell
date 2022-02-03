@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:48:57 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/03 07:38:05 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/03 19:45:23 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,15 @@ void	set_io(char **cl, int *fd, int *input)
 		if (fd[1] != STDOUT_FILENO)
 			close(fd[1]);
 		fd[1] = output_redirects(cl);
+		if (fd[1] == -1)
+			return ;
 	}
 	if (is_there_redirections(cl, '<'))
 	{
 		if (*input != STDIN_FILENO)
 			close(*input);
 		*input = input_redirects(cl);
+		if (*input == -1)
+			return ;
 	}
 }

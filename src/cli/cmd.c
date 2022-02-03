@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/03 11:45:34 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/03 19:46:16 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	run_command_line(char **cl, t_env_var *env, int input, int output)
 		return ;
 	}
 	set_io(cl, fd, &input);
-	if (input == -1)
+	if (input == -1 || fd[1] == -1)
 	{
 		free_cmd(cmd);
 		g_error_status = 1;
