@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:54:17 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/02 19:15:26 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/03 10:19:12 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,12 @@ int	output_redirects(char **matrix)
 {
 	char	*name;
 	int		mode;
-	// int		index;
 	int		fd;
 
-	// index = 0;
 	fd = STDOUT_FILENO;
-	// printf("\n#####matrix: %s\n", *matrix);
-	// while (*matrix && **matrix != '>')
-	// 	matrix++; 
 	while (check_redirects(matrix, '>'))
 	{
 		mode = check_redirects(matrix, '>');
-		// printf("\n*******mode: %d\n", mode);
 		if (!mode)
 			return (1);
 		name = file_name(matrix, '>');
@@ -89,8 +83,6 @@ int	output_redirects(char **matrix)
 		if (mode > 0 && fd != STDOUT_FILENO)
 			close(fd);
 		fd = create_file(name, mode);
-		// printf("\n*******matrix: %s\n", *matrix);
-		// printf("\n*******fd: %d\n", fd);
 		matrix++;
 	}
 	return (fd);

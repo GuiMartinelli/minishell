@@ -6,41 +6,42 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/03 09:09:11 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/03 10:25:02 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_print_matrix(char **matrix)
-{
-	while (*matrix)
-		printf("cl: %s\n", *matrix++);
-}
-
 int	launch_builtins(t_cmd *cmd, char **matrix, t_var *env_list, int fd)
 {
 	g_error_status = 0;
-	if (ft_strncmp(cmd->option[0], "pwd", comp_size(cmd->option[0], "pwd")) == 0)
+	if (ft_strncmp(cmd->option[0], "pwd",
+			comp_size(cmd->option[0], "pwd")) == 0)
 		pwd(fd);
-	else if (ft_strncmp(cmd->option[0], "env", comp_size(cmd->option[0], "env")) == 0)
+	else if (ft_strncmp(cmd->option[0], "env",
+			comp_size(cmd->option[0], "env")) == 0)
 		env(env_list, fd);
-	else if (ft_strncmp(cmd->option[0], "echo", comp_size(cmd->option[0], "echo")) == 0)
+	else if (ft_strncmp(cmd->option[0], "echo",
+			comp_size(cmd->option[0], "echo")) == 0)
 		echo(cmd->option, fd);
-	else if (ft_strncmp(cmd->option[0], "cd", comp_size(cmd->option[0], "cd")) == 0)
+	else if (ft_strncmp(cmd->option[0],
+			"cd", comp_size(cmd->option[0], "cd")) == 0)
 		cd(cmd->option[1], env_list);
-	else if (ft_strncmp(cmd->option[0], "export", comp_size(cmd->option[0], "export")) == 0)
+	else if (ft_strncmp(cmd->option[0], "export",
+			comp_size(cmd->option[0], "export")) == 0)
 		export(env_list, &cmd->option[1]);
-	else if (ft_strncmp(cmd->option[0], "unset", comp_size(cmd->option[0], "unset")) == 0)
+	else if (ft_strncmp(cmd->option[0], "unset",
+			comp_size(cmd->option[0], "unset")) == 0)
 		env_list = unset(env_list, &cmd->option[1]);
-	else if (ft_strncmp(cmd->option[0], "exit", comp_size(cmd->option[0], "exit")) == 0)
+	else if (ft_strncmp(cmd->option[0], "exit",
+			comp_size(cmd->option[0], "exit")) == 0)
 		ft_exit(cmd->option, env_list, matrix, cmd);
 	else
 		return (FALSE);
 	return (TRUE);
 }
 
-void	launch_execve(t_cmd *cmd, int input, int output)
+int	launch_execve(t_cmd *cmd, int input, int output)
 {
 	pid_t	pid;
 	int		status;
@@ -67,10 +68,7 @@ void	launch_execve(t_cmd *cmd, int input, int output)
 		ft_putendl_fd("\nFailed forking child..", 2);
 	wait(&status);
 	reset_io(&input, &output);
-	if (status)
-		g_error_status = 2;
-	else
-		g_error_status = 0;
+	return (status);
 }
 
 void	free_cmd(t_cmd *cmd)
@@ -118,15 +116,20 @@ void	run_command_line(char **cl, t_env_var *env, int input, int output)
 		reset_io(&input, &fd[1]);
 	else
 	{
-		if (access(cmd->name, F_OK) == 0)
-			launch_execve(cmd, input, fd[1]);
-		else
+		if (!cmd->name || launch_execve(cmd, input, fd[1]))
 		{
-			g_error_status = 127;
-			ft_putstr_fd("minishell: command not found: ", 2);
-			ft_putstr_fd(cmd->option[0], 2);
-			write(2, "\n", 1);
+			if (!cmd->name)
+			{
+				g_error_status = 127;
+				ft_putstr_fd("minishell: command not found: ", 2);
+				ft_putstr_fd(cmd->option[0], 2);
+				write(2, "\n", 1);
+			}
+			else
+				g_error_status = 2;
 		}
+		else
+			g_error_status = 0;
 	}
 	free_cmd(cmd);
 	while (*cl && **cl++ != '|')

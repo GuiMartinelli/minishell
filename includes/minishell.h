@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/03 07:44:46 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/03 10:12:22 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int		command_args_delimiter(char *str);
  * Launch
  */
 int		launch_builtins(t_cmd *cmd, char **matrix, t_var *env_list, int fd);
-void	launch_execve(t_cmd *cmd, int input, int output);
+int		launch_execve(t_cmd *cmd, int input, int output);
 
 /**
  * Builtins
