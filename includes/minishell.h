@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/03 10:12:22 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/03 20:11:37 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_parse
 	char	quotes;
 }			t_parse;
 
-int	g_error_status;
+extern int	g_error_status;
 
 /**
  * Command line interface (cli)
