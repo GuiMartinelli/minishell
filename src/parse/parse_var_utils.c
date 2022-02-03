@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 08:24:42 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/02 11:41:40 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/02 20:59:55 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,12 @@ int	get_var_size(char *str, t_var *env, char **env_matrix)
 	if (*str == '~')
 		return (home_size(env_matrix));
 	if (*str == '?')
-		return (ft_strlen(ft_itoa(g_error_status)));
+	{
+		value = ft_itoa(g_error_status);
+		size = (int)ft_strlen(value);
+		free_n_null(value);
+		return (size);
+	}
 	name = get_var_name(str);
 	size = 0;
 	value = get_var_value(name, env);
@@ -64,11 +69,8 @@ int	get_var_size(char *str, t_var *env, char **env_matrix)
 		size = 0;
 	else
 		size = ft_strlen(value);
-	if (name)
-	{
-		free(name);
-		name = NULL;
-	}
+	free_n_null(name);
+	free_n_null(value);
 	return (size);
 }
 
@@ -95,5 +97,6 @@ int	var_value_cpy(char *dest, char *src, t_var *env, char **env_matrix)
 	if (!value)
 		return (0);
 	cpy_size = ft_strlcpy(dest, value, (ft_strlen(value) + 1));
+	free_n_null(value);
 	return (cpy_size);
 }

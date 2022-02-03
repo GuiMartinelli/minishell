@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 07:49:51 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/02 11:14:02 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/02 20:57:52 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,17 @@ int	get_quote_size(char *str, t_var *env, char **env_matrix)
 
 int	check_var(char *str, t_var *env, char **env_matrix)
 {
-	int	size;
+	int		size;
+	char	*err;
 
 	if (*str == '~')
 		size = get_var_size("~", env, env_matrix);
 	if (*str == '?')
-		size = ft_strlen(ft_itoa(g_error_status));
+	{
+		err = ft_itoa(g_error_status);
+		size = ft_strlen(err);
+		free_n_null(err);
+	}
 	else
 		size = get_var_size(str, env, env_matrix);
 	return (size);

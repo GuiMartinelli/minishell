@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/02 20:06:50 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/02 20:49:09 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ int	launch_builtins(t_cmd *cmd, char **matrix, t_var *env_list, int fd)
 void	launch_execve(t_cmd *cmd, int input, int output)
 {
 	pid_t	pid;
+	int		status;
 
+	status = 0;
 	pid = fork();
 	signal(SIGINT, interrupt_process);
 	signal(SIGQUIT, quit_process);
@@ -63,9 +65,12 @@ void	launch_execve(t_cmd *cmd, int input, int output)
 	}
 	else if (pid == -1)
 		ft_putendl_fd("\nFailed forking child..", 2);
-	wait(NULL);
+	wait(&status);
 	reset_io(&input, &output);
-	g_error_status = 0;
+	if (status)
+		g_error_status = 2;
+	else
+		g_error_status = 0;
 }
 
 void	free_cmd(t_cmd *cmd)
