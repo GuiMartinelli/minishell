@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 07:49:51 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/03 11:15:26 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/03 11:17:26 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ char	**string_parse(char *str, t_var *env, char **envp)
 	parse.idx2 = 0;
 	parse.str = str;
 	parse.quotes = 0;
-	parse.parsed = ft_calloc((get_string_size(str, env, envp) + 1), sizeof(char));
+	parse.parsed = ft_calloc((get_string_size(str, env, envp) + 1),
+			sizeof(char));
 	if (!parse.parsed)
 		return (NULL);
 	string_parse_sub(&parse, env, envp);
