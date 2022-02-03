@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 09:11:48 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/02 20:25:21 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/03 09:52:54 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	check_tokens(char *str, int index)
 	}
 	else if (*str == '>' || *str == '<')
 	{
-		if (index && *(str - 1) != ' ' && *(str - 1) != *str)
+		if (index && *(str - 1) != ' ')
 			count++;
-		if (*(str + 1) && *(str + 1) != ' ' && *(str + 1) != *str)
+		if (*(str + 1) && *(str + 1) != ' ')
 			count++;
 	}
 	return (count);
@@ -72,17 +72,17 @@ char	*cpy_str(char *src, char *dest, char quotes)
 	{
 		if ((*src == '<' || *src == '>') && !quotes)
 		{
-			if (*(src - 1) && *(src - 1) != ' ')
+			if (index > 0 && *(src - 1) != ' ' && dest[index - 1] != ' ')
 				dest[index++] = ' ';
 			dest[index] = *src;
 			if (*src == *(src + 1))
 				dest[++index] = *src++;
-			if (*(src + 1) != ' ')
+			if (*(src + 1) && *(src + 1) != ' ')
 				dest[++index] = ' ';
 		}
 		else if (*src == '|' && !quotes)
 		{
-			if (*(src - 1) && *(src - 1) != ' ')
+			if (index > 0 && *(src - 1) != ' ')
 				dest[index++] = ' ';
 			dest[index] = *src;
 			if (*(src + 1) && *(src + 1) != ' ')
