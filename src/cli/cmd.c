@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/03 11:13:01 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/03 11:45:34 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	launch_execve(t_cmd *cmd, int input, int output)
 		if (execve(cmd->name, cmd->option, cmd->env) == -1)
 		{
 			perror("minishell");
-			exit(EXIT_FAILURE);
+			return (-1);
 		}
 		if (input != STDIN_FILENO)
 			close(input);
@@ -116,20 +116,20 @@ void	run_command_line(char **cl, t_env_var *env, int input, int output)
 		reset_io(&input, &fd[1]);
 	else
 	{
-		if (!cmd->name || launch_execve(cmd, input, fd[1]))
+		if (cmd->name && access(cmd->name, F_OK) == 0)
 		{
-			if (!cmd->name)
-			{
-				g_error_status = 127;
-				ft_putstr_fd("minishell: command not found: ", 2);
-				ft_putstr_fd(cmd->option[0], 2);
-				write(2, "\n", 1);
-			}
-			else
+			if (launch_execve(cmd, input, fd[1]))
 				g_error_status = 2;
+			else
+				g_error_status = 0;
 		}
 		else
-			g_error_status = 0;
+		{
+			g_error_status = 127;
+			ft_putstr_fd("minishell: command not found: ", 2);
+			ft_putstr_fd(cmd->option[0], 2);
+			write(2, "\n", 1);
+		}
 	}
 	free_cmd(cmd);
 	while (*cl && **cl++ != '|')
