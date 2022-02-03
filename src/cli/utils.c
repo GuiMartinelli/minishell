@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:48:57 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/30 16:35:03 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/03 07:38:05 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	is_there_a_pipe(char **cl)
 	{
 		if (**cl == '|')
 		{
-			if (*(++cl) && **cl == '|')
+			if (ft_strlen(*cl) > 1 || (*(++cl) && **cl == '|'))
 				return (FALSE);
 			return (TRUE);
 		}
@@ -46,7 +46,7 @@ static int	is_there_redirections(char **cl, char redirection)
 {
 	while (*cl && **cl != '|')
 	{
-		if (**cl == redirection)
+		if (**cl == redirection && ft_strlen(*cl) <= 2)
 			return (TRUE);
 		cl++;
 	}
