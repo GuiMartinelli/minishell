@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/28 11:39:33 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/03 10:12:22 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,15 @@ typedef struct s_parse
 	char	quotes;
 }			t_parse;
 
+int	g_error_status;
+
 /**
  * Command line interface (cli)
  */
 char	*new_prompt(void);
 void	eval(char *command_line, t_var *env_list, char **envp);
+void	set_io(char **cl, int *fd, int *input);
+void	reset_io(int *input, int *output);
 
 /**
  * System
@@ -85,13 +89,14 @@ void	free_var_list(t_var *var_list);
 void	free_n_null(void *ptr);
 void	free_var(t_var *var);
 void	free_matrix(char **matrix);
+void	free_cmd(t_cmd *cmd);
+int		command_args_delimiter(char *str);
 
 /**
  * Launch
  */
-int		launch_builtins(char *cmd, char **arg, t_var *env_list, int fd);
-void	launch_execve(t_cmd *cmd, int input, int output);
-void	run_cmds(char **matrix, char **envp, int input, int output, t_var *env_list);
+int		launch_builtins(t_cmd *cmd, char **matrix, t_var *env_list, int fd);
+int		launch_execve(t_cmd *cmd, int input, int output);
 
 /**
  * Builtins
@@ -103,7 +108,7 @@ void	env(t_var *list, int fd);
 void	echo(char **str, int fd);
 t_var	*unset(t_var *env_list, char **var_name);
 void	cd(char *dir, t_var *env_list);
-void	ft_exit(void);
+void	ft_exit(char **exit_status, t_var *env_list, char **matrix, t_cmd *cmd);
 
 /**
  * Execve
@@ -119,12 +124,14 @@ char	*check_path(char **env_path, char *cmd);
  * 
  */
 int		is_quotes(char *str, char q);
-int		is_variable(char *c);
+int		is_variable(char *c, char quote);
+int		home_size(char **matrix);
+char	*home_value(char **matrix);
 int		mv_ptr(char mode, char *str);
-int		get_var_size(char *str, t_var *env);
-int		var_value_cpy(char *dest, char *src, t_var *env);
+int		get_var_size(char *str, t_var *env, char **env_matrix);
+int		var_value_cpy(char *dest, char *src, t_var *env, char **env_matrix);
 char	*parse_spaces(char *str);
-char	**string_parse(char *str, t_var *env);
+char	**string_parse(char *str, t_var *env, char **envp);
 char	**ft_split_string(char *s);
 size_t	comp_size(char *str1, char *str2);
 
@@ -137,6 +144,7 @@ char	*file_name(char **matrix, char c);
 int		output_redirects(char **matrix);
 int		input_redirects(char **matrix);
 int		heredocs_prompt(char **matrix, char *delimiter);
-void	file_error(char *name);
+int		file_error(char *name);
+int		move_index(char **matrix, int index, char c);
 
 #endif

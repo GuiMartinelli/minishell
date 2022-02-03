@@ -6,15 +6,15 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:54:17 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/28 11:40:23 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/03 10:19:12 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	move_index(char **matrix, int index)
+int	move_index(char **matrix, int index, char c)
 {
-	while (*matrix[index] != '>')
+	while (*matrix[index] != c)
 		index++;
 	index++;
 	if (matrix[index])
@@ -51,40 +51,39 @@ int	check_redirects(char **matrix, char c)
 
 char	*file_name(char **matrix, char c)
 {
-	while (*matrix)
+	char	*file;
+
+	file = NULL;
+	while (*matrix && **matrix != '|')
 	{
-		if (**matrix == c)
-		{
-			matrix++;
-			return (*matrix);
-		}
+		if (**matrix == c && c == '<' && *(matrix + 1))
+			return (*(matrix + 1));
+		else if (**matrix == c && c == '>' && *(matrix + 1))
+			return (*(matrix + 1));
 		matrix++;
 	}
-	return (NULL);
+	return (file);
 }
 
 int	output_redirects(char **matrix)
 {
 	char	*name;
 	int		mode;
-	int		index;
 	int		fd;
 
-	index = 0;
 	fd = STDOUT_FILENO;
-	while (matrix[index] && *matrix[index] != '|')
+	while (check_redirects(matrix, '>'))
 	{
-		mode = check_redirects((matrix + index), '>');
+		mode = check_redirects(matrix, '>');
 		if (!mode)
 			return (1);
-		name = file_name((matrix + index), '>');
+		name = file_name(matrix, '>');
 		if (!name || *name == '|' || *name == '<' || *name == '>')
-		{
-			file_error(name);
-			return (-1);
-		}
+			return (file_error(name));
+		if (mode > 0 && fd != STDOUT_FILENO)
+			close(fd);
 		fd = create_file(name, mode);
-		index = move_index(matrix, index);
+		matrix++;
 	}
 	return (fd);
 }
