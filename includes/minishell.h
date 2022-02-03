@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/03 20:11:37 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/03 20:38:22 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,10 @@ char	*check_path(char **env_path, char *cmd);
  */
 int		is_quotes(char *str, char q);
 int		is_variable(char *c, char quote);
+char	check_quote(char *ptr, char quotes);
+int		check_tokens(char *str, int index);
+char	save_quotes(char *src, char *dest, int index);
+int		solve_pipes(char *src, char *dest, char quotes, int index);
 int		home_size(char **matrix);
 char	*home_value(char **matrix);
 int		mv_ptr(char mode, char *str);
