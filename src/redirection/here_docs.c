@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_docs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 09:07:13 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/02 12:09:38 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/03 21:04:03 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,5 @@ int	heredocs_prompt(char **matrix, char *delimiter)
 	ptr = next_redirect(matrix);
 	if (ptr)
 		heredocs_prompt(ptr, *(ptr + 1));
-	return (1);
+	return (open("/tmp/heredoc", O_RDONLY));
 }

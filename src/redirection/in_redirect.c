@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:08:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/02 16:32:20 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/03 21:04:45 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,17 @@ static int	file_not_found(char *name)
 	return (-1);
 }
 
+static int	open_file(char *file, char c, int fd)
+{
+	if (c == '<')
+	{
+		if (fd != STDIN_FILENO)
+			close(fd);
+		fd = open(file, O_RDONLY);
+	}
+	return (fd);
+}
+
 int	input_redirects(char **matrix)
 {
 	char	*name;
@@ -52,22 +63,11 @@ int	input_redirects(char **matrix)
 		if (!name || *name == '|' || *name == '<' || *name == '>')
 			return (file_error(name));
 		if (mode == 2)
-		{
-			heredocs_prompt(matrix, name);
-			return (open("/tmp/heredoc", O_RDONLY));
-		}
-		else
-		{
-			if (*matrix[i] == '<')
-			{
-				if (fd != STDIN_FILENO)
-					close(fd);
-				fd = open(name, O_RDONLY);
-				if (fd == -1)
-					return (file_not_found(name));
-			}
-			i = move_index(matrix, i, '<');
-		}
+			return (heredocs_prompt(matrix, name));
+		fd = open_file(name, *matrix[i], fd);
+		if (fd == -1)
+			return (file_not_found(name));
+		i = move_index(matrix, i, '<');
 	}
 	return (fd);
 }
