@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:08 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/03 20:11:48 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/04 11:37:58 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		prompt = new_prompt();
 		signal(SIGINT, redisplay_prompt);
+		signal(SIGQUIT, SIG_IGN);
 		cmd = readline(prompt);
 		free(prompt);
 		if (cmd == NULL)
