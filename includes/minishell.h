@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/03 20:38:22 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/03 21:55:55 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ char	*new_prompt(void);
 void	eval(char *command_line, t_var *env_list, char **envp);
 void	set_io(char **cl, int *fd, int *input);
 void	reset_io(int *input, int *output);
+int		handle_errors(t_cmd *cmd, int error_status);
+int		check_error(int input, int fd, t_cmd *cmd);
+void	set_default_io(int fd[2]);
+void	free_cmd(t_cmd *cmd);
+void	define_signal(void);
 
 /**
  * System

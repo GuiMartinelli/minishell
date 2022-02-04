@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:15:51 by proberto          #+#    #+#              #
-#    Updated: 2022/01/30 12:52:42 by proberto         ###   ########.fr        #
+#    Updated: 2022/02/03 21:52:36 by guferrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,11 @@ NAME = minishell
 LIBFT = $(addprefix $(PATH_LIBFT)/, libft.a)
 MAIN = $(PATH_SRC)/minishell.c
 SRC = \
-	$(addprefix $(PATH_SRC)/cli/, prompt.c cmd.c utils.c) \
+	$(addprefix $(PATH_SRC)/cli/, prompt.c cmd.c utils.c cmd_utils.c) \
 	$(addprefix $(PATH_SRC)/system/, env_var.c utils_var.c free_var.c signals.c) \
 	$(addprefix $(PATH_SRC)/builtins/, cd.c echo.c env.c export.c pwd.c unset.c ft_exit.c) \
 	$(addprefix $(PATH_SRC)/exec/, paths.c) \
-	$(addprefix $(PATH_SRC)/parse/, parse_utils.c parse_var_utils.c string_parse.c ft_split_string.c parse_spaces.c) \
+	$(addprefix $(PATH_SRC)/parse/, parse_utils.c parse_var_utils.c string_parse.c ft_split_string.c parse_spaces.c parse_space_utils.c) \
 	$(addprefix $(PATH_SRC)/redirection/, out_redirect.c in_redirect.c here_docs.c) \
 	$(addprefix $(PATH_SRC)/pipes/, parse_cmds.c)
 CC = gcc

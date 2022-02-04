@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:58:44 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/03 10:03:44 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/03 21:36:20 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ char	**parse_cmd(t_cmd *cmd, char **matrix, char **env, t_var *env_list)
 {
 	char	**aux;
 
+	if (!cmd)
+		return (NULL);
 	if (!check_pipe_error(**matrix))
 		return (NULL);
 	aux = matrix;

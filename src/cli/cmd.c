@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/03 19:46:16 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/03 21:56:02 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ int	launch_execve(t_cmd *cmd, int input, int output)
 
 	status = 0;
 	pid = fork();
-	signal(SIGINT, interrupt_process);
-	signal(SIGQUIT, quit_process);
+	define_signal();
 	if (pid == 0)
 	{
 		dup2(input, 0);
@@ -71,14 +70,25 @@ int	launch_execve(t_cmd *cmd, int input, int output)
 	return (status);
 }
 
-void	free_cmd(t_cmd *cmd)
+void	launch(t_cmd *cmd, int fd[2], int *input)
 {
-	free_n_null(cmd->option);
-	free_n_null(cmd->name);
-	free_n_null(cmd);
+	if (cmd->name && access(cmd->name, F_OK) == 0)
+	{
+		if (launch_execve(cmd, *input, fd[1]))
+			g_error_status = 2;
+		else
+			g_error_status = 0;
+	}
+	else
+	{
+		g_error_status = 127;
+		ft_putstr_fd("minishell: command not found: ", 2);
+		ft_putstr_fd(cmd->option[0], 2);
+		write(2, "\n", 1);
+	}
 }
 
-void	run_command_line(char **cl, t_env_var *env, int input, int output)
+static int	run_command_line(char **cl, t_env_var *env, int input, int output)
 {
 	t_cmd		*cmd;
 	int			fd[2];
@@ -87,55 +97,24 @@ void	run_command_line(char **cl, t_env_var *env, int input, int output)
 	aux = (const char **)cl;
 	(void)input;
 	(void)output;
-	fd[0] = STDIN_FILENO;
-	fd[1] = STDOUT_FILENO;
+	set_default_io(fd);
 	cmd = ft_calloc(1, sizeof(t_cmd));
-	if (cmd == NULL)
-		return ;
 	cl = parse_cmd(cmd, cl, env->envp, env->list);
 	if (!cl)
-	{
-		free_cmd(cmd);
-		g_error_status = 2;
-		return ;
-	}
+		return (handle_errors(cmd, 2));
 	set_io(cl, fd, &input);
-	if (input == -1 || fd[1] == -1)
-	{
-		free_cmd(cmd);
-		g_error_status = 1;
-		return ;
-	}
-	if (!cmd->option || !cmd->option[0])
-	{
-		g_error_status = 0;
-		free_cmd(cmd);
-		return ;
-	}
+	if (check_error(input, fd[1], cmd))
+		return (-1);
 	if (launch_builtins(cmd, (char **)aux, env->list, fd[1]))
 		reset_io(&input, &fd[1]);
 	else
-	{
-		if (cmd->name && access(cmd->name, F_OK) == 0)
-		{
-			if (launch_execve(cmd, input, fd[1]))
-				g_error_status = 2;
-			else
-				g_error_status = 0;
-		}
-		else
-		{
-			g_error_status = 127;
-			ft_putstr_fd("minishell: command not found: ", 2);
-			ft_putstr_fd(cmd->option[0], 2);
-			write(2, "\n", 1);
-		}
-	}
+		launch(cmd, fd, &input);
 	free_cmd(cmd);
 	while (*cl && **cl++ != '|')
 		;
 	if (*cl && **cl != '|')
 		run_command_line(cl, env, fd[0], fd[1]);
+	return (0);
 }
 
 void	eval(char *command_line, t_var *env_list, char **envp)
