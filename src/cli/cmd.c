@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/04 11:34:42 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/04 12:10:49 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,15 @@ void	launch(t_cmd *cmd, int fd[2], int *input)
 	if (cmd->name && access(cmd->name, F_OK) == 0)
 	{
 		if (launch_execve(cmd, *input, fd[1]))
-			g_error_status = 1;
+		{
+			if (g_error_status != 131 && g_error_status != 130)
+				g_error_status = 1;
+		}
 		else
-			g_error_status = 0;
+		{
+			if (g_error_status != 130)
+				g_error_status = 0;
+		}
 	}
 	else
 	{
