@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 21:50:08 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/05 14:29:52 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/05 16:36:03 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_error(int input, int fd, t_cmd *cmd)
 	if (input == -1 || fd == -1)
 		return (handle_errors(cmd, 1));
 	if (!cmd->option || !cmd->option[0])
-		return (handle_errors(cmd, 0));
+		return (0);
 	return (0);
 }
 

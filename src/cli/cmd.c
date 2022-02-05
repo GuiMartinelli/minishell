@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/04 12:10:49 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/05 18:12:50 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,15 +111,22 @@ static int	run_command_line(char **cl, t_env_var *env, int input, int output)
 	set_io(cl, fd, &input);
 	if (check_error(input, fd[1], cmd))
 		return (-1);
-	if (launch_builtins(cmd, (char **)aux, env->list, fd[1]))
+	if (cmd->option && (cmd->option[0] && launch_builtins(cmd, (char **)aux, env->list, fd[1])))
 		reset_io(&input, &fd[1]);
-	else
+	else if (cmd->option && cmd->option[0])
 		launch(cmd, fd, &input);
+	else
+	{
+		if (fd[1] != STDOUT_FILENO)
+			close(fd[1]);
+	}
 	free_cmd(cmd);
 	while (*cl && **cl++ != '|')
 		;
 	if (*cl && **cl != '|')
 		run_command_line(cl, env, fd[0], fd[1]);
+	reset_io(&input, &output);
+	reset_io(&fd[0], &fd[1]);
 	return (0);
 }
 
