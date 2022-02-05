@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 09:22:37 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/04 11:41:20 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/05 14:31:46 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,19 @@ void	interrupt_process(int signal)
 }
 
 /**
+ * @brief Handle the SIGQUIT signal (CTRL + \) and exit the process.
+ * 
+ * @param signal signal number
+ * @return void
+ */
+void	interrupt_here_document(int signal)
+{
+	(void)signal;
+	write(1, "\n", 1);
+	exit(130);
+}
+
+/**
  * @brief Handle the SIGQUIT signal (CTRL + \) or (CTRL + ]), stop the forked 
  * process and generate a core dump.
  * 
@@ -54,4 +67,15 @@ void	quit_process(int signal)
 	(void)signal;
 	g_error_status = 131;
 	ft_putendl_fd("Quit (core dumped)", 1);
+}
+
+/**
+ * @brief Define signal handlers for SIGINT and SIGQUIT signals
+ * 
+ * @return void
+ */
+void	define_signal(void)
+{
+	signal(SIGINT, interrupt_process);
+	signal(SIGQUIT, quit_process);
 }

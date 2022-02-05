@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/03 21:55:55 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/05 14:06:58 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	define_signal(void);
  */
 void	redisplay_prompt(int signal);
 void	interrupt_process(int signal);
+void	interrupt_here_document(int signal);
 void	quit_process(int signal);
 t_var	*env_variables(char **env);
 int		new_variable(t_var **env_list, char *name, char *value);
@@ -151,8 +152,8 @@ size_t	comp_size(char *str1, char *str2);
 int		check_redirects(char **matrix, char c);
 char	*file_name(char **matrix, char c);
 int		output_redirects(char **matrix);
-int		input_redirects(char **matrix);
-int		heredocs_prompt(char **matrix, char *delimiter);
+int		input_redirects(char **cl);
+int		heredocs_prompt(char **cl, char *delimiter);
 int		file_error(char *name);
 int		move_index(char **matrix, int index, char c);
 

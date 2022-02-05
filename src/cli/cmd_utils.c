@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 21:50:08 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/04 11:38:42 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/05 14:29:52 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,4 @@ void	free_cmd(t_cmd *cmd)
 	free_n_null(cmd->option);
 	free_n_null(cmd->name);
 	free_n_null(cmd);
-}
-
-void	define_signal(void)
-{
-	signal(SIGINT, interrupt_process);
-	signal(SIGQUIT, quit_process);
 }
