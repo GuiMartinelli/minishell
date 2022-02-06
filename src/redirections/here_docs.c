@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 09:07:13 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/05 14:22:26 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 08:38:43 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param cl char array (acronymous for command line)
  * @return the pointer to the next heredoc or NULL if there is none
  */
-char	**next_redirect(char **cl)
+static char	**next_redirect(char **cl)
 {
 	while (**cl != '<')
 		cl++;
@@ -38,7 +38,7 @@ char	**next_redirect(char **cl)
  * @param delimiter the keyword for the EOF (end of file)
  * @return void
  */
-void	print_err(char *delimiter)
+static void	print_err(char *delimiter)
 {
 	write(2, "minishell: warning: here-document delimited by "
 		"end-of-file (wanted `", 69);
@@ -55,7 +55,7 @@ void	print_err(char *delimiter)
  * @return if the string is different from delimiter, it will return 0, else
  * it returns 1, that means the file is finished
  */
-int	write_heredoc(char *input, char *eof)
+static int	write_heredoc(char *input, char *eof)
 {
 	int	size;
 	int	fd;
@@ -86,11 +86,11 @@ int	write_heredoc(char *input, char *eof)
  * @param delimiter the keyword for the EOF (end of file)
  * @return void
  */
-void	read_and_write(char *delimiter)
+static void	read_and_write(char *delimiter)
 {
 	char	*input;
 
-	signal(SIGINT, interrupt_here_document);
+	signal(SIGINT, interrupt_here_docs);
 	while (TRUE)
 	{
 		input = readline("> ");

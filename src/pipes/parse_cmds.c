@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:58:44 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/03 21:36:20 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/06 08:20:10 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	get_args_size(char **matrix)
+static int	get_args_size(char **matrix)
 {
 	int	x;
 
@@ -39,7 +39,7 @@ int	command_args_delimiter(char *str)
 		return (0);
 }
 
-int	check_pipe_error(char first_chr)
+static int	check_pipe_error(char first_chr)
 {
 	if (first_chr == '|')
 	{
@@ -50,7 +50,7 @@ int	check_pipe_error(char first_chr)
 	return (1);
 }
 
-char	**write_cmd(t_cmd *cmd, char **matrix, char **env, t_var *env_list)
+static char	**write_cmd(t_cmd *cmd, char **matrix, char **env, t_var *env_list)
 {
 	int		index;
 	char	**paths;

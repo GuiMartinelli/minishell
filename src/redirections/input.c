@@ -6,24 +6,11 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:08:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/05 13:34:43 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 08:23:12 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	file_error(char *name)
-{
-	write(1, "bash: syntax error near unexpected token `", 43);
-	if (name)
-	{
-		write(1, &*name, 1);
-		write(1, "'\n", 2);
-	}
-	else
-		write(2, "newline'\n", 10);
-	return (-1);
-}
 
 static int	file_not_found(char *name)
 {

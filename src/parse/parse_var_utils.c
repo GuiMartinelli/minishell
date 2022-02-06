@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_var_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 08:24:42 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/03 09:20:10 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/06 08:13:58 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_variable(char *c, char quote)
 		return (0);
 }
 
-char	*get_var_name(char *str)
+static char	*get_var_name(char *str)
 {
 	int		index;
 	int		size;

@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 09:22:37 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/05 14:31:46 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 08:38:28 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	interrupt_process(int signal)
  * @param signal signal number
  * @return void
  */
-void	interrupt_here_document(int signal)
+void	interrupt_here_docs(int signal)
 {
 	(void)signal;
 	write(1, "\n", 1);

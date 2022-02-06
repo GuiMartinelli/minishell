@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   string_parse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 07:49:51 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/03 11:17:26 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/06 08:04:24 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	get_quote_size(char *str, t_var *env, char **env_matrix)
+static int	get_quote_size(char *str, t_var *env, char **env_matrix)
 {
 	char	quote;
 	int		size;
@@ -34,7 +34,7 @@ int	get_quote_size(char *str, t_var *env, char **env_matrix)
 	return (size + 2);
 }
 
-int	check_var(char *str, t_var *env, char **env_matrix)
+static int	check_var(char *str, t_var *env, char **env_matrix)
 {
 	int		size;
 	char	*err;
@@ -52,7 +52,7 @@ int	check_var(char *str, t_var *env, char **env_matrix)
 	return (size);
 }
 
-int	get_string_size(char *str, t_var *env, char **env_matrix)
+static int	get_string_size(char *str, t_var *env, char **env_matrix)
 {
 	int		size;
 	int		aux;
@@ -81,7 +81,7 @@ int	get_string_size(char *str, t_var *env, char **env_matrix)
 	return (size + 1);
 }
 
-void	string_parse_sub(t_parse *parse, t_var *env, char **env_matrix)
+static void	string_parse_sub(t_parse *parse, t_var *env, char **env_matrix)
 {
 	while (parse->str[parse->idx1])
 	{

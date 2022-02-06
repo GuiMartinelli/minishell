@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_spaces.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 09:11:48 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/03 20:38:23 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/06 08:14:54 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	get_size(char *str)
+static int	get_size(char *str)
 {
 	int		count;
 	char	quotes;
@@ -31,7 +31,7 @@ int	get_size(char *str)
 	return (count);
 }
 
-char	*cpy_str(char *src, char *dest, char quotes)
+static char	*cpy_str(char *src, char *dest, char quotes)
 {
 	int		index;
 

@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/05 14:06:58 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 08:38:36 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	define_signal(void);
  */
 void	redisplay_prompt(int signal);
 void	interrupt_process(int signal);
-void	interrupt_here_document(int signal);
+void	interrupt_here_docs(int signal);
 void	quit_process(int signal);
 t_var	*env_variables(char **env);
 int		new_variable(t_var **env_list, char *name, char *value);
@@ -121,7 +121,6 @@ void	ft_exit(char **exit_status, t_var *env_list, char **matrix, t_cmd *cmd);
  * 
  */
 char	**parse_paths(t_var *env_list);
-char	*build_path(char *env_path, char *cmd);
 char	**parse_cmd(t_cmd *cmd, char **matrix, char **env, t_var *env_list);
 char	*check_path(char **env_path, char *cmd);
 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 08:08:25 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/11 19:45:31 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/06 08:15:57 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../../includes/minishell.h"
 
-int	matrix_size(char *s)
+static int	matrix_size(char *s)
 {
 	int		count;
 	char	quote;
@@ -41,7 +41,7 @@ int	matrix_size(char *s)
 	return (count);
 }
 
-int	strlenchr_split(char	*s, char c)
+static int	strlenchr_split(char	*s, char c)
 {
 	int		size;
 
@@ -55,7 +55,7 @@ int	strlenchr_split(char	*s, char c)
 	return (size);
 }
 
-char	*str_cpy_split(char *src, char *dest, char c)
+static char	*str_cpy_split(char *src, char *dest, char c)
 {
 	while (*src != c && *src != '\0')
 	{
@@ -75,7 +75,7 @@ char	*str_cpy_split(char *src, char *dest, char c)
 	return (src);
 }
 
-char	*alloc_n_copy(char *s, char c, int index, char **dest)
+static char	*alloc_n_copy(char *s, char c, int index, char **dest)
 {
 	int	size;
 
