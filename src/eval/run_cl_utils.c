@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 12:22:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 16:47:54 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 17:35:21 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,19 @@ void	reset_io(int *input, int *output)
 }
 
 /**
+ * @brief Set io subfunction.
+ * 
+ * @param cmd command structure
+ * @param input read file descriptor
+ * @return void
+ */
+void	set_io_sub(t_cmd *cmd, int *input)
+{
+	cmd->read = *input;
+	*input = STDIN_FILENO;
+}
+
+/**
  * @brief Define what will be the input and output of the program.
  * 
  * @param cl char array (acronym for command line)
@@ -62,10 +75,7 @@ void	set_io(char **cl, t_cmd *cmd)
 		input = fd[0];
 	}
 	else
-	{
-		cmd->read = input;
-		input = STDIN_FILENO;
-	}
+		set_io_sub(cmd, &input);
 	if (is_there_redirections(cl, '>'))
 	{
 		if (fd[1] != STDOUT_FILENO)

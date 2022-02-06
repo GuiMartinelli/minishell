@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 16:23:56 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 17:23:52 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	eval(char *cl, t_env_var *env)
 {
 	char	**cl_lex;
 	t_cmd	cmd;
-	
+
 	cl_lex = ft_lexer(cl, env->list, env->envp);
 	if (!*cl_lex)
 	{

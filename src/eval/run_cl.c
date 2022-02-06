@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:31:27 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 16:40:32 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 17:25:47 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,11 +153,11 @@ int	run_cl(t_cmd *cmd, char **cl, t_env_var *env)
 	set_io(cl, cmd);
 	if (cmd->read == -1 || cmd->write == -1)
 		return (handle_errors(cmd, 1));
-	if (cmd->arg && (*cmd->arg && launch_builtins(cmd, (char**)aux, env->list)))
+	if (cmd->arg && *cmd->arg && launch_builtins(cmd, (char **)aux, env->list))
 		reset_io(&cmd->read, &cmd->write);
 	else if (cmd->arg && cmd->arg[0])
 		launch_execve(cmd, env->envp);
-	else 
+	else
 	{
 		if (cmd->write != STDOUT_FILENO)
 			close(cmd->write);

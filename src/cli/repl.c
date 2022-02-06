@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 08:56:05 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 16:16:59 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 17:23:02 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ void	repl(t_env_var *env)
 	}
 	if (cl)
 		free(cl);
-	rl_clear_history();	
+	rl_clear_history();
 }
