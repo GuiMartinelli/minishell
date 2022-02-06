@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 12:58:07 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 17:17:00 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_var	*env_variables(char **env);
 int		new_variable(t_var **env_list, char *name, char *value);
 int		update_var(t_var *env_list, char *name, char *value);
 char	**ft_split_value(char const *s, char c);
-char	*get_var_value(char *name, t_var *var_list);
+char	*hash_table(char *name, t_var *var_list);
 void	free_var_list(t_var *var_list);
 void	free_n_null(void *ptr);
 void	free_var(t_var *var);
@@ -149,12 +149,12 @@ size_t	comp_size(char *str1, char *str2);
  * Redirects
  * 
  */
-int		check_redirects(char **matrix, char c);
-char	*file_name(char **matrix, char c);
-int		output_redirects(char **matrix);
+int		check_redirects(char **cl, char c);
+char	*file_name(char **cl, char c);
+int		output_redirects(char **cl);
 int		input_redirects(char **cl);
 int		heredocs_prompt(char **cl, char *delimiter);
 int		file_error(char *name);
-int		move_index(char **matrix, int index, char c);
+int		move_index(char **cl, int index, char c);
 
 #endif

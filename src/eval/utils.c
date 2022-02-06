@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:48:57 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 12:39:15 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 16:51:24 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * @brief Checks for a pipe on the command line.
  * 
  * @param cl char array (acronymous for command line)
- * @return True if there is a pipe, False if there is none or if there is a
+ * @return true if there is a pipe, false if there is none or if there is a
  * double pipe (one pipe followed by another pipe)
 */
 int	is_there_a_pipe(char **cl)
@@ -40,7 +40,7 @@ int	is_there_a_pipe(char **cl)
  * @param cl char array (acronymous for command line)
  * @param redirection the possible redirects to inputs (<, <<) and
  * outputs (>, >>)
- * @return True if there is a redirect, False otherwise
+ * @return true if there is a redirect, false otherwise
 */
 int	is_there_redirections(char **cl, char redirection)
 {
@@ -53,8 +53,14 @@ int	is_there_redirections(char **cl, char redirection)
 	return (FALSE);
 }
 
+/**
+ * @brief Free the path and arg from the command structure.
+ * 
+ * @param cmd command structure
+ * @return void
+ */
 void	free_cmd(t_cmd *cmd)
 {
-	free_n_null(cmd->arg);
 	free_n_null(cmd->path);
+	free_n_null(cmd->arg);
 }

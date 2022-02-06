@@ -6,12 +6,20 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:31:27 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 12:58:34 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 16:40:32 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief Search and launch the correct built-in function. 
+ * 
+ * @param cmd command structure
+ * @param cl char array (acronym for command line)
+ * @param env_list environment variables list
+ * @return true if any built-ins were executed, false otherwise
+ */
 static int	launch_builtins(t_cmd *cmd, char **cl, t_var *env_list)
 {
 	g_error_status = 0;
@@ -41,6 +49,15 @@ static int	launch_builtins(t_cmd *cmd, char **cl, t_var *env_list)
 	return (TRUE);
 }
 
+/**
+ * @brief Launch execve subfunction.
+ * 
+ * @param cmd command structure
+ * @param input read file descriptor
+ * @param output write file descriptor
+ * @param envp environment variables passed to the program
+ * @return int
+ */
 static int	launch_execve_sub(t_cmd *cmd, int input, int output, char **envp)
 {
 	pid_t	pid;
@@ -70,6 +87,15 @@ static int	launch_execve_sub(t_cmd *cmd, int input, int output, char **envp)
 	return (status);
 }
 
+/**
+ * @brief Search and launch the right executable 
+ * (based on the PATH variable or by using relative or absolute path).
+ * 
+ * @param cmd command structure
+ * @param envp environment variables passed to the program through the main 
+ * function
+ * @return void
+ */
 static void	launch_execve(t_cmd *cmd, char **envp)
 {
 	if (cmd->path && access(cmd->path, F_OK) == 0)
@@ -94,6 +120,13 @@ static void	launch_execve(t_cmd *cmd, char **envp)
 	}
 }
 
+/**
+ * @brief Handle error and set global variable status.
+ * 
+ * @param cmd command structure
+ * @param error_status number of error
+ * @return int
+ */
 static int	handle_errors(t_cmd *cmd, int error_status)
 {
 	free_cmd(cmd);
@@ -101,6 +134,14 @@ static int	handle_errors(t_cmd *cmd, int error_status)
 	return (-1);
 }
 
+/**
+ * @brief Parse and execute the command line.
+ * 
+ * @param cmd command structure
+ * @param cl char array (acronym for command line)
+ * @param env structure containing the environment variables (list and envp)
+ * @return int
+ */
 int	run_cl(t_cmd *cmd, char **cl, t_env_var *env)
 {
 	const char	**aux;

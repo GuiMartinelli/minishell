@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 08:24:42 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/06 08:13:58 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 15:58:28 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	get_var_size(char *str, t_var *env, char **env_matrix)
 	}
 	name = get_var_name(str);
 	size = 0;
-	value = get_var_value(name, env);
+	value = hash_table(name, env);
 	if (!value)
 		size = 0;
 	else
@@ -88,7 +88,7 @@ int	var_value_cpy(char *dest, char *src, t_var *env, char **env_matrix)
 	}
 	else
 		name = get_var_name(src);
-	value = get_var_value(name, env);
+	value = hash_table(name, env);
 	if (name)
 	{
 		free(name);

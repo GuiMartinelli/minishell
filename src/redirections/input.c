@@ -1,17 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   in_redirect.c                                      :+:      :+:    :+:   */
+/*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:08:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/06 08:23:12 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 17:07:46 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief Handle input redirects errors and set global variable status.
+ * 
+ * @param name file name
+ * @return int 
+ */
 static int	file_not_found(char *name)
 {
 	write(2, "bash: ", 7);
@@ -21,6 +27,14 @@ static int	file_not_found(char *name)
 	return (-1);
 }
 
+/**
+ * @brief Input redirects subfunction.
+ * 
+ * @param file file name
+ * @param c char array (acronym for command line)
+ * @param fd file descriptor
+ * @return fd 
+ */
 static int	open_file(char *file, char c, int fd)
 {
 	if (c == '<')
@@ -32,6 +46,12 @@ static int	open_file(char *file, char c, int fd)
 	return (fd);
 }
 
+/**
+ * @brief Open a file and return its file descriptor.
+ * 
+ * @param cl char array (acronym for command line)
+ * @return fd
+ */
 int	input_redirects(char **cl)
 {
 	char	*name;

@@ -6,7 +6,7 @@
 #    By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:15:51 by proberto          #+#    #+#              #
-#    Updated: 2022/02/06 13:02:47 by proberto         ###   ########.fr        #
+#    Updated: 2022/02/06 16:09:28 by proberto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME = minishell
 LIBFT = $(addprefix $(PATH_LIBFT)/, libft.a)
 MAIN = $(PATH_SRC)/minishell.c
 SRC = \
-	$(addprefix $(PATH_SRC)/system/, signals.c env_var.c utils_var.c free_var.c) \
+	$(addprefix $(PATH_SRC)/system/, signals.c env_var.c utils_var.c utils.c) \
 	$(addprefix $(PATH_SRC)/cli/, repl.c prompt.c) \
 	$(addprefix $(PATH_SRC)/parse/, ft_lexer_utils.c ft_lexer.c ft_tokenizer.c) \
 	$(addprefix $(PATH_SRC)/parse/, parse_var_utils.c parse_spaces.c) \

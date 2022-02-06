@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   utils_var.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 06:54:38 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/03 09:19:59 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/06 16:05:19 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief Count the size even while the char is different from the delimiter.
+ * 
+ * @param s string to be counted
+ * @param c delimiter char
+ * @return size of the string
+ */
 int	strlenchr(char	*s, char c)
 {
 	int	size;
@@ -25,6 +32,15 @@ int	strlenchr(char	*s, char c)
 	return (size);
 }
 
+/**
+ * @brief Copy a src string to dst even while the char is different from the 
+ * delimiter.
+ * 
+ * @param src source string
+ * @param dest destination string
+ * @param c delimiter char
+ * @return char*
+ */
 char	*str_cpy(char *src, char *dest, char c)
 {
 	while (*src != c && *src != '\0')
@@ -83,7 +99,7 @@ char	**ft_split_value(char const *s, char c)
  * @param var_list variable list
  * @return char* pointer to the variable value
  */
-char	*get_var_value(char *name, t_var *var_list)
+char	*hash_table(char *name, t_var *var_list)
 {
 	if (!name)
 		return (NULL);

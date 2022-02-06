@@ -6,12 +6,18 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 12:22:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 12:39:02 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 16:47:54 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief Set the default input and output file descriptor.
+ * 
+ * @param cmd command structure
+ * @return void
+ */
 void	set_default_io(t_cmd *cmd)
 {
 	cmd->read = STDIN_FILENO;
@@ -19,7 +25,8 @@ void	set_default_io(t_cmd *cmd)
 }
 
 /**
- * @brief Reset input and output to default.
+ * @brief Reset input and output file descriptors to default and close them 
+ * if they are open.
  * 
  * @param input pointer to the input file descriptor to be reset
  * @param output pointer to the output file descriptor to be reset
@@ -37,9 +44,8 @@ void	reset_io(int *input, int *output)
 /**
  * @brief Define what will be the input and output of the program.
  * 
- * @param cl char array (acronymous for command line)
- * @param input pointer to the input file descriptor
- * @param output int pointer to the output file descriptor
+ * @param cl char array (acronym for command line)
+ * @param cmd command structure
  * @return void
 */
 void	set_io(char **cl, t_cmd *cmd)

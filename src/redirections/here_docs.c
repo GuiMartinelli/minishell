@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 09:07:13 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/06 08:38:43 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 16:53:32 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * @brief Check if there is other heredocs in the command line.
  * 
- * @param cl char array (acronymous for command line)
+ * @param cl char array (acronym for command line)
  * @return the pointer to the next heredoc or NULL if there is none
  */
 static char	**next_redirect(char **cl)
@@ -115,7 +115,7 @@ static void	read_and_write(char *delimiter)
  * @details readline is executed in a subprocess so that the SIGINT is captured
  * and handled outside the scope of the main process, this causes the command 
  * prompt to be returned when the signal is received
- * @param cl char array (acronymous for command line)
+ * @param cl char array (acronym for command line)
  * @param delimiter the keyword for the EOF (end of file)
  * @return fd of the temp file
  */

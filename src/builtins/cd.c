@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 15:39:20 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/03 19:39:01 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/06 15:58:17 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@ void	cd(char *dir, t_var *env_list)
 
 	temp = NULL;
 	if (dir == NULL || (*dir == '-' && *(dir + 1) == '-' && *(dir + 2) == 0))
-		temp = get_var_value("HOME", env_list);
+		temp = hash_table("HOME", env_list);
 	else if (*dir == '-' && *(dir + 1) == '\0')
 	{
-		temp = get_var_value("OLDPWD", env_list);
+		temp = hash_table("OLDPWD", env_list);
 		ft_putendl_fd(dir, 1);
 	}
 	if (temp)
 		change_directory(temp);
 	else
 		change_directory(dir);
-	oldpwd = get_var_value("PWD", env_list);
+	oldpwd = hash_table("PWD", env_list);
 	update_var(env_list, "OLDPWD", oldpwd);
 	pwd = getcwd(NULL, 0);
 	update_var(env_list, "PWD", pwd);

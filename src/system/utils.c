@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_var.c                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 09:30:26 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 11:53:32 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 16:08:58 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ void	free_n_null(void *ptr)
 	}
 }
 
+/**
+ * @brief Free a char array and set it to NULL.
+ * 
+ * @param matrix char array to be freed
+ * @return void
+ */
 void	free_matrix(char **matrix)
 {
 	int	x;
