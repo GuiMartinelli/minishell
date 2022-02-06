@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 08:38:36 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 12:58:07 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ typedef struct s_prompt
 
 typedef struct s_cmd
 {
-	char	*name;
-	char	**option;
-	char	**env;
+	char	*path;
+	char	**arg;
+	int		read;
+	int		write;
 }			t_cmd;
 
 typedef struct s_var
@@ -69,15 +70,20 @@ extern int	g_error_status;
 /**
  * Command line interface (cli)
  */
+void	repl(t_env_var *env);
 char	*new_prompt(void);
-void	eval(char *command_line, t_var *env_list, char **envp);
-void	set_io(char **cl, int *fd, int *input);
+void	eval(char *cl, t_env_var *env);
+
+/**
+ * Run commands
+ */
+int		run_cl(t_cmd *cmd, char **cl, t_env_var *env);
+void	set_default_io(t_cmd *cmd);
+void	set_io(char **cl, t_cmd *cmd);
 void	reset_io(int *input, int *output);
-int		handle_errors(t_cmd *cmd, int error_status);
-int		check_error(int input, int fd, t_cmd *cmd);
-void	set_default_io(int fd[2]);
+int		is_there_a_pipe(char **cl);
+int		is_there_redirections(char **cl, char redirection);
 void	free_cmd(t_cmd *cmd);
-void	define_signal(void);
 
 /**
  * System
@@ -86,6 +92,7 @@ void	redisplay_prompt(int signal);
 void	interrupt_process(int signal);
 void	interrupt_here_docs(int signal);
 void	quit_process(int signal);
+void	define_signal(void);
 t_var	*env_variables(char **env);
 int		new_variable(t_var **env_list, char *name, char *value);
 int		update_var(t_var *env_list, char *name, char *value);
@@ -97,12 +104,6 @@ void	free_var(t_var *var);
 void	free_matrix(char **matrix);
 void	free_cmd(t_cmd *cmd);
 int		command_args_delimiter(char *str);
-
-/**
- * Launch
- */
-int		launch_builtins(t_cmd *cmd, char **matrix, t_var *env_list, int fd);
-int		launch_execve(t_cmd *cmd, int input, int output);
 
 /**
  * Builtins
@@ -121,7 +122,7 @@ void	ft_exit(char **exit_status, t_var *env_list, char **matrix, t_cmd *cmd);
  * 
  */
 char	**parse_paths(t_var *env_list);
-char	**parse_cmd(t_cmd *cmd, char **matrix, char **env, t_var *env_list);
+char	**parse_cmd(t_cmd *cmd, char **matrix, t_var *env_list);
 char	*check_path(char **env_path, char *cmd);
 
 /**
@@ -140,7 +141,7 @@ int		mv_ptr(char mode, char *str);
 int		get_var_size(char *str, t_var *env, char **env_matrix);
 int		var_value_cpy(char *dest, char *src, t_var *env, char **env_matrix);
 char	*parse_spaces(char *str);
-char	**string_parse(char *str, t_var *env, char **envp);
+char	**ft_lexer(char *str, t_var *env, char **envp);
 char	**ft_split_string(char *s);
 size_t	comp_size(char *str1, char *str2);
 

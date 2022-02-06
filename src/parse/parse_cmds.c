@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:58:44 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/06 08:20:10 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 11:24:17 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,46 +50,43 @@ static int	check_pipe_error(char first_chr)
 	return (1);
 }
 
-static char	**write_cmd(t_cmd *cmd, char **matrix, char **env, t_var *env_list)
+static char	**write_cmd(t_cmd *cmd, char **cl, t_var *env_list)
 {
 	int		index;
 	char	**paths;
 
 	index = 0;
 	paths = parse_paths(env_list);
-	cmd->name = check_path(paths, *matrix);
-	cmd->option = ft_calloc(get_args_size(matrix), sizeof(char *));
-	while (*matrix && !command_args_delimiter(*matrix))
+	cmd->path = check_path(paths, *cl);
+	cmd->arg = ft_calloc(get_args_size(cl), sizeof(char *));
+	while (*cl && !command_args_delimiter(*cl))
 	{
-		cmd->option[index] = *matrix;
-		matrix++;
+		cmd->arg[index] = *cl;
+		cl++;
 		index++;
 	}
-	cmd->env = env;
 	if (paths)
 		free_matrix(paths);
-	return (matrix);
+	return (cl);
 }
 
-char	**parse_cmd(t_cmd *cmd, char **matrix, char **env, t_var *env_list)
+char	**parse_cmd(t_cmd *cmd, char **cl, t_var *env_list)
 {
 	char	**aux;
 
-	if (!cmd)
+	if (!check_pipe_error(**cl))
 		return (NULL);
-	if (!check_pipe_error(**matrix))
-		return (NULL);
-	aux = matrix;
-	while (*matrix && (**matrix == '<' || **matrix == '>'))
+	aux = cl;
+	while (*cl && (**cl == '<' || **cl == '>'))
 	{
-		matrix ++;
-		if (*matrix)
-			matrix++;
+		cl ++;
+		if (*cl)
+			cl++;
 	}
-	if (!*matrix)
+	if (!*cl)
 		return (aux);
-	matrix = write_cmd(cmd, matrix, env, env_list);
+	cl = write_cmd(cmd, cl, env_list);
 	if (*aux && (**aux == '<' || **aux == '>'))
 		return (aux);
-	return (matrix);
+	return (cl);
 }

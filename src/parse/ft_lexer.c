@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_parse.c                                     :+:      :+:    :+:   */
+/*   ft_lexer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 07:49:51 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/06 08:04:24 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 09:19:47 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	get_string_size(char *str, t_var *env, char **env_matrix)
 	return (size + 1);
 }
 
-static void	string_parse_sub(t_parse *parse, t_var *env, char **env_matrix)
+static void	ft_lexer_sub(t_parse *parse, t_var *env, char **env_matrix)
 {
 	while (parse->str[parse->idx1])
 	{
@@ -106,7 +106,7 @@ static void	string_parse_sub(t_parse *parse, t_var *env, char **env_matrix)
 	}
 }
 
-char	**string_parse(char *str, t_var *env, char **envp)
+char	**ft_lexer(char *str, t_var *env, char **envp)
 {
 	t_parse	parse;
 	char	**splitted;
@@ -119,7 +119,7 @@ char	**string_parse(char *str, t_var *env, char **envp)
 			sizeof(char));
 	if (!parse.parsed)
 		return (NULL);
-	string_parse_sub(&parse, env, envp);
+	ft_lexer_sub(&parse, env, envp);
 	parse.parsed = parse_spaces(parse.parsed);
 	splitted = ft_split_string(parse.parsed);
 	free_n_null(parse.parsed);
