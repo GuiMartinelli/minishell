@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 20:37:02 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 22:15:52 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,16 @@
 # define STDIN_FILENO 0
 # define STDOUT_FILENO 1
 
+# define YELLOW "\001\033[1;33m\002"
+# define RED "\001\033[1;31m\002"
+# define GREEN "\001\033[1;32m\002"
+# define BLUE "\001\033[1;36m\002"
+# define RESET "\001\033[0m\002" 
+
 typedef struct s_prompt
 {
 	char	*prompt;
-	char	*pwd;
-	char	*target;
+	char	*label;
 	char	*prefix_color;
 	char	*suffix_color;
 	size_t	len;
@@ -71,7 +76,7 @@ extern int	g_error_status;
  * Command line interface (cli)
  */
 void	repl(t_env_var *env);
-char	*new_prompt(void);
+char	*new_prompt(t_env_var *env);
 void	eval(char *cl, t_env_var *env);
 
 /**

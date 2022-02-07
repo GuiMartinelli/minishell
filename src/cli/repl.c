@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 08:56:05 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 17:23:02 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 23:44:15 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * to the user (repl acronym for read-eval-print loop).
  * 
  * @param env structure containing the environment variables (list and envp)
- * return void
+ * @return void
  */
 void	repl(t_env_var *env)
 {
@@ -26,7 +26,7 @@ void	repl(t_env_var *env)
 
 	while (TRUE)
 	{
-		prompt = new_prompt();
+		prompt = new_prompt(env);
 		signal(SIGINT, redisplay_prompt);
 		signal(SIGQUIT, SIG_IGN);
 		cl = readline(prompt);
