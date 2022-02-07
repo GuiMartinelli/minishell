@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:58:44 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/06 21:17:38 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/07 06:49:26 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static char	**write_cmd(t_cmd *cmd, char **cl, t_var *env_list)
 	index = 0;
 	paths = parse_paths(env_list);
 	cmd->path = check_path(paths, *cl);
+	if (cmd->path == NULL)
+		cmd->path = ft_strdup(*cl);
 	cmd->arg = ft_calloc(get_args_size(cl), sizeof(char *));
 	while (*cl && !command_args_delimiter(*cl))
 	{
