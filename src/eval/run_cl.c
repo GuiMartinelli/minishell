@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_cl.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:31:27 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 20:06:05 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/07 10:02:13 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static int	launch_execve_sub(t_cmd *cmd, int input, int output, char **envp)
 		ft_putendl_fd("\nFailed forking child..", 2);
 	wait(&status);
 	reset_io(&input, &output);
-	return (status);
+	return (WEXITSTATUS(status));
 }
 
 /**
@@ -98,12 +98,15 @@ static int	launch_execve_sub(t_cmd *cmd, int input, int output, char **envp)
  */
 static void	launch_execve(t_cmd *cmd, char **envp)
 {
+	int	exit;
+
 	if (cmd->path && access(cmd->path, F_OK) == 0)
 	{
-		if (launch_execve_sub(cmd, cmd->read, cmd->write, envp))
+		exit = launch_execve_sub(cmd, cmd->read, cmd->write, envp);
+		if (exit)
 		{
 			if (g_error_status != 131 && g_error_status != 130)
-				g_error_status = 1;
+				g_error_status = exit;
 		}
 		else
 		{
