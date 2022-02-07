@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:31:27 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 17:25:47 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 20:06:05 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	launch_builtins(t_cmd *cmd, char **cl, t_var *env_list)
 		echo(cmd->arg, cmd->write);
 	else if (ft_strncmp(cmd->arg[0],
 			"cd", comp_size(cmd->arg[0], "cd")) == 0)
-		cd(cmd->arg[1], env_list);
+		cd(&cmd->arg[1], env_list);
 	else if (ft_strncmp(cmd->arg[0], "export",
 			comp_size(cmd->arg[0], "export")) == 0)
 		export(env_list, &cmd->arg[1]);
@@ -150,6 +150,7 @@ int	run_cl(t_cmd *cmd, char **cl, t_env_var *env)
 	cl = parse_cmd(cmd, cl, env->list);
 	if (!cl)
 		return (handle_errors(cmd, 2));
+	set_default_io(&cmd->read, &cmd->write);
 	set_io(cl, cmd);
 	if (cmd->read == -1 || cmd->write == -1)
 		return (handle_errors(cmd, 1));
@@ -158,10 +159,8 @@ int	run_cl(t_cmd *cmd, char **cl, t_env_var *env)
 	else if (cmd->arg && cmd->arg[0])
 		launch_execve(cmd, env->envp);
 	else
-	{
 		if (cmd->write != STDOUT_FILENO)
 			close(cmd->write);
-	}
 	free_cmd(cmd);
 	while (*cl && **cl++ != '|')
 		;

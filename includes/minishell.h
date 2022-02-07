@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 17:17:00 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 20:37:02 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	eval(char *cl, t_env_var *env);
  * Run commands
  */
 int		run_cl(t_cmd *cmd, char **cl, t_env_var *env);
-void	set_default_io(t_cmd *cmd);
+void	set_default_io(int *input, int *output);
 void	set_io(char **cl, t_cmd *cmd);
 void	reset_io(int *input, int *output);
 int		is_there_a_pipe(char **cl);
@@ -114,7 +114,7 @@ void	export(t_var *env_list, char **var);
 void	env(t_var *list, int fd);
 void	echo(char **str, int fd);
 t_var	*unset(t_var *env_list, char **var_name);
-void	cd(char *dir, t_var *env_list);
+int		cd(char **dir, t_var *env_list);
 void	ft_exit(char **exit_status, t_var *env_list, char **matrix, t_cmd *cmd);
 
 /**

@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 12:22:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 17:35:21 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 18:31:23 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
  * @param cmd command structure
  * @return void
  */
-void	set_default_io(t_cmd *cmd)
+void	set_default_io(int *input, int *output)
 {
-	cmd->read = STDIN_FILENO;
-	cmd->write = STDOUT_FILENO;
+	*input = STDIN_FILENO;
+	*output = STDOUT_FILENO;
 }
 
 /**
@@ -66,7 +66,7 @@ void	set_io(char **cl, t_cmd *cmd)
 	int			fd[2];
 	static int	input;
 
-	set_default_io(cmd);
+	set_default_io(&fd[0], &fd[1]);
 	if (is_there_a_pipe(cl) == TRUE)
 	{
 		pipe(fd);

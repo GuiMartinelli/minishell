@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:58:44 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/06 11:24:17 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 21:17:38 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static char	**write_cmd(t_cmd *cmd, char **cl, t_var *env_list)
 		cl++;
 		index++;
 	}
+	cmd->arg[index] = NULL;
 	if (paths)
 		free_matrix(paths);
 	return (cl);
