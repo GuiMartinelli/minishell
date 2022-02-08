@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 22:15:52 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/07 22:32:27 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	free_n_null(void *ptr);
 void	free_var(t_var *var);
 void	free_matrix(char **matrix);
 void	free_cmd(t_cmd *cmd);
+void	free_here_docs(int status);
 int		command_args_delimiter(char *str);
 
 /**

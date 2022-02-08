@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 09:22:37 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/07 06:58:39 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/07 22:52:33 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ void	interrupt_process(int signal)
  * @return void
  */
 void	interrupt_here_docs(int signal)
-{
+{	
 	(void)signal;
+	g_error_status = -42;
 	write(1, "\n", 1);
+	free_here_docs(130);
 	exit(130);
 }
 

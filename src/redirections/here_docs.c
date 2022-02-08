@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 09:07:13 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/06 16:53:32 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/07 22:47:45 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static void	read_and_write(char *delimiter)
 		if (input == NULL)
 		{
 			print_err(delimiter);
-			exit(0);
+			free_here_docs(0);
 		}
 		if (write_heredoc(input, delimiter))
 		{
@@ -106,7 +106,7 @@ static void	read_and_write(char *delimiter)
 		}
 		free(input);
 	}
-	exit(0);
+	free_here_docs(0);
 }
 
 /**
