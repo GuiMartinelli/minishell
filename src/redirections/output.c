@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   out_redirect.c                                     :+:      :+:    :+:   */
+/*   output.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:54:17 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/03 10:19:12 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/06 17:02:47 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	move_index(char **matrix, int index, char c)
-{
-	while (*matrix[index] != c)
-		index++;
-	index++;
-	if (matrix[index])
-		index++;
-	return (index);
-}
-
-int	create_file(char *file, int mode)
+/**
+ * @brief Output redirects subfunction.
+ * 
+ * @disclaimer: mode 1 is equivalent to > (truncate)
+ * mode 2 is equivalent to >> (append)
+ * @param file file name
+ * @param mode open mode
+ * @return int 
+ */
+static int	create_file(char *file, int mode)
 {
 	int	fd;
 
@@ -33,57 +32,32 @@ int	create_file(char *file, int mode)
 	return (fd);
 }
 
-int	check_redirects(char **matrix, char c)
-{
-	while (*matrix)
-	{
-		if (**matrix == c)
-		{
-			if (*(*matrix + 1) == c)
-				return (2);
-			else
-				return (1);
-		}
-		matrix++;
-	}
-	return (0);
-}
-
-char	*file_name(char **matrix, char c)
-{
-	char	*file;
-
-	file = NULL;
-	while (*matrix && **matrix != '|')
-	{
-		if (**matrix == c && c == '<' && *(matrix + 1))
-			return (*(matrix + 1));
-		else if (**matrix == c && c == '>' && *(matrix + 1))
-			return (*(matrix + 1));
-		matrix++;
-	}
-	return (file);
-}
-
-int	output_redirects(char **matrix)
+/**
+ * @brief Create (if it doesn't exist) or open a file and return its 
+ * file descriptor.
+ * 
+ * @param cl char array (acronym for command line)
+ * @return fd 
+ */
+int	output_redirects(char **cl)
 {
 	char	*name;
 	int		mode;
 	int		fd;
 
 	fd = STDOUT_FILENO;
-	while (check_redirects(matrix, '>'))
+	while (check_redirects(cl, '>'))
 	{
-		mode = check_redirects(matrix, '>');
+		mode = check_redirects(cl, '>');
 		if (!mode)
 			return (1);
-		name = file_name(matrix, '>');
+		name = file_name(cl, '>');
 		if (!name || *name == '|' || *name == '<' || *name == '>')
 			return (file_error(name));
 		if (mode > 0 && fd != STDOUT_FILENO)
 			close(fd);
 		fd = create_file(name, mode);
-		matrix++;
+		cl++;
 	}
 	return (fd);
 }

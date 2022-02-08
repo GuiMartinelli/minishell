@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   in_redirect.c                                      :+:      :+:    :+:   */
+/*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:08:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/02 16:32:20 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/06 17:07:46 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	file_error(char *name)
-{
-	write(1, "bash: syntax error near unexpected token `", 43);
-	if (name)
-	{
-		write(1, &*name, 1);
-		write(1, "'\n", 2);
-	}
-	else
-		write(2, "newline'\n", 10);
-	return (-1);
-}
-
+/**
+ * @brief Handle input redirects errors and set global variable status.
+ * 
+ * @param name file name
+ * @return int 
+ */
 static int	file_not_found(char *name)
 {
 	write(2, "bash: ", 7);
@@ -34,7 +27,32 @@ static int	file_not_found(char *name)
 	return (-1);
 }
 
-int	input_redirects(char **matrix)
+/**
+ * @brief Input redirects subfunction.
+ * 
+ * @param file file name
+ * @param c char array (acronym for command line)
+ * @param fd file descriptor
+ * @return fd 
+ */
+static int	open_file(char *file, char c, int fd)
+{
+	if (c == '<')
+	{
+		if (fd != STDIN_FILENO)
+			close(fd);
+		fd = open(file, O_RDONLY);
+	}
+	return (fd);
+}
+
+/**
+ * @brief Open a file and return its file descriptor.
+ * 
+ * @param cl char array (acronym for command line)
+ * @return fd
+ */
+int	input_redirects(char **cl)
 {
 	char	*name;
 	int		mode;
@@ -43,31 +61,20 @@ int	input_redirects(char **matrix)
 
 	i = 0;
 	fd = STDIN_FILENO;
-	while (matrix[i] && *matrix[i] == '<')
+	while (cl[i] && *cl[i] == '<')
 	{
-		mode = check_redirects((matrix + i), '<');
+		mode = check_redirects((cl + i), '<');
 		if (!mode)
 			return (0);
-		name = file_name((matrix + i), '<');
+		name = file_name((cl + i), '<');
 		if (!name || *name == '|' || *name == '<' || *name == '>')
 			return (file_error(name));
 		if (mode == 2)
-		{
-			heredocs_prompt(matrix, name);
-			return (open("/tmp/heredoc", O_RDONLY));
-		}
-		else
-		{
-			if (*matrix[i] == '<')
-			{
-				if (fd != STDIN_FILENO)
-					close(fd);
-				fd = open(name, O_RDONLY);
-				if (fd == -1)
-					return (file_not_found(name));
-			}
-			i = move_index(matrix, i, '<');
-		}
+			return (heredocs_prompt(cl, name));
+		fd = open_file(name, *cl[i], fd);
+		if (fd == -1)
+			return (file_not_found(name));
+		i = move_index(cl, i, '<');
 	}
 	return (fd);
 }

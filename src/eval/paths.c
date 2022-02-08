@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 08:47:33 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/31 11:45:23 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/06 08:18:23 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**parse_paths(t_var *env_list)
  * @param cmd command to be executed
  * @return string created
  */
-char	*build_path(char *env_path, char *cmd)
+static char	*build_path(char *env_path, char *cmd)
 {
 	char	*path;
 	char	*temp;

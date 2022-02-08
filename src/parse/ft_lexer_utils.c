@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*   ft_lexer_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 10:21:09 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/02 11:18:30 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/06 17:27:46 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,12 @@ size_t	comp_size(char *str1, char *str2)
 	size_t	size1;
 	size_t	size2;
 
-	size1 = ft_strlen(str1);
-	size2 = ft_strlen(str2);
+	size1 = 0;
+	size2 = 0;
+	if (str1)
+		size1 = ft_strlen(str1);
+	if (str2)
+		size2 = ft_strlen(str2);
 	if (size1 > size2)
 		return (size1);
 	else

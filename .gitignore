@@ -3,4 +3,5 @@
 *.a
 minishell
 test.sh
+log
 readline.supp

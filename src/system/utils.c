@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_var.c                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 09:30:26 by proberto          #+#    #+#             */
-/*   Updated: 2022/01/17 21:09:06 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/06 16:08:58 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,25 @@ void	free_n_null(void *ptr)
 		free(ptr);
 		ptr = NULL;
 	}
+}
+
+/**
+ * @brief Free a char array and set it to NULL.
+ * 
+ * @param matrix char array to be freed
+ * @return void
+ */
+void	free_matrix(char **matrix)
+{
+	int	x;
+
+	x = 0;
+	while (matrix[x])
+	{
+		free_n_null(matrix[x]);
+		x++;
+	}
+	free_n_null(matrix);
 }
 
 /**
@@ -58,17 +77,4 @@ void	free_var_list(t_var *var_list)
 		free_var(curr);
 		curr = var_list;
 	}
-}
-
-void	free_matrix(char **matrix)
-{
-	int	x;
-
-	x = 0;
-	while (matrix[x])
-	{
-		free_n_null(matrix[x]);
-		x++;
-	}
-	free_n_null(matrix);
 }

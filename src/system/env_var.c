@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 09:12:52 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/11 19:07:01 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/06 15:51:22 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	new_variable(t_var **env_list, char *name, char *value)
  * structs linked list.
  * 
  * @param env environment variables matrix, that main function receive as param
- * @return t_var* 
+ * @return t_var* list
  */
 t_var	*env_variables(char **env)
 {

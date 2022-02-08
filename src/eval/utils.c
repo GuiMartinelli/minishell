@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:48:57 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/03 19:45:23 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/06 16:51:24 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
  * @brief Checks for a pipe on the command line.
  * 
  * @param cl char array (acronymous for command line)
- * @return True if there is a pipe, False if there is none or if there is a
+ * @return true if there is a pipe, false if there is none or if there is a
  * double pipe (one pipe followed by another pipe)
 */
-static int	is_there_a_pipe(char **cl)
+int	is_there_a_pipe(char **cl)
 {
 	while (*cl)
 	{
@@ -40,9 +40,9 @@ static int	is_there_a_pipe(char **cl)
  * @param cl char array (acronymous for command line)
  * @param redirection the possible redirects to inputs (<, <<) and
  * outputs (>, >>)
- * @return True if there is a redirect, False otherwise
+ * @return true if there is a redirect, false otherwise
 */
-static int	is_there_redirections(char **cl, char redirection)
+int	is_there_redirections(char **cl, char redirection)
 {
 	while (*cl && **cl != '|')
 	{
@@ -54,47 +54,13 @@ static int	is_there_redirections(char **cl, char redirection)
 }
 
 /**
- * @brief Reset input and output to default.
+ * @brief Free the path and arg from the command structure.
  * 
- * @param input pointer to the input file descriptor to be reset
- * @param output pointer to the output file descriptor to be reset
+ * @param cmd command structure
  * @return void
-*/
-void	reset_io(int *input, int *output)
+ */
+void	free_cmd(t_cmd *cmd)
 {
-	if (*input != STDIN_FILENO)
-		close(*input);
-	if (*output != STDOUT_FILENO)
-		close(*output);
-	*output = STDOUT_FILENO;
-}
-
-/**
- * @brief Define what will be the input and output of the program.
- * 
- * @param cl char array (acronymous for command line)
- * @param input pointer to the input file descriptor
- * @param output int pointer to the output file descriptor
- * @return void
-*/
-void	set_io(char **cl, int *fd, int *input)
-{
-	if (is_there_a_pipe(cl) == TRUE)
-		pipe(fd);
-	if (is_there_redirections(cl, '>'))
-	{
-		if (fd[1] != STDOUT_FILENO)
-			close(fd[1]);
-		fd[1] = output_redirects(cl);
-		if (fd[1] == -1)
-			return ;
-	}
-	if (is_there_redirections(cl, '<'))
-	{
-		if (*input != STDIN_FILENO)
-			close(*input);
-		*input = input_redirects(cl);
-		if (*input == -1)
-			return ;
-	}
+	free_n_null(cmd->path);
+	free_n_null(cmd->arg);
 }

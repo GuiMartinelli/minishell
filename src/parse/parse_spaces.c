@@ -3,48 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_spaces.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 09:11:48 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/03 09:52:54 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/06 08:14:54 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	check_quote(char *ptr, char quotes)
-{
-	if (*ptr != quotes && quotes)
-		return (quotes);
-	if (quotes == *ptr)
-		return (0);
-	else
-		return (*ptr);
-}
-
-int	check_tokens(char *str, int index)
-{
-	int	count;
-
-	count = 0;
-	if (*str == '|')
-	{
-		if (index && *(str - 1) != ' ')
-			count++;
-		if (*(str + 1) && *(str + 1) != ' ')
-			count++;
-	}
-	else if (*str == '>' || *str == '<')
-	{
-		if (index && *(str - 1) != ' ')
-			count++;
-		if (*(str + 1) && *(str + 1) != ' ')
-			count++;
-	}
-	return (count);
-}
-
-int	get_size(char *str)
+static int	get_size(char *str)
 {
 	int		count;
 	char	quotes;
@@ -63,7 +31,7 @@ int	get_size(char *str)
 	return (count);
 }
 
-char	*cpy_str(char *src, char *dest, char quotes)
+static char	*cpy_str(char *src, char *dest, char quotes)
 {
 	int		index;
 
@@ -81,19 +49,9 @@ char	*cpy_str(char *src, char *dest, char quotes)
 				dest[++index] = ' ';
 		}
 		else if (*src == '|' && !quotes)
-		{
-			if (index > 0 && *(src - 1) != ' ')
-				dest[index++] = ' ';
-			dest[index] = *src;
-			if (*(src + 1) && *(src + 1) != ' ')
-				dest[++index] = ' ';
-		}
+			index = solve_pipes(src, dest, quotes, index);
 		else
-		{
-			if (*src == '"' || *src == '\'')
-				quotes = check_quote(src, quotes);
-			dest[index] = *src;
-		}
+			quotes = save_quotes(src, dest, index);
 		src++;
 		index++;
 	}
