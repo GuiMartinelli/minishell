@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 09:30:26 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 16:08:58 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/07 22:52:44 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,19 @@ void	free_var_list(t_var *var_list)
 		free_var(curr);
 		curr = var_list;
 	}
+}
+
+void	free_here_docs(int status)
+{
+	char	**cmd;
+	int		fd[2];
+
+	if (status == 130)
+		cmd = ft_split("/usr/bin/bash bash -c 'exit 130'", ' ');
+	else
+		cmd = ft_split("/usr/bin/ls ls", ' ');
+	pipe(fd);
+	dup2(fd[1], 1);
+	dup2(fd[1], 2);
+	execve(cmd[0], &cmd[1], NULL);
 }
