@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:31:27 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/07 10:02:13 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/07 21:13:28 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static int	launch_execve_sub(t_cmd *cmd, int input, int output, char **envp)
 		ft_putendl_fd("\nFailed forking child..", 2);
 	wait(&status);
 	reset_io(&input, &output);
-	return (WEXITSTATUS(status));
+	return (status);
 }
 
 /**
@@ -106,7 +106,8 @@ static void	launch_execve(t_cmd *cmd, char **envp)
 		if (exit)
 		{
 			if (g_error_status != 131 && g_error_status != 130)
-				g_error_status = exit;
+				if (WIFEXITED(exit))
+				g_error_status = WEXITSTATUS(exit);
 		}
 		else
 		{
