@@ -6,7 +6,7 @@
 #    By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:15:51 by proberto          #+#    #+#              #
-#    Updated: 2022/02/06 16:09:28 by proberto         ###   ########.fr        #
+#    Updated: 2022/02/09 17:57:47 by proberto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,11 +38,11 @@ $(LIBFT):
 	@$(MAKE) -C $(PATH_LIBFT)
 
 clean:
-	rm $(NAME)
-#	@$(MAKE) clean -C $(PATH_LIBFT)
+	@$(MAKE) clean -C $(PATH_LIBFT)
 
 fclean: clean
-#	@$(MAKE) fclean -C $(PATH_LIBFT)
+	@$(MAKE) fclean -C $(PATH_LIBFT)
+	rm $(NAME)
 
 re: fclean all
 

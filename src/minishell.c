@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:08 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 15:50:06 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:33:11 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ int	main(int argc, char **argv, char **envp)
 	env.envp = envp;
 	repl(&env);
 	free_var_list(env.list);
+	ft_putendl_fd("exit", 1);
+	exit(g_error_status);
 	return (0);
 }
