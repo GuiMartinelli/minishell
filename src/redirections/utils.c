@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 08:21:16 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 17:15:59 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/10 09:21:06 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ char	*file_name(char **cl, char c)
  */
 int	file_error(char *name)
 {
-	write(1, "bash: syntax error near unexpected token `", 43);
+	write(2, "bash: syntax error near unexpected token `", 43);
 	if (name)
 	{
-		write(1, &*name, 1);
-		write(1, "'\n", 2);
+		write(2, &*name, 1);
+		write(2, "'\n", 2);
 	}
 	else
 		write(2, "newline'\n", 10);
