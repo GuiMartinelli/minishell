@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 08:06:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/10 08:07:56 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/10 09:14:19 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_sinalize(char *dest)
 
 int	check_special_chars(char *str, char c)
 {
+	if (c != '"' && c != '\'')
+		return (0);
 	if (*str == '>' || *str == '<')
 	{
 		if ((str + 1) && *(str + 1) == c)
