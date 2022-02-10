@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:31:27 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/07 21:13:28 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/10 09:18:09 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ int	run_cl(t_cmd *cmd, char **cl, t_env_var *env)
 	free_cmd(cmd);
 	while (*cl && **cl++ != '|')
 		;
-	if (*cl && **cl != '|')
+	if ((*cl && **cl != '|') && g_error_status != 127)
 		run_cl(cmd, cl, env);
 	reset_io(&cmd->read, &cmd->write);
 	return (0);
