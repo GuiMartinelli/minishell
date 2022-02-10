@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:15:51 by proberto          #+#    #+#              #
-#    Updated: 2022/02/09 17:57:47 by proberto         ###   ########.fr        #
+#    Updated: 2022/02/10 08:11:54 by guferrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ MAIN = $(PATH_SRC)/minishell.c
 SRC = \
 	$(addprefix $(PATH_SRC)/system/, signals.c env_var.c utils_var.c utils.c) \
 	$(addprefix $(PATH_SRC)/cli/, repl.c prompt.c) \
-	$(addprefix $(PATH_SRC)/parse/, ft_lexer_utils.c ft_lexer.c ft_tokenizer.c) \
+	$(addprefix $(PATH_SRC)/parse/, ft_lexer_utils.c ft_lexer.c ft_tokenizer.c ft_tokenizer_utils.c) \
 	$(addprefix $(PATH_SRC)/parse/, parse_var_utils.c parse_spaces.c) \
 	$(addprefix $(PATH_SRC)/parse/, parse_space_utils.c parse_cmds.c) \
 	$(addprefix $(PATH_SRC)/redirections/, input.c here_docs.c output.c utils.c) \

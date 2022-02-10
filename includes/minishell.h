@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/07 22:32:27 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/10 08:07:22 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,8 @@ int		solve_pipes(char *src, char *dest, char quotes, int index);
 int		home_size(char **matrix);
 char	*home_value(char **matrix);
 int		mv_ptr(char mode, char *str);
+void	ft_sinalize(char *dest);
+int		check_special_chars(char *str, char c);
 int		get_var_size(char *str, t_var *env, char **env_matrix);
 int		var_value_cpy(char *dest, char *src, t_var *env, char **env_matrix);
 char	*parse_spaces(char *str);

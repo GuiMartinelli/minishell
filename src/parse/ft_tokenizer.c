@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 08:08:25 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/06 09:22:57 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/10 08:06:50 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ static int	strlenchr_split(char	*s, char c)
 
 static char	*str_cpy_split(char *src, char *dest, char c)
 {
+	int	sinalize;
+
+	sinalize = check_special_chars(src, c);
 	while (*src != c && *src != '\0')
 	{
 		if (*src == '\\')
@@ -68,7 +71,10 @@ static char	*str_cpy_split(char *src, char *dest, char c)
 			src++;
 		}
 	}
-	*dest = '\0';
+	if (sinalize)
+		*dest = 3;
+	else
+		*dest = '\0';
 	if (*src == '\0')
 		return (src);
 	src++;
@@ -79,9 +85,14 @@ static char	*alloc_n_copy(char *s, char c, int index, char **dest)
 {
 	int	size;
 
+	size = 0;
 	if (c == '"' || c == '\'')
+	{
 		s++;
-	size = strlenchr_split((char *)s, c);
+		if (check_special_chars(s, c))
+			size = 1;
+	}
+	size += strlenchr_split((char *)s, c);
 	dest[index] = (char *)ft_calloc(size, sizeof(char));
 	if (!dest[index])
 		return (NULL);
