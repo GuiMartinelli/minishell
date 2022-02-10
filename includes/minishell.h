@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/10 08:07:22 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/10 15:18:50 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ extern int	g_error_status;
  * Command line interface (cli)
  */
 void	repl(t_env_var *env);
-char	*new_prompt(t_env_var *env);
+char	*new_prompt(char *user_name);
 void	eval(char *cl, t_env_var *env);
 
 /**
@@ -125,7 +125,6 @@ void	ft_exit(char **exit_status, t_var *env_list, char **matrix, t_cmd *cmd);
 
 /**
  * Execve
- * 
  */
 char	**parse_paths(t_var *env_list);
 char	**parse_cmd(t_cmd *cmd, char **matrix, t_var *env_list);
@@ -133,7 +132,6 @@ char	*check_path(char **env_path, char *cmd);
 
 /**
  * Parse
- * 
  */
 int		is_quotes(char *str, char q);
 int		is_variable(char *c, char quote);
@@ -155,7 +153,6 @@ size_t	comp_size(char *str1, char *str2);
 
 /**
  * Redirects
- * 
  */
 int		check_redirects(char **cl, char c);
 char	*file_name(char **cl, char c);

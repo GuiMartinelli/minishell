@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:12:44 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/07 06:39:38 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/10 18:50:22 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,12 @@ static void	init_pwd_prompt(t_prompt *pwd, t_prompt *user)
  * @brief Initialize the prompt user struct.
  * 
  * @param user struct to be initialized
- * @param env structure containing the environment variables
+ * @param user_name user name
  * @return void
  */
-static void	init_user_prompt(t_prompt *user, t_env_var *env)
+static void	init_user_prompt(t_prompt *user, char *user_name)
 {
-	user->label = hash_table("USER", env->list);
+	user->label = user_name;
 	user->prefix_color = YELLOW;
 	user->suffix_color = RESET;
 	user->len = ft_strlen(user->label)
@@ -112,10 +112,10 @@ static void	init_user_prompt(t_prompt *user, t_env_var *env)
  * @brief Create the prompt string to be displayed in the cli 
  * (acronym for command line).
  * 
- * @param env structure containing the environment variables
+ * @param user_name user name
  * @return the char* pointer to a new prompt
  */
-char	*new_prompt(t_env_var *env)
+char	*new_prompt(char *user_name)
 {
 	t_prompt	user;
 	t_prompt	pwd;
@@ -123,12 +123,11 @@ char	*new_prompt(t_env_var *env)
 	char		*prompt;
 	size_t		len;
 
-	init_user_prompt(&user, env);
+	init_user_prompt(&user, user_name);
 	init_pwd_prompt(&pwd, &user);
 	init_target_prompt(&target);
 	len = user.len + pwd.len + target.len + ft_strlen(" in ");
 	prompt = build(&user, &pwd, &target, len);
-	free(user.label);
 	free(pwd.label);
 	return (prompt);
 }
