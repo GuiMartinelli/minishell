@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:08:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/06 17:07:46 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/10 20:34:16 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,24 +57,22 @@ int	input_redirects(char **cl)
 	char	*name;
 	int		mode;
 	int		fd;
-	int		i;
 
-	i = 0;
 	fd = STDIN_FILENO;
-	while (cl[i] && *cl[i] == '<')
+	while (check_redirects(cl, '<'))
 	{
-		mode = check_redirects((cl + i), '<');
+		mode = check_redirects(cl, '<');
 		if (!mode)
 			return (0);
-		name = file_name((cl + i), '<');
+		name = file_name(cl, '<');
 		if (!name || *name == '|' || *name == '<' || *name == '>')
 			return (file_error(name));
 		if (mode == 2)
 			return (heredocs_prompt(cl, name));
-		fd = open_file(name, *cl[i], fd);
+		fd = open_file(name, **cl, fd);
 		if (fd == -1)
 			return (file_not_found(name));
-		i = move_index(cl, i, '<');
+		cl++;
 	}
 	return (fd);
 }

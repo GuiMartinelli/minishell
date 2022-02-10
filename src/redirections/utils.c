@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 08:21:16 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/10 09:21:06 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/10 20:45:55 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-/**
- * @brief Return index for next redirect.
- * 
- * @param cl char array (acronym for command line)
- * @param index 
- * @param c redirect character (</>)
- * @return int 
- */
-int	move_index(char **cl, int index, char c)
-{
-	while (*cl[index] != c)
-		index++;
-	index++;
-	if (cl[index])
-		index++;
-	return (index);
-}
 
 /**
  * @brief Check if there is a redirection in the command line.

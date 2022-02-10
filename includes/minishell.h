@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/10 15:18:50 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/10 20:45:58 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,5 @@ int		output_redirects(char **cl);
 int		input_redirects(char **cl);
 int		heredocs_prompt(char **cl, char *delimiter);
 int		file_error(char *name);
-int		move_index(char **cl, int index, char c);
 
 #endif
