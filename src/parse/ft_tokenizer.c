@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 08:08:25 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/10 08:06:50 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/11 08:16:10 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,23 @@ static int	strlenchr_split(char	*s, char c)
 	return (size);
 }
 
+char	*skip_chars(char *src)
+{
+	static char	quote;
+
+	if (quote != *src)
+	{
+		quote = *src;
+		src++;
+	}
+	else if (quote == *src)
+	{
+		quote = 0;
+		src++;
+	}
+	return (src);
+}
+
 static char	*str_cpy_split(char *src, char *dest, char c)
 {
 	int	sinalize;
@@ -62,8 +79,8 @@ static char	*str_cpy_split(char *src, char *dest, char c)
 	sinalize = check_special_chars(src, c);
 	while (*src != c && *src != '\0')
 	{
-		if (*src == '\\')
-			src++;
+		if ((*src == '"' || *src == '\'') && c == ' ' && is_quotes(src, *src))
+			src = skip_chars(src);
 		else
 		{
 			*dest = *src;
@@ -112,12 +129,11 @@ char	**ft_split_string(char *s)
 		return (NULL);
 	while (cont < (size - 1))
 	{
-		if (*s == ' ' || *s == '\\')
+		if (*s == ' ')
 			s++;
 		else
 		{
-			if ((*s == '"' || *s == '\'') && is_quotes(s, *s)
-				&& *(s - 1) != '\\')
+			if ((*s == '"' || *s == '\'') && is_quotes(s, *s))
 				s = alloc_n_copy(s, *s, cont, ptr);
 			else
 				s = alloc_n_copy(s, ' ', cont, ptr);

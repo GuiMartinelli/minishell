@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lexer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 07:49:51 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/06 09:19:47 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/11 08:02:39 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	get_string_size(char *str, t_var *env, char **env_matrix)
 	while (str[aux])
 	{
 		if ((str[aux] == '\'' || str[aux] == '"')
-			&& is_quotes((str + aux), str[aux]) && str[(aux - 1)] != '\\')
+			&& is_quotes((str + aux), str[aux]))
 		{
 			size += get_quote_size((str + aux), env, env_matrix);
 			aux += (mv_ptr(str[aux], (str + aux)) - 1);
@@ -87,7 +87,7 @@ static void	ft_lexer_sub(t_parse *parse, t_var *env, char **env_matrix)
 	{
 		if ((parse->str[parse->idx1] == '\'' || parse->str[parse->idx1] == '"')
 			&& is_quotes((parse->str + parse->idx1), parse->str[parse->idx1])
-			&& parse->str[parse->idx1 - 1] != '\\' && !parse->quotes)
+			&& !parse->quotes)
 			parse->quotes = parse->str[parse->idx1];
 		else if (parse->str[parse->idx1] == parse->quotes)
 			parse->quotes = 0;
