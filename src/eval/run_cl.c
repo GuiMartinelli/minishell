@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_cl.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:31:27 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/10 09:18:09 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/10 21:14:17 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ static void	launch_execve(t_cmd *cmd, char **envp)
 		ft_putstr_fd("minishell: command not found: ", 2);
 		ft_putstr_fd(cmd->arg[0], 2);
 		write(2, "\n", 1);
+		reset_io(&cmd->read, &cmd->write);
 	}
 }
 
@@ -168,7 +169,7 @@ int	run_cl(t_cmd *cmd, char **cl, t_env_var *env)
 	free_cmd(cmd);
 	while (*cl && **cl++ != '|')
 		;
-	if ((*cl && **cl != '|') && g_error_status != 127)
+	if (*cl && **cl != '|')
 		run_cl(cmd, cl, env);
 	reset_io(&cmd->read, &cmd->write);
 	return (0);
