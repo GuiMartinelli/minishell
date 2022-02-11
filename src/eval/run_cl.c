@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_cl.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:31:27 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/10 21:14:17 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/10 21:40:49 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @param env_list environment variables list
  * @return true if any built-ins were executed, false otherwise
  */
-static int	launch_builtins(t_cmd *cmd, char **cl, t_var *env_list)
+static int	launch_builtins(t_cmd *cmd, char **cl, t_var **env_list)
 {
 	g_error_status = 0;
 	if (ft_strncmp(cmd->arg[0], "pwd",
@@ -28,22 +28,22 @@ static int	launch_builtins(t_cmd *cmd, char **cl, t_var *env_list)
 		pwd(cmd->write);
 	else if (ft_strncmp(cmd->arg[0], "env",
 			comp_size(cmd->arg[0], "env")) == 0)
-		env(env_list, cmd->write);
+		env(*env_list, cmd->write);
 	else if (ft_strncmp(cmd->arg[0], "echo",
 			comp_size(cmd->arg[0], "echo")) == 0)
 		echo(cmd->arg, cmd->write);
 	else if (ft_strncmp(cmd->arg[0],
 			"cd", comp_size(cmd->arg[0], "cd")) == 0)
-		cd(&cmd->arg[1], env_list);
+		cd(&cmd->arg[1], *env_list);
 	else if (ft_strncmp(cmd->arg[0], "export",
 			comp_size(cmd->arg[0], "export")) == 0)
-		export(env_list, &cmd->arg[1]);
+		export(*env_list, &cmd->arg[1]);
 	else if (ft_strncmp(cmd->arg[0], "unset",
 			comp_size(cmd->arg[0], "unset")) == 0)
-		env_list = unset(env_list, &cmd->arg[1]);
+		*env_list = unset(*env_list, &cmd->arg[1]);
 	else if (ft_strncmp(cmd->arg[0], "exit",
 			comp_size(cmd->arg[0], "exit")) == 0)
-		ft_exit(cmd->arg, env_list, cl, cmd);
+		ft_exit(cmd->arg, *env_list, cl, cmd);
 	else
 		return (FALSE);
 	return (TRUE);
@@ -159,7 +159,7 @@ int	run_cl(t_cmd *cmd, char **cl, t_env_var *env)
 	set_io(cl, cmd);
 	if (cmd->read == -1 || cmd->write == -1)
 		return (handle_errors(cmd, 1));
-	if (cmd->arg && *cmd->arg && launch_builtins(cmd, (char **)aux, env->list))
+	if (cmd->arg && *cmd->arg && launch_builtins(cmd, (char **)aux, &env->list))
 		reset_io(&cmd->read, &cmd->write);
 	else if (cmd->arg && cmd->arg[0])
 		launch_execve(cmd, env->envp);
