@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 08:06:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/11 08:31:22 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/11 16:43:48 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,15 @@ char	*skip_chars(char *src)
 {
 	static char	quote;
 
-	if (quote != *src)
+	if (quote != *src && is_quotes(src, *src))
 	{
 		quote = *src;
 		src++;
+		if (*src == *(src - 1))
+		{
+			src++;
+			quote = 0;
+		}
 	}
 	else if (quote == *src)
 	{
