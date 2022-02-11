@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 08:56:05 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/10 18:47:31 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/10 21:26:03 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*get_user(char **envp)
 {
 	char	*user;
 
-	user = "NULL";
+	user = NULL;
 	while (*envp)
 	{
 		if (ft_strncmp(*envp, "USER", ft_strlen("USER")) == 0)
