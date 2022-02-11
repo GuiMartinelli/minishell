@@ -6,7 +6,7 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 08:06:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/10 09:14:19 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/11 08:31:22 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,21 @@ int	check_special_chars(char *str, char c)
 			return (0);
 	}
 	return (0);
+}
+
+char	*skip_chars(char *src)
+{
+	static char	quote;
+
+	if (quote != *src)
+	{
+		quote = *src;
+		src++;
+	}
+	else if (quote == *src)
+	{
+		quote = 0;
+		src++;
+	}
+	return (src);
 }
