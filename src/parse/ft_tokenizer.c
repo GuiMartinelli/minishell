@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 08:08:25 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/11 16:42:17 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/11 21:45:15 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static char	*str_cpy_split(char *src, char *dest, char c)
 	{
 		if ((*src == '"' || *src == '\'') && c == ' ')
 			src = skip_chars(src);
-		else
+		if (*src != c && *src)
 		{
 			*dest = *src;
 			dest++;
