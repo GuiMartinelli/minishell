@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 14:55:52 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/12 23:00:23 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/13 11:15:15 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	check_syntax_error(char **cl)
 		{
 			ft_putendl_fd("minishell: syntax error near unexpected token `|'",
 				STDERR_FILENO);
+			g_error_status = 2;
 			return (TRUE);
 		}
 		i++;
