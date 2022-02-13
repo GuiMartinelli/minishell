@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:59:47 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/12 23:39:40 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/13 11:55:58 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	number_of_args(char **matrix)
 		matrix++;
 		size++;
 	}
+	if (size > 2)
+		g_error_status = 1;
 	return (size);
 }
 
@@ -56,6 +58,7 @@ void	ft_exit(char **exit_status, t_var *env_list, char **matrix, t_cmd *cmd)
 		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 		ft_putstr_fd(*exit_status, STDERR_FILENO);
 		ft_putendl_fd(": numeric argument required", STDERR_FILENO);
+		g_error_status = 2;
 	}
 	else
 	{
@@ -68,5 +71,4 @@ void	ft_exit(char **exit_status, t_var *env_list, char **matrix, t_cmd *cmd)
 		free_var_list(env_list);
 		exit(ex);
 	}
-	g_error_status = 2;
 }
