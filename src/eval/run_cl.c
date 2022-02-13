@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_cl.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:31:27 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/10 21:40:49 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/12 23:45:29 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	launch_execve_sub(t_cmd *cmd, int input, int output, char **envp)
 			close(output);
 	}
 	else if (pid == -1)
-		ft_putendl_fd("\nFailed forking child..", 2);
+		ft_putendl_fd("\nFailed forking child..", STDERR_FILENO);
 	wait(&status);
 	reset_io(&input, &output);
 	return (status);
@@ -118,7 +118,7 @@ static void	launch_execve(t_cmd *cmd, char **envp)
 	else
 	{
 		g_error_status = 127;
-		ft_putstr_fd("minishell: command not found: ", 2);
+		ft_putstr_fd("minishell: command not found: ", STDERR_FILENO);
 		ft_putstr_fd(cmd->arg[0], 2);
 		write(2, "\n", 1);
 		reset_io(&cmd->read, &cmd->write);
@@ -158,7 +158,7 @@ int	run_cl(t_cmd *cmd, char **cl, t_env_var *env)
 	set_default_io(&cmd->read, &cmd->write);
 	set_io(cl, cmd);
 	if (cmd->read == -1 || cmd->write == -1)
-		return (handle_errors(cmd, 1));
+		return (handle_errors(cmd, 2));
 	if (cmd->arg && *cmd->arg && launch_builtins(cmd, (char **)aux, &env->list))
 		reset_io(&cmd->read, &cmd->write);
 	else if (cmd->arg && cmd->arg[0])
