@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/11 08:31:37 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/12 22:58:05 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define FALSE 0
 # define STDIN_FILENO 0
 # define STDOUT_FILENO 1
+# define STDERR_FILENO 2
 
 # define YELLOW "\001\033[1;33m\002"
 # define RED "\001\033[1;31m\002"
@@ -117,6 +118,8 @@ int		command_args_delimiter(char *str);
 char	*get_pwd(void);
 void	pwd(int fd);
 void	export(t_var *env_list, char **var);
+int		valid_var(char *name, char *value, char *msg);
+int		invalid_name(char *name);
 void	env(t_var *list, int fd);
 void	echo(char **str, int fd);
 t_var	*unset(t_var *env_list, char **var_name);

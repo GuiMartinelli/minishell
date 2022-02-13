@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 08:21:16 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/10 20:45:55 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/12 23:48:10 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,14 @@ char	*file_name(char **cl, char c)
  */
 int	file_error(char *name)
 {
-	write(2, "bash: syntax error near unexpected token `", 43);
+	ft_putstr_fd("minishell: syntax error near unexpected token `",
+		STDERR_FILENO);
 	if (name)
 	{
-		write(2, &*name, 1);
+		ft_putstr_fd(name, STDERR_FILENO);
 		write(2, "'\n", 2);
 	}
 	else
-		write(2, "newline'\n", 10);
+		ft_putendl_fd(" newline'", STDERR_FILENO);
 	return (-1);
 }

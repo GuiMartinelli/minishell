@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:08:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/10 20:34:16 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/12 23:47:49 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
  */
 static int	file_not_found(char *name)
 {
-	write(2, "bash: ", 7);
+	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(name, 2);
-	write(2, ": No such file or directory\n", 29);
+	ft_putendl_fd(": No such file or directory", STDERR_FILENO);
 	g_error_status = 1;
 	return (-1);
 }

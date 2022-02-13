@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:58:44 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/07 06:49:26 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/12 23:46:53 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static int	check_pipe_error(char first_chr)
 	if (first_chr == '|')
 	{
 		g_error_status = 1;
-		write(2, "bash: syntax error near unexpected token `|'\n", 47);
+		ft_putendl_fd("minishell: syntax error near unexpected token `|'",
+			STDERR_FILENO);
 		return (0);
 	}
 	return (1);

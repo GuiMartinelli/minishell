@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 09:07:13 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/07 22:47:45 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/12 22:59:58 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ static char	**next_redirect(char **cl)
  */
 static void	print_err(char *delimiter)
 {
-	write(2, "minishell: warning: here-document delimited by "
-		"end-of-file (wanted `", 69);
-	ft_putstr_fd(delimiter, 2);
-	write(2, "`)\n", 4);
+	ft_putstr_fd("minishell: warning: here-document delimited by "
+		"end-of-file (wanted `", STDERR_FILENO);
+	ft_putstr_fd(delimiter, STDERR_FILENO);
+	ft_putendl_fd("`)\n", STDERR_FILENO);
 }
 
 /**

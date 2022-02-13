@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:59:47 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/02 20:08:19 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/12 23:39:40 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ void	ft_exit(char **exit_status, t_var *env_list, char **matrix, t_cmd *cmd)
 
 	args = number_of_args(exit_status);
 	if (args > 2)
-		write(2, "bash: exit: too many arguments\n", 32);
+		ft_putendl_fd("minishell: exit: too many arguments", STDERR_FILENO);
 	else if (!valid_exit(exit_status[1]))
 	{
-		write(2, "bash: exit: ", 13);
-		ft_putstr_fd(*exit_status, 2);
-		write(2, ": numeric argument required\n", 29);
+		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
+		ft_putstr_fd(*exit_status, STDERR_FILENO);
+		ft_putendl_fd(": numeric argument required", STDERR_FILENO);
 	}
 	else
 	{

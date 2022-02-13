@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 15:39:20 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/06 21:48:46 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/12 23:38:31 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  */
 static int	error_flags(void)
 {
-	ft_putendl_fd("minishell: cd: too many arguments", 2);
+	ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);
 	g_error_status = 1;
 	return (-1);
 }
@@ -34,7 +34,7 @@ static int	change_directory(char *dir)
 {
 	if (!dir || chdir(dir))
 	{
-		ft_putstr_fd("minishell: cd: ", 2);
+		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
 		if (dir)
 			perror(dir);
 		else
