@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:31:27 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/12 23:45:29 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/13 11:49:04 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	launch_builtins(t_cmd *cmd, char **cl, t_var **env_list)
 		pwd(cmd->write);
 	else if (ft_strncmp(cmd->arg[0], "env",
 			comp_size(cmd->arg[0], "env")) == 0)
-		env(*env_list, cmd->write);
+		env(&cmd->arg[1], *env_list, cmd->write);
 	else if (ft_strncmp(cmd->arg[0], "echo",
 			comp_size(cmd->arg[0], "echo")) == 0)
 		echo(cmd->arg, cmd->write);
@@ -134,8 +134,11 @@ static void	launch_execve(t_cmd *cmd, char **envp)
  */
 static int	handle_errors(t_cmd *cmd, int error_status)
 {
+	if (cmd->read == -2)
+		error_status = 1;
+	else
+		g_error_status = error_status;
 	free_cmd(cmd);
-	g_error_status = error_status;
 	return (-1);
 }
 
@@ -152,12 +155,12 @@ int	run_cl(t_cmd *cmd, char **cl, t_env_var *env)
 	const char	**aux;
 
 	aux = (const char **)cl;
+	set_default_io(&cmd->read, &cmd->write);
 	cl = parse_cmd(cmd, cl, env->list);
 	if (!cl)
 		return (handle_errors(cmd, 2));
-	set_default_io(&cmd->read, &cmd->write);
 	set_io(cl, cmd);
-	if (cmd->read == -1 || cmd->write == -1)
+	if (cmd->read == -1 || cmd->read == -2 || cmd->write == -1)
 		return (handle_errors(cmd, 2));
 	if (cmd->arg && *cmd->arg && launch_builtins(cmd, (char **)aux, &env->list))
 		reset_io(&cmd->read, &cmd->write);

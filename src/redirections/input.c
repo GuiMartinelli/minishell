@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 20:08:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/12 23:47:49 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/13 10:40:49 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	file_not_found(char *name)
 	ft_putstr_fd(name, 2);
 	ft_putendl_fd(": No such file or directory", STDERR_FILENO);
 	g_error_status = 1;
-	return (-1);
+	return (-2);
 }
 
 /**
