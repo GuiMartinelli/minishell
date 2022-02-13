@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 10:21:15 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/02 11:23:23 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/12 23:39:14 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	ft_free(char **key)
  * @param name variable name
  * @return TRUE if the variable name is invalid, FALSE otherwise
  */
-static int	invalid_name(char *name)
+int	invalid_name(char *name)
 {
 	size_t	i;
 	int		is_invalid;
@@ -60,17 +60,18 @@ static int	invalid_name(char *name)
  * 
  * @param name variable name
  * @param value variable value
+ * @param msg message to be printed
  * @return TRUE if name and value are valid, FALSE otherwise
  */
-static int	valid_var(char *name, char *value)
+int	valid_var(char *name, char *value, char *msg)
 {
 	int	is_valid;
 
 	if (invalid_name(name) == TRUE)
 	{		
-		ft_putstr_fd("minishell: export: `", 2);
+		ft_putstr_fd(msg, 2);
 		ft_putstr_fd(name, 2);
-		ft_putstr_fd("': not a valid identifier\n", 2);
+		ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
 		is_valid = FALSE;
 	}
 	else
@@ -107,7 +108,7 @@ void	export(t_var *env_list, char **var)
 			name = value;
 		else
 			name = key[0];
-		if (valid_var(name, value) == TRUE)
+		if (valid_var(name, value, "minishell: export: `") == TRUE)
 			new_variable(&env_list, name, ++value);
 		else
 			g_error_status = 2;

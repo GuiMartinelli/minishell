@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 06:47:03 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/12 18:12:42 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/12 21:27:12 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,14 @@ static t_var	*ft_remove(t_var *env_list, char *var_name)
 t_var	*unset(t_var *env_list, char **var_name)
 {
 	size_t	i;
+	char	*val;
 
 	i = 0;
+	val = "1";
 	while (var_name[i])
 	{
-		env_list = ft_remove(env_list, var_name[i]);
+		if (valid_var(var_name[i], val, "minishell: unset: `") == TRUE)
+			env_list = ft_remove(env_list, var_name[i]);
 		i++;
 	}
 	return (env_list);
