@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 06:47:03 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/12 21:27:12 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/13 12:04:06 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_var	*ft_remove(t_var *env_list, char *var_name)
  * @brief Simulates the shell's built-in unset, which excludes a variable from 
  * a variable list.
  * 
- * @param var_list environment variables list
+ * @param env_list environment variables list
  * @param var_name name of the var to be deleted
  * @return beginning of the node list, may change if the variable to be 
  * deleted is the first
@@ -69,6 +69,8 @@ t_var	*unset(t_var *env_list, char **var_name)
 	{
 		if (valid_var(var_name[i], val, "minishell: unset: `") == TRUE)
 			env_list = ft_remove(env_list, var_name[i]);
+		else
+			g_error_status = 1;
 		i++;
 	}
 	return (env_list);
