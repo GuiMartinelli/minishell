@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:10:14 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/12 22:58:05 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/13 11:41:42 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	pwd(int fd);
 void	export(t_var *env_list, char **var);
 int		valid_var(char *name, char *value, char *msg);
 int		invalid_name(char *name);
-void	env(t_var *list, int fd);
+void	env(char **arg, t_var *list, int fd);
 void	echo(char **str, int fd);
 t_var	*unset(t_var *env_list, char **var_name);
 int		cd(char **dir, t_var *env_list);

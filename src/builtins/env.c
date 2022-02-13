@@ -6,7 +6,7 @@
 /*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 09:50:02 by guferrei          #+#    #+#             */
-/*   Updated: 2022/01/12 18:07:01 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/13 11:45:32 by proberto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,21 @@
  * @brief Simulates the shell's built-in env, which writes all environment 
  * variables to a given fd.
  * 
+ * @param arg args
  * @param list the environment variables list
  * @param fd the file descriptor to print
  * @return void
  */
-void	env(t_var *list, int fd)
+void	env(char **arg, t_var *list, int fd)
 {
 	t_var	*curr;
 
+	if (*arg)
+	{
+		ft_putendl_fd("minishell: env: too many arguments", STDERR_FILENO);
+		g_error_status = 1;
+		return ;
+	}
 	curr = list;
 	while (curr)
 	{
