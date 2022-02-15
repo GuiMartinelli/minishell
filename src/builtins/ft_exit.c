@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:59:47 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/13 13:07:59 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/15 20:23:03 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_exit(char **exit_status, t_var *env_list, char **matrix, t_cmd *cmd)
 	else
 	{
 		if (args == 1)
-			ex = 0;
+			ex = g_error_status;
 		else
 			ex = ft_atoi(exit_status[1]);
 		free_cmd(cmd);

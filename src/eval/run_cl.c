@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_cl.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:31:27 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/13 11:49:04 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/15 20:23:17 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
  */
 static int	launch_builtins(t_cmd *cmd, char **cl, t_var **env_list)
 {
+	if (ft_strncmp(cmd->arg[0], "exit",
+			comp_size(cmd->arg[0], "exit")) == 0)
+		ft_exit(cmd->arg, *env_list, cl, cmd);
 	g_error_status = 0;
 	if (ft_strncmp(cmd->arg[0], "pwd",
 			comp_size(cmd->arg[0], "pwd")) == 0)
@@ -41,9 +44,6 @@ static int	launch_builtins(t_cmd *cmd, char **cl, t_var **env_list)
 	else if (ft_strncmp(cmd->arg[0], "unset",
 			comp_size(cmd->arg[0], "unset")) == 0)
 		*env_list = unset(*env_list, &cmd->arg[1]);
-	else if (ft_strncmp(cmd->arg[0], "exit",
-			comp_size(cmd->arg[0], "exit")) == 0)
-		ft_exit(cmd->arg, *env_list, cl, cmd);
 	else
 		return (FALSE);
 	return (TRUE);
@@ -73,7 +73,7 @@ static int	launch_execve_sub(t_cmd *cmd, int input, int output, char **envp)
 		if (execve(cmd->path, cmd->arg, envp) == -1)
 		{
 			perror("minishell");
-			return (-1);
+			exit (-1);
 		}
 		if (input != STDIN_FILENO)
 			close(input);
