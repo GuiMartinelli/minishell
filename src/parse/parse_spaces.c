@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parse_spaces.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 09:11:48 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/06 08:14:54 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/17 19:42:01 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief Get the size of a string after adding spaces.
+ * 
+ * @param str string to check
+ * @return int size of the string
+ */
 static int	get_size(char *str)
 {
 	int		count;
@@ -31,6 +37,14 @@ static int	get_size(char *str)
 	return (count);
 }
 
+/**
+ * @brief Copy a string with new spaces where needed
+ * 
+ * @param src string to parse
+ * @param dest string to write
+ * @param quotes quotation marks, if there is it
+ * @return char* parsed string
+ */
 static char	*cpy_str(char *src, char *dest, char quotes)
 {
 	int		index;
@@ -58,6 +72,13 @@ static char	*cpy_str(char *src, char *dest, char quotes)
 	return (dest);
 }
 
+/**
+ * @brief Gets a string, and returns it after handling special characters without
+ * space around.
+ * 
+ * @param str string to parse
+ * @return char* string after parse
+ */
 char	*parse_spaces(char *str)
 {
 	char	*parsed;

@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 08:08:25 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/11 21:45:15 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/17 19:34:43 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../../includes/minishell.h"
 
+/**
+ * @brief Count the number of strings that the matrix needs
+ * 
+ * @param s string to split
+ * @return int matrix size
+ */
 static int	matrix_size(char *s)
 {
 	int		count;
@@ -41,7 +47,14 @@ static int	matrix_size(char *s)
 	return (count);
 }
 
-static int	strlenchr_split(char	*s, char c)
+/**
+ * @brief Gets the size of a string to split, up to a space or quotation marks
+ * 
+ * @param s string to count
+ * @param c char which indicates if there is quotation marks
+ * @return int string lenght
+ */
+static int	strlenchr_split(char *s, char c)
 {
 	int		size;
 
@@ -55,6 +68,14 @@ static int	strlenchr_split(char	*s, char c)
 	return (size);
 }
 
+/**
+ * @brief Writes the string to a pointer, handling special chars
+ * 
+ * @param src string to copy
+ * @param dest pointer to write the coppied string
+ * @param c char which indicates if there is quotation marks
+ * @return char* pointer that indicates where the string stopped
+ */
 static char	*str_cpy_split(char *src, char *dest, char c)
 {
 	int	sinalize;
@@ -81,6 +102,15 @@ static char	*str_cpy_split(char *src, char *dest, char c)
 	return (src);
 }
 
+/**
+ * @brief Allocs a new string and writes the splitted contents inside.
+ * 
+ * @param s pointer to the string to split
+ * @param c char which indicates if there is quotation marks
+ * @param index index of the matrix, where the new string will be placed
+ * @param dest matrix to place the new string
+ * @return char* pointer that indicates where the string stopped
+ */
 static char	*alloc_n_copy(char *s, char c, int index, char **dest)
 {
 	int	size;
@@ -99,6 +129,13 @@ static char	*alloc_n_copy(char *s, char c, int index, char **dest)
 	return (str_cpy_split((char *)s, dest[index], c));
 }
 
+/**
+ * @brief Gets a parsed string and splits in spaces, respecting
+ * quotation marks.
+ * 
+ * @param s string to split
+ * @return char** splitted matrix
+ */
 char	**ft_split_string(char *s)
 {
 	int		size;

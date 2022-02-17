@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   parse_var_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 08:24:42 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/06 15:58:28 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/17 19:46:05 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief Checks if the string contain a variable
+ * 
+ * @param c string to check
+ * @param quote quotation marks, if there is it
+ * @return int return 1 if true, or 0 if false
+ */
 int	is_variable(char *c, char quote)
 {
 	if (*c == '~' && (*(c - 1) == ' ' && (!*(c + 1)
@@ -24,6 +31,12 @@ int	is_variable(char *c, char quote)
 		return (0);
 }
 
+/**
+ * @brief Parses the variable name and check if is valid.
+ * 
+ * @param str string to read
+ * @return char* variable name
+ */
 static char	*get_var_name(char *str)
 {
 	int		index;
@@ -47,6 +60,14 @@ static char	*get_var_name(char *str)
 	return (name);
 }
 
+/**
+ * @brief Get the variable value lenght
+ * 
+ * @param str string to check
+ * @param env linked list of program variables
+ * @param env_matrix matrix of Shell environment variables
+ * @return int lenght of the variable value
+ */
 int	get_var_size(char *str, t_var *env, char **env_matrix)
 {
 	char	*name;
@@ -74,6 +95,15 @@ int	get_var_size(char *str, t_var *env, char **env_matrix)
 	return (size);
 }
 
+/**
+ * @brief Expand the value of a given variable.
+ * 
+ * @param dest string to write
+ * @param src string to read
+ * @param env linked list of program variables
+ * @param env_matrix matrix of Shell environment variables
+ * @return int lenght of chars copied
+ */
 int	var_value_cpy(char *dest, char *src, t_var *env, char **env_matrix)
 {
 	char	*name;

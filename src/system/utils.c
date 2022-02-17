@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 09:30:26 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/07 22:52:44 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/17 18:51:27 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@ void	free_var_list(t_var *var_list)
 	}
 }
 
+/**
+ * @brief Open a execve to free all memory in the child process.
+ * 
+ * @param status command status, received by the signal inputed
+ */
 void	free_here_docs(int status)
 {
 	char	**cmd;

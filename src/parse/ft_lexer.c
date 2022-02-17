@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lexer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proberto <proberto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 07:49:51 by guferrei          #+#    #+#             */
-/*   Updated: 2022/02/12 22:14:09 by proberto         ###   ########.fr       */
+/*   Updated: 2022/02/17 19:35:18 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief Get the size of a quoted argument
+ * 
+ * @param str pointer to first quotation marks
+ * @param env link list of program environment variables
+ * @param env_matrix matrix of Shell environment variables
+ * @return int size of quoted string
+ */
 static int	get_quote_size(char *str, t_var *env, char **env_matrix)
 {
 	char	quote;
@@ -34,6 +42,14 @@ static int	get_quote_size(char *str, t_var *env, char **env_matrix)
 	return (size + 2);
 }
 
+/**
+ * @brief Checks if a variable exists and if it is expandable
+ * 
+ * @param str pointer to variable name
+ * @param env link list of program environment variables
+ * @param env_matrix matrix of Shell environment variables
+ * @return int size of variable value
+ */
 static int	check_var(char *str, t_var *env, char **env_matrix)
 {
 	int		size;
@@ -52,6 +68,14 @@ static int	check_var(char *str, t_var *env, char **env_matrix)
 	return (size);
 }
 
+/**
+ * @brief Get the string size after parsed and variables expanded.
+ * 
+ * @param str original string
+ * @param env link list of program environment variables
+ * @param env_matrix matrix of Shell environment variables
+ * @return int size of parsed string
+ */
 static int	get_string_size(char *str, t_var *env, char **env_matrix)
 {
 	int		size;
@@ -81,6 +105,13 @@ static int	get_string_size(char *str, t_var *env, char **env_matrix)
 	return (size + 1);
 }
 
+/**
+ * @brief Expand variables when necessary and handle spaces in a row.
+ * 
+ * @param parse struct containing data of original and parsed string
+ * @param env linked list of program environment variables
+ * @param env_matrix matrix of Shell environment variables
+ */
 static void	ft_lexer_sub(t_parse *parse, t_var *env, char **env_matrix)
 {
 	while (parse->str[parse->idx1])
@@ -106,6 +137,14 @@ static void	ft_lexer_sub(t_parse *parse, t_var *env, char **env_matrix)
 	}
 }
 
+/**
+ * @brief Get a string and format to a matrix which the programs interprets
+ * 
+ * @param str string to format
+ * @param env linked list of program environment variables
+ * @param envp matrix of shell environment variables
+ * @return char** matrix parsed and formated
+ */
 char	**ft_lexer(char *str, t_var *env, char **envp)
 {
 	t_parse	parse;

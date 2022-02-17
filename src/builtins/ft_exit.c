@@ -6,12 +6,18 @@
 /*   By: guferrei <guferrei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:59:47 by proberto          #+#    #+#             */
-/*   Updated: 2022/02/15 20:23:03 by guferrei         ###   ########.fr       */
+/*   Updated: 2022/02/17 18:48:10 by guferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief Count number of arguments and set error if is greater than 1
+ * 
+ * @param matrix matrix of inputs
+ * @return int number of arguments
+ */
 int	number_of_args(char **matrix)
 {
 	int	size;
@@ -27,6 +33,12 @@ int	number_of_args(char **matrix)
 	return (size);
 }
 
+/**
+ * @brief Checks if the argument is a digit
+ * 
+ * @param status argument in a string
+ * @return int 1 if is valid or 0 if isn't
+ */
 int	valid_exit(char *status)
 {
 	if (!status)
