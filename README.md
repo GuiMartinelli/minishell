@@ -1,8 +1,8 @@
-##Introduction
-This is the 8th École 42 project, and is about creating a simple shell, where we learn a lot about Shell, processes, UNIX and file descriptors, debbuging, hash tables, lexical analysis and much more. 
+## Introduction
+This is the 8th École 42 project, and is about creating a simple shell, where we learn a lot about Shell, processes, UNIX and file descriptors, debbuging, hash tables, lexical analysis and much more.;
 Also this is the first e42 project that requires group work, so we learn a lot about mob programming, documentation, git tools like working on different branches and task management as well.
 
-##About the project
+## About the project
 The project requires your Shell to:
 • Display a prompt when waiting for a new command.
 • Have a working history.
@@ -45,6 +45,6 @@ Install Readline library with `sudo apt-get install libreadline-dev`
 Compile the program `make`
 You're ready to run it, have fun!! `./minishell`
 
-##Developed by:
-[prmarquesz](https://github.com/prmarquesz)
-[GuiMartinelli](https://github.com/GuiMartinelli)
+## Developed by:
+[prmarquesz](https://github.com/prmarquesz);
+[GuiMartinelli](https://github.com/GuiMartinelli);
