@@ -15,11 +15,11 @@ subject such as \ (backslash) or ; (semicolon).
 - Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence.  
 - Handle " (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence except for $ (dollar sign).  
 - Implement redirections:  
-	- < should redirect input.  
-	- > should redirect output.  
-	- << should be given a delimiter, then read the input until a line containing the
+	- '<' should redirect input.  
+	- '>' should redirect output.  
+	- '<<' should be given a delimiter, then read the input until a line containing the
 delimiter is seen. However, it doesn’t have to update the history!  
-	- >> should redirect output in append mode.  
+	- '>>' should redirect output in append mode.  
 - Implement pipes (| character). The output of each command in the pipeline is
 connected to the input of the next command via a pipe.  
 - Handle environment variables ($ followed by a sequence of characters) which
@@ -41,9 +41,9 @@ foreground pipeline.
 	- exit with no options  
 
 ## Usage:
-Install Readline library with `sudo apt-get install libreadline-dev`
-Compile the program `make`
-You're ready to run it, have fun!! `./minishell`
+Install Readline library with `sudo apt-get install libreadline-dev`  
+Compile the program `make`  
+You're ready to run it, have fun!! `./minishell`  
 
 ## Developed by:
 [prmarquesz](https://github.com/prmarquesz)  
