@@ -41,7 +41,7 @@ foreground pipeline.
 	- exit with no options  
 
 ## Usage:
-Install Readline library with `sudo apt-get install libreadline-dev`  
+Install Readline library with ```sudo apt-get install libreadline-dev```  
 Compile the program `make`  
 You're ready to run it, have fun!! `./minishell`  
 
