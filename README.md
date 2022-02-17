@@ -46,5 +46,5 @@ Compile the program `make`
 You're ready to run it, have fun!! `./minishell`
 
 ## Developed by:
-[prmarquesz](https://github.com/prmarquesz);
-[GuiMartinelli](https://github.com/GuiMartinelli);
+[prmarquesz](https://github.com/prmarquesz) ;
+[GuiMartinelli](https://github.com/GuiMartinelli) ;
