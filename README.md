@@ -8,8 +8,7 @@ The project requires your Shell to:
 - Have a working history.  
 - Search and launch the right executable (based on the PATH variable or using a  
 relative or an absolute path).  
-- Not use more than one global variable. Think about it. You will have to explain  
-its purpose.  
+- Not use more than one global variable.
 - Not interpret unclosed quotes or special characters which are not required by the  
 subject such as \ (backslash) or ; (semicolon).  
 - Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence.  
@@ -20,7 +19,7 @@ subject such as \ (backslash) or ; (semicolon).
 	- '<<' should be given a delimiter, then read the input until a line containing the
 delimiter is seen. However, it doesn’t have to update the history!  
 	- '>>' should redirect output in append mode.  
-- Implement pipes (| character). The output of each command in the pipeline is
+- Implement pipes. The output of each command in the pipeline is
 connected to the input of the next command via a pipe.  
 - Handle environment variables ($ followed by a sequence of characters) which
 should expand to their values.  
