@@ -39,7 +39,7 @@ foreground pipeline.
 	- env with no options or arguments  
 	- exit with no options  
 
-## Usage:
+## Usage(Linux):
 Install Readline library with 
 ```
 $ sudo apt-get install libreadline-dev
